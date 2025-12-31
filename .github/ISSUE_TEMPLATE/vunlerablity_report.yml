@@ -1,6 +1,5 @@
 name: Vulnerability report
 description: Security-impacting bug report.
-type: Bug
 labels: vulnerability
 body:
   - type: markdown
