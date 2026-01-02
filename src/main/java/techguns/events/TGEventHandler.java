@@ -520,27 +520,8 @@ public class TGEventHandler {
 		RenderGrenade40mmProjectile.initModel();
 		RenderAttackHelicopter.initModels();
 		RenderDoor3x3Fast.initModels();
-
-        // Th3_Sl1ze: believe me, this is a fucking dogshit solution BUT somehow THESE EXACT 2 items have a fucking invisible model
-        // and I have to set them manually...
-        try {
-            IModel baseModel = ModelLoaderRegistry.getModel(new ResourceLocation("minecraft", "item/generated"));
-            ResourceLocation copperLoc = new ResourceLocation(Techguns.MODID, "items/platecopper");
-            ResourceLocation steelLoc  = new ResourceLocation(Techguns.MODID, "items/platesteel");
-            IModel retexturedModelCopper = baseModel.retexture(ImmutableMap.of("layer0", copperLoc.toString()));
-            IModel retexturedModelSteel  = baseModel.retexture(ImmutableMap.of("layer0", steelLoc.toString()));
-            IBakedModel bakedModelCopper = retexturedModelCopper.bake(ModelRotation.X0_Y0, DefaultVertexFormats.ITEM, ModelLoader.defaultTextureGetter());
-            IBakedModel bakedModelSteel = retexturedModelSteel.bake(ModelRotation.X0_Y0, DefaultVertexFormats.ITEM, ModelLoader.defaultTextureGetter());
-            ModelResourceLocation bakedModelLocationCopper = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "platecopper"), "inventory");
-            ModelResourceLocation bakedModelLocationSteel  = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "platesteel"), "inventory");
-            event.getModelRegistry().putObject(bakedModelLocationCopper, bakedModelCopper);
-            event.getModelRegistry().putObject(bakedModelLocationSteel, bakedModelSteel);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onRenderHand(RenderHandEvent event) {
@@ -553,19 +534,18 @@ public class TGEventHandler {
 
 			ItemRenderer itemrenderer = Minecraft.getMinecraft().getItemRenderer();
 			try {
-				ClientProxy cp = ClientProxy.get();
-				if(hand==EnumHand.MAIN_HAND) {
-					if(cp.Field_ItemRenderer_equippedProgressMainhand.getFloat(itemrenderer)<t) {
-						cp.Field_ItemRenderer_equippedProgressMainhand.setFloat(itemrenderer, t);
-						cp.Field_ItemRenderer_prevEquippedProgressMainhand.setFloat(itemrenderer, t);
-					}
-				} else {
-					if(cp.Field_ItemRenderer_equippedProgressOffhand.getFloat(itemrenderer)<t) {
-						cp.Field_ItemRenderer_equippedProgressOffhand.setFloat(itemrenderer, t);
-						cp.Field_ItemRenderer_prevEquippedProgressOffhand.setFloat(itemrenderer, t);
-					}
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
+                if (hand == EnumHand.MAIN_HAND) {
+                    if (itemrenderer.equippedProgressMainHand < t) {
+                        itemrenderer.equippedProgressMainHand = t;
+                        itemrenderer.prevEquippedProgressMainHand = t;
+                    }
+                } else {
+                    if (itemrenderer.equippedProgressOffHand < t) {
+                        itemrenderer.equippedProgressOffHand = t;
+                        itemrenderer.prevEquippedProgressOffHand = t;
+                    }
+                }
+			} catch (IllegalArgumentException e) {
 				e.printStackTrace();
 			}
 

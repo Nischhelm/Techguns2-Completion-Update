@@ -34,7 +34,6 @@ import net.minecraftforge.fluids.FluidEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
@@ -72,9 +71,7 @@ public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster
 	public static final int BUTTON_ID_INTENSITY_INC=ButtonConstants.BUTTON_ID_REDSTONE+3;
 	public static final int BUTTON_ID_INTENSITY_DEC =ButtonConstants.BUTTON_ID_REDSTONE+4;
 	public static final int BUTTON_ID_DUMPTANK=ButtonConstants.BUTTON_ID_REDSTONE+5;
-	
-	public static Field playerChunkMapEntry_Players = ObfuscationReflectionHelper.findField(PlayerChunkMapEntry.class, "field_187283_c"); //ReflectionHelper.findField(PlayerChunkMapEntry.class, "players","field_187283_c");
-	
+
 	protected byte intensity=0;
 	
 	public MachineSlotItem input;
@@ -705,23 +702,15 @@ public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster
 	
 	public void needFluidUpdate() {
 		if (!this.world.isRemote) {
-			
 			ChunkPos cp = this.world.getChunk(getPos()).getPos();
 			PlayerChunkMapEntry entry = ((WorldServer) this.world).getPlayerChunkMap().getEntry(cp.x, cp.z);
-			if(entry !=null ) {
-				try {
-					List<EntityPlayerMP> players = (List<EntityPlayerMP>) playerChunkMapEntry_Players.get(entry);
-					IMessage packet = new PacketUpdateTileEntTanks(this, this.getPos());
-					for (EntityPlayerMP entityplayermp : players) {
-						TGPackets.wrapper.sendTo(packet, entityplayermp);
-					}
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+			if(entry != null) {
+                List<EntityPlayerMP> players = entry.players;
+                IMessage packet = new PacketUpdateTileEntTanks(this, this.getPos());
+                for (EntityPlayerMP entityplayermp : players) {
+                    TGPackets.wrapper.sendTo(packet, entityplayermp);
+                }
 			}
-
 		}
 	}
 

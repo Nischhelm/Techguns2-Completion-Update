@@ -50,7 +50,7 @@ public class InventoryUtil {
      * @return
      */
     public static int addItemToInventory(NonNullList<ItemStack> mainInventory, ItemStack item2, int startIndex, int endIndex){
-    	ItemStack item = item2.copy();//TGItems.newStack(item2, item2.stackSize);
+    	ItemStack item = item2.copy();
     	
     	for(int i=startIndex;i<endIndex;i++){
     		//1st try a merge
@@ -97,7 +97,7 @@ public class InventoryUtil {
      * @return
      */
     public static int addItemToInventory(ItemStackHandlerPlus mainInventory, ItemStack item2, int startIndex, int endIndex){
-    	ItemStack item = item2.copy();//TGItems.newStack(item2, item2.stackSize);
+    	ItemStack item = item2.copy();
     	
     	for(int i=startIndex;i<endIndex;i++){
 
@@ -185,7 +185,7 @@ public class InventoryUtil {
         			int missing = consumeItem(props.tg_inventory.inventory, ammo,TGPlayerInventory.SLOTS_AMMO_START, TGPlayerInventory.SLOTS_AMMO_END+1);
         			
         			if (missing >0){
-        				return consumeItem(ply.inventory.mainInventory,TGItems.newStack(ammo, missing),0,ply.inventory.mainInventory.size()) <= 0;
+        				return consumeItem(ply.inventory.mainInventory,new ItemStack(ammo.getItem(), missing, ammo.getItemDamage()),0,ply.inventory.mainInventory.size()) <= 0;
         			} else {
         				return true;
         			}

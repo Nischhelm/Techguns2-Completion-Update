@@ -74,8 +74,8 @@ public class AmmoPressBuildPlans {
 	}
 
 	public static ItemStack[] getPossibleResults() {
-		return new ItemStack[] { TGItems.newStack(TGItems.PISTOL_ROUNDS, AMMOUNT_PISTOL), TGItems.newStack(TGItems.SHOTGUN_ROUNDS, AMMOUNT_SHOTGUN),
-				TGItems.newStack(TGItems.RIFLE_ROUNDS, AMMOUNT_RIFLE), TGItems.newStack(TGItems.SNIPER_ROUNDS, AMMOUNT_SNIPER) };
+		return new ItemStack[] { new ItemStack(TGItems.PISTOL_ROUNDS.getItem(), AMMOUNT_PISTOL, TGItems.PISTOL_ROUNDS.getItemDamage()), new ItemStack(TGItems.SHOTGUN_ROUNDS.getItem(), AMMOUNT_SHOTGUN, TGItems.SHOTGUN_ROUNDS.getItemDamage()),
+				new ItemStack(TGItems.RIFLE_ROUNDS.getItem(), AMMOUNT_RIFLE, TGItems.RIFLE_ROUNDS.getItemDamage()), new ItemStack(TGItems.SNIPER_ROUNDS.getItem(), AMMOUNT_SNIPER, TGItems.SNIPER_ROUNDS.getItemDamage()) };
 	}
 
 	public static boolean isInList(ItemStack it, ArrayList<ItemStack> list) {

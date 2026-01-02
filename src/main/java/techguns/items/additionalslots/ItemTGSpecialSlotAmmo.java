@@ -40,7 +40,7 @@ public abstract class ItemTGSpecialSlotAmmo extends ItemTGSpecialSlot {
 			item.setItemDamage(0);
 			if(InventoryUtil.addAmmoToPlayerInventory(ply, ammoEmpty)>0){
 				if(!ply.world.isRemote){
-					ply.world.spawnEntity(new EntityItem(ply.world, ply.posX, ply.posY, ply.posZ, TGItems.newStack(ammoEmpty, 1)));
+					ply.world.spawnEntity(new EntityItem(ply.world, ply.posX, ply.posY, ply.posZ, new ItemStack(ammoEmpty.getItem(), 1, ammoEmpty.getItemDamage())));
 				}
 			}
 		}

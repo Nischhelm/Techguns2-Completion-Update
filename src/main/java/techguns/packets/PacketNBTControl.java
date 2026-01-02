@@ -23,10 +23,6 @@ public class PacketNBTControl implements IMessage {
 
     public PacketNBTControl() { }
 
-    public PacketNBTControl(NBTTagCompound nbt, BlockPos pos) {
-        this(nbt, pos.getX(), pos.getY(), pos.getZ());
-    }
-
     public PacketNBTControl(NBTTagCompound nbt, int x, int y, int z) {
 
         this.buffer = new PacketBuffer(Unpooled.buffer());

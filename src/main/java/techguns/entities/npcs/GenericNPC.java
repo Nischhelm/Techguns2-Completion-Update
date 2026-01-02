@@ -140,8 +140,7 @@ public class GenericNPC extends EntityMob implements IRangedAttackMob, INPCTechg
         {
             ItemStack it = this.getRandomItemFromLoottable();
             if (it != null){
-                //this.dropItem(it.getItem(),it.stackSize,it.getItemDamage());
-                this.entityDropItem(TGItems.newStack(it, it.getCount()), 0.0f);
+                this.entityDropItem(it, 0.0f);
             }
         }
     }
@@ -158,9 +157,7 @@ public class GenericNPC extends EntityMob implements IRangedAttackMob, INPCTechg
     public IEntityLivingData onInitialSpawn(@NotNull DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         livingdata = super.onInitialSpawn(difficulty, livingdata);
         this.setEquipmentBasedOnDifficulty(difficulty);
-        // this.setEnchantmentBasedOnDifficulty(difficulty);
         this.setCombatTask();
-	    // this.setCanPickUpLoot(this.rand.nextFloat() < 0.55F * difficulty.getClampedAdditionalDifficulty());
         this.setCanPickUpLoot(false);
 	        
         return livingdata;

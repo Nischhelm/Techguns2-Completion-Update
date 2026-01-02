@@ -32,6 +32,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGPackets;
 import techguns.TGSounds;
 import techguns.Techguns;
@@ -197,7 +198,7 @@ public class GenericGunMeleeCharge extends GenericGunCharge implements IGenericG
 	}
 	
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+	public boolean onEntitySwing(@NotNull EntityLivingBase entityLiving, @NotNull ItemStack stack) {
 		boolean openingContainer=false;
 		if (!entityLiving.world.isRemote) {
 			if(entityLiving instanceof EntityPlayer){

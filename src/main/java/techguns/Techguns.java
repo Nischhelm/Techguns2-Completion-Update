@@ -78,7 +78,7 @@ public class Techguns
 	    @Override
 	    @SideOnly(Side.CLIENT)
 	    public ItemStack createIcon() {
-	        return TGItems.newStack(TGItems.PISTOL_ROUNDS,1);
+	        return new ItemStack(TGItems.PISTOL_ROUNDS.getItem(), 1, TGItems.PISTOL_ROUNDS.getItemDamage());
 	    }
 
 		@Override

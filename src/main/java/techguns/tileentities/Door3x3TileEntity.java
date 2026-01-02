@@ -174,17 +174,11 @@ public class Door3x3TileEntity extends BasicRedstoneTileEnt {
 			ChunkPos cp = this.world.getChunk(getPos()).getPos();
 			PlayerChunkMapEntry entry = ((WorldServer) this.world).getPlayerChunkMap().getEntry(cp.x, cp.z);
 			if (entry != null) {
-				try {
-					List<EntityPlayerMP> players = (List<EntityPlayerMP>) ReactionChamberTileEntMaster.playerChunkMapEntry_Players.get(entry);
-					IMessage packet = new PacketDoorStateChange(this);
-					for (EntityPlayerMP entityplayermp : players) {
-						TGPackets.wrapper.sendTo(packet, entityplayermp);
-					}
-				} catch (IllegalArgumentException e) {
-					e.printStackTrace();
-				} catch (IllegalAccessException e) {
-					e.printStackTrace();
-				}
+                List<EntityPlayerMP> players = entry.players;
+                IMessage packet = new PacketDoorStateChange(this);
+                for (EntityPlayerMP entityplayermp : players) {
+                    TGPackets.wrapper.sendTo(packet, entityplayermp);
+                }
 			}
 		}
 	}

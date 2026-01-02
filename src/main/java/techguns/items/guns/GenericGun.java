@@ -10,6 +10,7 @@ import net.minecraft.util.*;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Keyboard;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
@@ -35,7 +36,6 @@ import net.minecraft.network.play.server.SPacketEntityVelocity;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
-import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -205,16 +205,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		this.muzzelight=false;
 		return this;
 	}
-	
-	public GenericGun setMuzzleLight(int lifetime, float radius_start, float radius_end, float r, float g, float b) {
-		this.light_lifetime = lifetime;
-		this.light_radius_start= radius_start;
-		this.light_radius_end= radius_end;
-		this.setMuzzleLight(r, g, b);
-		return this;
-	}
-	
-	public GenericGun setRangeTooltipType(RangeTooltipType type) {
+
+    public GenericGun setRangeTooltipType(RangeTooltipType type) {
 		this.rangeTooltipType=type;
 		return this;
 	}
@@ -228,10 +220,9 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		return this.hasAmbientEffect;
 	}
 	
-	public GenericGun setNoBowAnim() {
-		this.hasAimedBowAnim=false;
-		return this;
-	}
+	public void setNoBowAnim() {
+		this.hasAimedBowAnim = false;
+    }
 	
 	public boolean hasBowAnim() {
 		return this.hasAimedBowAnim;
@@ -392,22 +383,18 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 
 	@Override
-	public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack) {
+	public boolean onEntitySwing(@NotNull EntityLivingBase entityLiving, @NotNull ItemStack stack) {
 		if(this.shootWithLeftClick){
 			return true;
 		} else {
-			if(this.getCurrentAmmo(stack)>=this.miningAmmoConsumption){
-				return true;
-			} else {
-				return false;
-			}
+            return this.getCurrentAmmo(stack) >= this.miningAmmoConsumption;
 		}
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull EntityPlayer playerIn, @NotNull EnumHand handIn) {
 		this.gunSecondaryAction(playerIn, playerIn.getHeldItem(handIn));
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
+		return new ActionResult<>(EnumActionResult.PASS, playerIn.getHeldItem(handIn));
 	}
 
 	public ItemStack[] getReloadItem(ItemStack stack) {
@@ -594,9 +581,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		        		SoundUtil.playSoundOnEntityGunPosition(world, player, rechamberSound, 1.0F, 1.0F, false, false, TGSoundCategory.RELOAD);
 		        	}
 			        
-		    	} else {
 		    	}
-		    	
     		} else {
     			//mag empty, reload needed
     			
@@ -606,9 +591,9 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
     				Arrays.stream(this.ammoType.getEmptyMag()).forEach( e -> {
     					if (!e.isEmpty()){
         					//player.inventory.addItemStackToInventory(new ItemStack(emptyMag.getItem(),1,emptyMag.getItemDamage()));
-        					int amount=InventoryUtil.addAmmoToPlayerInventory(player, TGItems.newStack(e, 1));
+        					int amount=InventoryUtil.addAmmoToPlayerInventory(player, new ItemStack(e.getItem(), 1, e.getItemDamage()));
         					if(amount >0 && !world.isRemote){
-        						player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, TGItems.newStack(e, amount)));
+        						player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, new ItemStack(e.getItem(), amount, e.getItemDamage())));
         					}
         				}
     				});
@@ -739,7 +724,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 		
 	@Override
-	public void onCreated(ItemStack stack, World world, EntityPlayer player) {
+	public void onCreated(ItemStack stack, @NotNull World world, @NotNull EntityPlayer player) {
 		NBTTagCompound tags = stack.getTagCompound();
 		if(tags==null){
 			tags=new NBTTagCompound();
@@ -785,7 +770,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 			tags = stack.getTagCompound();
 		}
 		String var = tags.getString("ammovariant");
-		if(var==null || var.equals("")) return AmmoTypes.TYPE_DEFAULT;
+		if(var.isEmpty()) return AmmoTypes.TYPE_DEFAULT;
 		return var;
 	}
 
@@ -845,7 +830,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 								int bulletsBack = (int) Math.floor(oldAmmo / this.ammoType.getShotsPerBullet(clipsize, oldAmmo));
 								if (bulletsBack > 0) {
 									int amount2 = InventoryUtil.addAmmoToPlayerInventory(player, TGItems.newStack(this.ammoType.getBullet(currentVariant)[i], bulletsBack));
-									if (amount2 > 0 && !world.isRemote) {
+									if (amount2 > 0) {
 										player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, TGItems.newStack(this.ammoType.getBullet(currentVariant)[i], amount2)));
 									}
 								}
@@ -912,7 +897,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 	
 	@Override
-	public void getSubItems(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubItems(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		if (this.isInCreativeTab(tab)){
 			ItemStack gun = new ItemStack(this, 1,0);
 			this.onCreated(gun, null, null);
@@ -921,12 +906,12 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 	
 	@Override
-	public boolean showDurabilityBar(ItemStack stack) {
+	public boolean showDurabilityBar(@NotNull ItemStack stack) {
 		return true;
 	}
 
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
+	public double getDurabilityForDisplay(@NotNull ItemStack stack) {
 		return 1.0-getPercentAmmoLeft(stack);
 	}
 
@@ -940,7 +925,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 
 	@Override
-	public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+	public boolean shouldCauseReequipAnimation(@NotNull ItemStack oldStack, @NotNull ItemStack newStack, boolean slotChanged) {
 		return slotChanged || !oldStack.isItemEqual(newStack);
 	}
 	
@@ -980,7 +965,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		DamageModifier mod = this.projectile_selector.getFactoryForType(this.getCurrentAmmoVariantKey(stack)).getDamageModifier();
 		float dmg = mod.getDamage(this.damage);
 		if (dmg == this.damage) {
-			return "" + this.damage + (this.damageMin != this.damage ? "-" + this.damageMin : "");
+			return this.damage + (this.damageMin != this.damage ? "-" + this.damageMin : "");
 		} else {
 			float dmgmin = mod.getDamage(this.damageMin);
 			ChatFormatting prefix = ChatFormatting.GREEN;
@@ -1093,15 +1078,15 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	protected void addMiningTooltip(ItemStack stack, World world, List<String> list, ITooltipFlag flagIn, boolean longTooltip) {}
 	
 	@Override
-	public void addInformation(ItemStack stack, World worldIn, List<String> list, ITooltipFlag flagIn) {
+	public void addInformation(@NotNull ItemStack stack, World worldIn, @NotNull List<String> list, @NotNull ITooltipFlag flagIn) {
 		super.addInformation(stack, worldIn, list, flagIn);
 		if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
 			list.add(TextUtil.trans("techguns.gun.tooltip.handtype")+": "+this.getGunHandType().toString());
 			
 			ItemStack[] ammo = this.ammoType.getAmmo(this.getCurrentAmmoVariant(stack));
-			for(int i=0;i< ammo.length;i++) {
-				list.add(TextUtil.trans("techguns.gun.tooltip.ammo")+": "+(this.ammoCount>1 ? this.ammoCount+"x " : "")+ChatFormatting.WHITE+TextUtil.trans(ammo[i].getTranslationKey()+".name"));
-			}
+            for (ItemStack itemStack : ammo) {
+                list.add(TextUtil.trans("techguns.gun.tooltip.ammo") + ": " + (this.ammoCount > 1 ? this.ammoCount + "x " : "") + ChatFormatting.WHITE + TextUtil.trans(itemStack.getTranslationKey() + ".name"));
+            }
 			this.addMiningTooltip(stack, worldIn, list, flagIn, true);
 			list.add(TextUtil.trans("techguns.gun.tooltip.damageType")+": "+this.getDamageType(stack).toString());
 			list.add(TextUtil.trans("techguns.gun.tooltip.damage")+(this.shotgun ? ("(x"+ (this.bulletcount+1)+")") : "" )+": "+getTooltipTextDmg(stack,true));
@@ -1121,9 +1106,9 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 			
 		} else {
 			ItemStack[] ammo = this.ammoType.getAmmo(this.getCurrentAmmoVariant(stack));
-			for(int i=0;i< ammo.length;i++) {
-				list.add(TextUtil.trans("techguns.gun.tooltip.ammo")+": "+(this.ammoCount>1 ? this.ammoCount+"x " : "")+ChatFormatting.WHITE+TextUtil.trans(ammo[i].getTranslationKey()+".name"));
-			}
+            for (ItemStack itemStack : ammo) {
+                list.add(TextUtil.trans("techguns.gun.tooltip.ammo") + ": " + (this.ammoCount > 1 ? this.ammoCount + "x " : "") + ChatFormatting.WHITE + TextUtil.trans(itemStack.getTranslationKey() + ".name"));
+            }
 			this.addMiningTooltip(stack, worldIn, list, flagIn, false);
 			list.add(TextUtil.trans("techguns.gun.tooltip.damage")+(this.shotgun ? ("(x"+ (this.bulletcount+1)+")") : "" )+": "+getTooltipTextDmg(stack,false));
 			list.add(TextUtil.trans("techguns.gun.tooltip.shift1")+" "+ChatFormatting.GREEN+TextUtil.trans("techguns.gun.tooltip.shift2")+" "+ChatFormatting.GRAY+TextUtil.trans("techguns.gun.tooltip.shift3"));
@@ -1164,14 +1149,9 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		this.shootWithLeftClick = shootWithLeftClick;
 		return this;
 	}
-	
-	public GenericGun setMiningAmmoConsumption(int ammo) {
-		this.miningAmmoConsumption = ammo;
-		return this;
-	}
 
-	@Override
-	public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity targetEntity) {
+    @Override
+	public boolean onLeftClickEntity(@NotNull ItemStack stack, @NotNull EntityPlayer player, @NotNull Entity targetEntity) {
 		
 		if (this.shootWithLeftClick) {
 			return true;
@@ -1208,7 +1188,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 						i = i + EnchantmentHelper.getKnockbackModifier(player);
 
 						if (player.isSprinting() && flag) {
-							player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK,
+							player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_KNOCKBACK,
 									player.getSoundCategory(), 1.0F, 1.0F);
 							++i;
 							flag1 = true;
@@ -1224,14 +1204,10 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 
 						f = f + f1;
 						boolean flag3 = false;
-						double d0 = (double) (player.distanceWalkedModified - player.prevDistanceWalkedModified);
+						double d0 = player.distanceWalkedModified - player.prevDistanceWalkedModified;
 
 						if (flag && !flag2 && !flag1 && player.onGround && d0 < (double) player.getAIMoveSpeed()) {
-							ItemStack itemstack = player.getHeldItem(EnumHand.MAIN_HAND);
-
-							flag3= this.hasSwordSweep() && this.getAmmoLeft(stack)>0; //if (itemstack.getItem() instanceof ItemSword) {
-							//	flag3 = true;
-							//}
+                            flag3= this.hasSwordSweep() && this.getAmmoLeft(stack)>0;
 						}
 
 						float f4 = 0.0F;
@@ -1261,11 +1237,11 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 							
 							if (i > 0) {
 								if (targetEntity instanceof EntityLivingBase) {
-									((EntityLivingBase) targetEntity).knockBack(player, (float) i * 0.5F, (double) MathHelper.sin(player.rotationYaw * 0.017453292F),
-											(double) (-MathHelper.cos(player.rotationYaw * 0.017453292F)));
+									((EntityLivingBase) targetEntity).knockBack(player, (float) i * 0.5F, MathHelper.sin(player.rotationYaw * 0.017453292F),
+                                            -MathHelper.cos(player.rotationYaw * 0.017453292F));
 								} else {
-									targetEntity.addVelocity((double) (-MathHelper.sin(player.rotationYaw * 0.017453292F) * (float) i * 0.5F), 0.1D,
-											(double) (MathHelper.cos(player.rotationYaw * 0.017453292F) * (float) i * 0.5F));
+									targetEntity.addVelocity(-MathHelper.sin(player.rotationYaw * 0.017453292F) * (float) i * 0.5F, 0.1D,
+                                            MathHelper.cos(player.rotationYaw * 0.017453292F) * (float) i * 0.5F);
 								}
 
 								player.motionX *= 0.6D;
@@ -1280,8 +1256,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 										targetEntity.getEntityBoundingBox().grow(1.0D, 0.25D, 1.0D))) {
 									if (entitylivingbase != player && entitylivingbase != targetEntity && !player.isOnSameTeam(entitylivingbase)
 											&& player.getDistanceSq(entitylivingbase) < 9.0D) {
-										entitylivingbase.knockBack(player, 0.4F, (double) MathHelper.sin(player.rotationYaw * 0.017453292F),
-												(double) (-MathHelper.cos(player.rotationYaw * 0.017453292F)));
+										entitylivingbase.knockBack(player, 0.4F, MathHelper.sin(player.rotationYaw * 0.017453292F),
+                                                -MathHelper.cos(player.rotationYaw * 0.017453292F));
 										TGDamageSource dmgsrc = getMeleeDamageSource(player,stack);
 										entitylivingbase.attackEntityFrom(dmgsrc, f3);
 										if(dmgsrc.wasSuccessful()) {
@@ -1310,17 +1286,17 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 							}
 
 							if (flag2) {
-								player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, player.getSoundCategory(),
+								player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_CRIT, player.getSoundCategory(),
 										1.0F, 1.0F);
 								player.onCriticalHit(targetEntity);
 							}
 
 							if (!flag2 && !flag3) {
 								if (flag) {
-									player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_STRONG,
+									player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_STRONG,
 											player.getSoundCategory(), 1.0F, 1.0F);
 								} else {
-									player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_WEAK,
+									player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_WEAK,
 											player.getSoundCategory(), 1.0F, 1.0F);
 								}
 							}
@@ -1374,7 +1350,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 
 							player.addExhaustion(0.1F);
 						} else {
-							player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE, player.getSoundCategory(),
+							player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_NODAMAGE, player.getSoundCategory(),
 									1.0F, 1.0F);
 
 							if (flag4) {
@@ -1402,8 +1378,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	
 	protected void doSweepAttackEffect(EntityPlayer player) {
         if(!player.world.isRemote) {
-			double d0 = (double)(-MathHelper.sin(player.rotationYaw * 0.017453292F));
-	        double d1 = (double)MathHelper.cos(player.rotationYaw * 0.017453292F);
+			double d0 = -MathHelper.sin(player.rotationYaw * 0.017453292F);
+	        double d1 = MathHelper.cos(player.rotationYaw * 0.017453292F);
         	double x = player.posX+d0;
         	double y = player.posY+player.height*0.8d;
         	double z = player.posZ+d1;
@@ -1413,7 +1389,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 
 	protected void playSweepSoundEffect(EntityPlayer player) {
-		player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP,
+		player.world.playSound(null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP,
 				player.getSoundCategory(), 1.0F, 1.0F);
 	}
 	
@@ -1426,8 +1402,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	 * @return
 	 */
 	protected TGDamageSource getMeleeDamageSource(EntityPlayer player, ItemStack stack){
-		TGDamageSource src = new TGDamageSource("player", player, player, DamageType.PHYSICAL, DeathType.GORE);
-		return src;
+        return new TGDamageSource("player", player, player, DamageType.PHYSICAL, DeathType.GORE);
 	}
 	
 	protected boolean hasSwordSweep() {
@@ -1495,7 +1470,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
     	
     	if(this.ammoCount>1 && this.getAmmoLeft(stack)>0) {
     		for(ItemStack s : this.getAmmoType().getBullet(this.getCurrentAmmoVariant(stack))) {
-    			items.add(TGItems.newStack(s,this.getAmmoLeft(stack)));
+    			items.add(new ItemStack(s.getItem(), this.getAmmoLeft(stack), s.getItemDamage()));
     		}
     	} else {
     		if (!this.isFullyLoaded(stack)) {
@@ -1576,7 +1551,6 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
     				while (i<(ammoCount-oldAmmo) && InventoryUtil.consumeAmmoPlayer(player,this.ammoType.getAmmo(this.getCurrentAmmoVariant(item)))){
     					i++;
     				}
-    				
     				//item.setItemDamage(ammoCount-i);
     				this.reloadAmmo(item, i);
     			} else {
@@ -1594,18 +1568,13 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 				} else{
 					//send reloadpacket
 					//send pakets to clients
-					
 			    	int msg_reloadtime = ((int)(((float)reloadtime/20.0f)*1000.0f));
 			    	TGPackets.wrapper.sendToAllAround(new ReloadStartedMessage(player,hand, msg_reloadtime,0), new TargetPoint(player.dimension, player.posX, player.posY, player.posZ, 100.0f));
 			    	//
 				}
 
-			} else {
 			}
-
-			
 		}
-		
 	}
 
 	public int getClipsize() {
@@ -1625,7 +1594,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	}
 	
 	@Override
-	public boolean doesSneakBypassUse(ItemStack stack, IBlockAccess world, BlockPos pos, EntityPlayer player) {
+	public boolean doesSneakBypassUse(@NotNull ItemStack stack, @NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull EntityPlayer player) {
 		return !(this.handType == GunHandType.TWO_HANDED);
 	}
 	

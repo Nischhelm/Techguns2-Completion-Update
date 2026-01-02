@@ -508,16 +508,16 @@ public class GenericArmor extends ItemArmor implements ISpecialArmor , IItemTGRe
 
 	public GenericArmor setRepairMats(ItemStack metal, ItemStack cloth, float metalpercent, int totalmats){
 		if(metal!=null && !metal.isEmpty()){
-			this.repairItem = TGItems.newStack(metal, 1);
+			this.repairItem = new ItemStack(metal.getItem(), 1, metal.getItemDamage());
 		} else if (cloth!=null && !cloth.isEmpty()){
-			this.repairItem = TGItems.newStack(cloth, 1);
+			this.repairItem = new ItemStack(cloth.getItem(), 1, cloth.getItemDamage());
 		}
 		
 		if(metal!=null && !metal.isEmpty()){
-			this.repairMatMetal=TGItems.newStack(metal, 1);
+			this.repairMatMetal=new ItemStack(metal.getItem(), 1, metal.getItemDamage());
 		}
 		if(cloth!=null && !cloth.isEmpty()){
-			this.repairMatCloth=TGItems.newStack(cloth, 1);
+			this.repairMatCloth=new ItemStack(cloth.getItem(), 1, cloth.getItemDamage());
 		}
 		this.repairMatCount=totalmats;
 		this.repairMatRatioMetal = metalpercent;
@@ -538,16 +538,16 @@ public class GenericArmor extends ItemArmor implements ISpecialArmor , IItemTGRe
 			
 			float dmgpercent = (item.getItemDamage()*1.0f)/((item.getMaxDamage()-1)*1.0f);
 				
-			int count =  (int) Math.ceil(armor.repairMatCount*dmgpercent);
+			int count = (int) Math.ceil(armor.repairMatCount*dmgpercent);
 			
 			int metalcount = (int) Math.ceil(count*armor.repairMatRatioMetal);
 			int clothcount = count-metalcount;
 			
-			if(armor.repairMatMetal!=null && metalcount>0){
-				mats.add(TGItems.newStack(armor.repairMatMetal, metalcount));
+			if(armor.repairMatMetal != null && metalcount > 0){
+				mats.add(new ItemStack(armor.repairMatMetal.getItem(), metalcount, armor.repairMatMetal.getItemDamage()));
 			}
-			if(armor.repairMatCloth!=null && clothcount>0){
-				mats.add(TGItems.newStack(armor.repairMatCloth, clothcount));
+			if(armor.repairMatCloth != null && clothcount > 0){
+				mats.add(new ItemStack(armor.repairMatCloth.getItem(), clothcount, armor.repairMatCloth.getItemDamage()));
 		}
 		}
 		return mats;

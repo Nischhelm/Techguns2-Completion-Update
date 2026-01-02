@@ -89,7 +89,7 @@ public class AmmoPressTileEnt extends BasicMachineTileEnt {
 	
 	@Override
 	public ITextComponent getDisplayName() {
-		return new TextComponentTranslation("techguns.container.ammopress", new Object[0]);
+		return new TextComponentTranslation("techguns.container.ammopress");
 	}
 
 	@Override
@@ -134,16 +134,12 @@ public class AmmoPressTileEnt extends BasicMachineTileEnt {
 			
 			int maxStack=this.getMaxMachineUpgradeMultiplier(SLOT_UPGRADE);
 			
-			//try higher stacksize
-			//int originalStacksize = output.getCount();
-			ItemStack outputStack = TGItems.newStack(output, output.getCount());
 			int i;
 			int multiplier=1;
 			for (i=maxStack;i>1;--i){
-				outputStack.setCount(output.getCount()*i);
-				if (canOutput(outputStack,SLOT_OUTPUT)){
+				output.setCount(output.getCount()*i);
+				if (canOutput(output,SLOT_OUTPUT)){
 					if (this.inputMetal1.canConsume(i) && this.inputMetal2.canConsume(2*i)&& this.inputPowder.canConsume(i)) {
-					//	output=outputStack;
 						multiplier=i;
 						break;
 					}
@@ -156,8 +152,6 @@ public class AmmoPressTileEnt extends BasicMachineTileEnt {
 			this.inputMetal1.consume(multiplier);
 			this.inputMetal2.consume(multiplier*2);
 			this.inputPowder.consume(multiplier);
-			//
-			//System.out.println("Starting with stackmultiplier:"+this.stackmultiplier);
 			this.currentOperation = new MachineOperation(output, metal1,metal2,powder);
 			this.currentOperation.setStackMultiplier(multiplier);
 			this.progress = 0;
@@ -176,7 +170,6 @@ public class AmmoPressTileEnt extends BasicMachineTileEnt {
 			this.inventory.setStackInSlot(SLOT_OUTPUT, currentOperation.getItemOutput0());
 		} else {
 			this.inventory.insertItemNoCheck(SLOT_OUTPUT, currentOperation.getItemOutput0(), false);
-			//this.inventory.getStackInSlot(SLOT_OUTPUT).grow(currentOperation.getItemOutput0().getCount());
 		}
 	}
 

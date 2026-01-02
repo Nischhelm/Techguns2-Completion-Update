@@ -146,12 +146,7 @@ public class GenericItemShared extends GenericItem implements IItemTGRenderer, I
 	@Override
 	public void initModel() {
         for (int i = 0; i < this.sharedItems.size(); i++) {
-            ResourceLocation rl = new ResourceLocation(Techguns.MODID, this.sharedItems.get(i).name);
-
-            if (i == TGItems.PLATE_COPPER.getItemDamage()) rl = new ResourceLocation(Techguns.MODID, "platecopper");
-            if (i == TGItems.PLATE_STEEL.getItemDamage())  rl = new ResourceLocation(Techguns.MODID, "platesteel");
-
-            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(rl, "inventory"));
+            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(new ResourceLocation(Techguns.MODID, this.sharedItems.get(i).name), "inventory"));
         }
 	}
 

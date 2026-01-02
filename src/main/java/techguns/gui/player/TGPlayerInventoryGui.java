@@ -218,13 +218,13 @@ public class TGPlayerInventoryGui extends TGBaseGui {
 			
 			/*if (!Techguns.isTConstructLoaded){
 				this.buttonList.add(new TGGuiTabButton(index, this.guiLeft-26, this.guiTop+5, true, new ItemStack(Blocks.crafting_table,1),0));
-			    this.buttonList.add(new TGGuiTabButton(index, this.guiLeft-26, this.guiTop+5+26, false,TGItems.newStack(TGItems.bullets9mm,1),TGConfig.GUI_ID_tgplayerInventory));
+			    this.buttonList.add(new TGGuiTabButton(index, this.guiLeft-26, this.guiTop+5+26, false,new ItemStack(TGItems.bullets9mm.getItem(), 1, TGItems.bullets9mm.getItemDamage()),TGConfig.GUI_ID_tgplayerInventory));
 			} else {
 				((TechgunsTConstructIntegrationClient)Techguns.pluginTConstructIntegration).addTabs(this.guiLeft, this.guiTop, this.buttonList);
 
 			}*/
 			//this.buttonList.add(new TGGuiTabButton(index, this.guiLeft+5, this.guiTop-26, true, new ItemStack(Blocks.CRAFTING_TABLE,1),-1));
-		    //this.buttonList.add(new TGGuiTabButton(index, this.guiLeft+5+28, this.guiTop-26, false,TGItems.newStack(TGItems.PISTOL_ROUNDS,1),0));	
+		    //this.buttonList.add(new TGGuiTabButton(index, this.guiLeft+5+28, this.guiTop-26, false,new ItemStack(TGItems.PISTOL_ROUNDS.getItem(), 1, TGItems.PISTOL_ROUNDS.getItemDamage()),0));	
 			
 			//Galacticraft API for Tabs
 			TabRegistry.updateTabValues(this.guiLeft, this.guiTop, TGPlayerTab.class);

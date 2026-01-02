@@ -120,9 +120,9 @@ public class GenericGunCharge extends GenericGun {
 					Arrays.stream(this.ammoType.getEmptyMag()).forEach( e -> {
     					if (!e.isEmpty()){
         					//player.inventory.addItemStackToInventory(new ItemStack(emptyMag.getItem(),1,emptyMag.getItemDamage()));
-        					int amount=InventoryUtil.addAmmoToPlayerInventory(player, TGItems.newStack(e, 1));
+        					int amount=InventoryUtil.addAmmoToPlayerInventory(player, new ItemStack(e.getItem(), 1, e.getItemDamage()));
         					if(amount >0 && !world.isRemote){
-        						player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, TGItems.newStack(e, amount)));
+        						player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, new ItemStack(e.getItem(), amount, e.getItemDamage())));
         					}
         				}
     				});

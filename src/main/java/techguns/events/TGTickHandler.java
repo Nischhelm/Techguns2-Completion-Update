@@ -1,11 +1,6 @@
 package techguns.events;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Iterator;
 import java.util.UUID;
-
-import com.google.common.base.Predicate;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -24,7 +19,6 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.ClientTickEvent;
@@ -47,7 +41,6 @@ import techguns.capabilities.TGExtendedPlayerClient;
 import techguns.capabilities.TGShooterValues;
 import techguns.client.ClientProxy;
 import techguns.client.audio.TGSoundCategory;
-import techguns.client.particle.LightPulse;
 import techguns.damagesystem.TGDamageSource;
 import techguns.deatheffects.EntityDeathUtils.DeathType;
 import techguns.gui.player.TGPlayerInventory;
@@ -71,13 +64,7 @@ public class TGTickHandler {
 	private static final UUID UUID_SPEED = UUID.fromString("5D8E53EB-DCFA-4121-B4DB-99BCAFA6B70B");
 	private static final UUID UUID_HEALTH = UUID.fromString("4CFA49EB-D215-498B-9CC9-4BD0D1350B1F");
 	private static final UUID UUID_KNOCKBACK_RESISTANCE = UUID.fromString("3441FC5D-F0B6-47F4-AFBB-DC5005670254");
-	
-	private static Method ITEMFOOD_onFoodEaten;
-	static {
-		//ITEMFOOD_onFoodEaten = ReflectionHelper.findMethod(ItemFood.class,"onFoodEaten","func_77849_c", ItemStack.class, World.class, EntityPlayer.class);
-		ITEMFOOD_onFoodEaten = ObfuscationReflectionHelper.findMethod(ItemFood.class, "func_77849_c", void.class, ItemStack.class, World.class, EntityPlayer.class);
-	}
-	
+
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void localClientPlayerTick(PlayerTickEvent event) {
@@ -91,8 +78,6 @@ public class TGTickHandler {
 
 			// ONLY DO FOR OWN PLAYER!
 			if (event.player == cp.getPlayerClient()) {
-				//TGExtendedPlayer props = TGExtendedPlayer.get(cp.getPlayerClient());
-				
 				if (Minecraft.getMinecraft().inGameHasFocus && !event.player.isSpectator()) {
 					ItemStack stack = event.player.getHeldItemMainhand();
 					ItemStack stackOff = event.player.getHeldItemOffhand();
@@ -154,12 +139,7 @@ public class TGTickHandler {
 					cp.keyFirePressedOffhand = false;
 				}
 			}
-
-		} else {
-			
-			
 		}
-
 	}
 	
 	@SubscribeEvent
@@ -213,30 +193,24 @@ public class TGTickHandler {
 			 }
 			 
 	         IAttributeInstance attributeMovespeed = event.player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MOVEMENT_SPEED);
-	         if (attributeMovespeed!=null){
-	        	 AttributeModifier mod_speed = attributeMovespeed.getModifier(UUID_SPEED);
-	        	 if (mod_speed!=null){
-	        		 attributeMovespeed.removeModifier(mod_speed);
-	        	 }
-	         }
-	         
-	         IAttributeInstance attributeMaxHealth = event.player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
-	         if (attributeMaxHealth!=null){
-	        	 AttributeModifier mod_health = attributeMaxHealth.getModifier(UUID_HEALTH);
-	        	 if (mod_health !=null){
-	        		 attributeMaxHealth.removeModifier(mod_health);
-	        	 }
-	         }
-	         
-	         IAttributeInstance attributeKnockbackResist = event.player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
-	         if (attributeKnockbackResist!=null){
-	        	 AttributeModifier mod_knockback_resistance = attributeKnockbackResist.getModifier(UUID_KNOCKBACK_RESISTANCE);
-	        	 if (mod_knockback_resistance  !=null){
-	        		 attributeKnockbackResist.removeModifier(mod_knockback_resistance);
-	        	 }
-	         }
-	         
-	         float speed=0.0f;
+             AttributeModifier mod_speed = attributeMovespeed.getModifier(UUID_SPEED);
+             if (mod_speed!=null){
+                 attributeMovespeed.removeModifier(mod_speed);
+             }
+
+             IAttributeInstance attributeMaxHealth = event.player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.MAX_HEALTH);
+             AttributeModifier mod_health = attributeMaxHealth.getModifier(UUID_HEALTH);
+             if (mod_health !=null){
+                 attributeMaxHealth.removeModifier(mod_health);
+             }
+
+             IAttributeInstance attributeKnockbackResist = event.player.getAttributeMap().getAttributeInstance(SharedMonsterAttributes.KNOCKBACK_RESISTANCE);
+             AttributeModifier mod_knockback_resistance = attributeKnockbackResist.getModifier(UUID_KNOCKBACK_RESISTANCE);
+             if (mod_knockback_resistance  !=null){
+                 attributeKnockbackResist.removeModifier(mod_knockback_resistance);
+             }
+
+             float speed;
 			 if (wearingTechgunsArmor){
 
 				 PoweredArmor.calculateConsumptionTick(event.player);
@@ -256,7 +230,6 @@ public class TGTickHandler {
 				 }
 				 
 				 if ((speed) != 0.0f){
-					 //event.player.addPotionEffect(new PotionEffect(Potion.moveSpeed.id,2,0,true));
 					 if(event.player.isSprinting()){
 						 if(speed > 0.0f){
 							 speed = speed*2.0f;
@@ -264,13 +237,6 @@ public class TGTickHandler {
 							speed = speed / 2.0f;
 						 }
 					 }
-					 
-					 /*if(!event.player.getActiveItemStack().isEmpty()){
-						 ItemStack item = event.player.getHeldItemMainhand();
-						 if (item.getItem() instanceof GenericGun){
-							 speed+=5.0f;
-						 }
-					 }*/
 					 
 		             attributeMovespeed.applyModifier(new AttributeModifier(UUID_SPEED, "TechgunsSpeedboost", speed, 2));
 				 }
@@ -288,11 +254,6 @@ public class TGTickHandler {
 					 
 				 }
 				 
-			 } else {
-
-				 if (speed>0.0f){
-					 attributeMovespeed.applyModifier(new AttributeModifier(UUID_SPEED, "TechgunsSpeedboost", speed, 2));
-				 }
 			 }
 			
 			 //Step height is client only
@@ -319,11 +280,8 @@ public class TGTickHandler {
 				 }
 			 }
 			 
-			 boolean enabled=false;
-			 if(props!=null){
-				 enabled= props.enableNightVision;
-			 }
-			 float nightvision=GenericArmor.getArmorBonusForPlayer(event.player, TGArmorBonus.NIGHTVISION, enabled);
+			 boolean enabled = props.enableNightVision;
+             float nightvision=GenericArmor.getArmorBonusForPlayer(event.player, TGArmorBonus.NIGHTVISION, enabled);
 			 Techguns.proxy.setHasNightvision(nightvision>0.0f);
 			 if(nightvision>0.0f && enabled){
 				 if(!event.player.world.isRemote){
@@ -387,73 +345,60 @@ public class TGTickHandler {
 			  * Auto feeder
 			  */
 			 if (!TGConfig.disableAutofeeder && event.player.getFoodStats().getFoodLevel()<=19){
-				 
-				 if (props!=null){
-					 int needed = 20-event.player.getFoodStats().getFoodLevel();
-					 if (props.foodleft>0){
-						 if (props.foodleft<=needed){
-							 event.player.getFoodStats().addStats(props.foodleft,props.lastSaturation);
-							 props.foodleft=0;
-							 props.lastSaturation=0.0f;
-						 } else {
-							 event.player.getFoodStats().addStats(needed,props.lastSaturation);
-							 props.foodleft-=needed;
-						 }
-						 if (!event.player.world.isRemote){
-							 TGPackets.wrapper.sendTo(new PacketTGExtendedPlayerSync(event.player,props,true), (EntityPlayerMP) event.player);
-						 }
-					 } else {
-						 ItemStack stack = InventoryUtil.consumeFood(props.tg_inventory.inventory, props.tg_inventory.SLOTS_AUTOFOOD_START, props.tg_inventory.SLOTS_AUTOFOOD_END+1);
-						 if (!stack.isEmpty()){
-							 ItemFood food = (ItemFood) stack.getItem();
-							 
-							 //check potion effect.
-							 try {
-								ITEMFOOD_onFoodEaten.invoke(food, stack, event.player.world,event.player);
-							} catch (IllegalAccessException e) {
-								e.printStackTrace();
-							} catch (IllegalArgumentException e) {
-								e.printStackTrace();
-							} catch (InvocationTargetException e) {
-								e.printStackTrace();
-							}
-							 
-							 if (!event.player.world.isRemote){
-								 //event.player.world.playSoundAtEntity(event.player, SoundEvents.ENTITY_PLAYER_BURP, 1.0f, 1.0f);
-								 event.player.world.playSound(null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1f, 1f);
-							 }
-							 
-							 short left = (short) (food.getHealAmount(stack)-needed);
-							 if (left >0){
-								 event.player.getFoodStats().addStats(needed, food.getSaturationModifier(stack));
-								 props.foodleft=left;
-								 props.lastSaturation=food.getSaturationModifier(stack);
-							 } else {
-								 event.player.getFoodStats().addStats(food.getHealAmount(stack), food.getSaturationModifier(stack));
-								 props.foodleft=0;
-								 props.lastSaturation=0.0f;
-							 }
-							 if (!event.player.world.isRemote){
-								 TGPackets.wrapper.sendTo(new PacketTGExtendedPlayerSync(event.player,props,true), (EntityPlayerMP) event.player);
-							 }
-						 }
-					 }
-				 }
-			 }
+
+                 int needed = 20 - event.player.getFoodStats().getFoodLevel();
+                 if (props.foodleft>0){
+                     if (props.foodleft<=needed){
+                         event.player.getFoodStats().addStats(props.foodleft,props.lastSaturation);
+                         props.foodleft=0;
+                         props.lastSaturation=0.0f;
+                     } else {
+                         event.player.getFoodStats().addStats(needed,props.lastSaturation);
+                         props.foodleft-= (short) needed;
+                     }
+                     if (!event.player.world.isRemote){
+                         TGPackets.wrapper.sendTo(new PacketTGExtendedPlayerSync(event.player,props,true), (EntityPlayerMP) event.player);
+                     }
+                 } else {
+                     ItemStack stack = InventoryUtil.consumeFood(props.tg_inventory.inventory, TGPlayerInventory.SLOTS_AUTOFOOD_START, TGPlayerInventory.SLOTS_AUTOFOOD_END +1);
+                     if (!stack.isEmpty()){
+                         ItemFood food = (ItemFood) stack.getItem();
+
+                         //check potion effect.
+                         food.onFoodEaten(stack, event.player.world, event.player);
+
+                         if (!event.player.world.isRemote){
+                             event.player.world.playSound(null, event.player.posX, event.player.posY, event.player.posZ, SoundEvents.ENTITY_PLAYER_BURP, SoundCategory.PLAYERS, 1f, 1f);
+                         }
+
+                         short left = (short) (food.getHealAmount(stack)-needed);
+                         if (left >0){
+                             event.player.getFoodStats().addStats(needed, food.getSaturationModifier(stack));
+                             props.foodleft=left;
+                             props.lastSaturation=food.getSaturationModifier(stack);
+                         } else {
+                             event.player.getFoodStats().addStats(food.getHealAmount(stack), food.getSaturationModifier(stack));
+                             props.foodleft=0;
+                             props.lastSaturation=0.0f;
+                         }
+                         if (!event.player.world.isRemote){
+                             TGPackets.wrapper.sendTo(new PacketTGExtendedPlayerSync(event.player,props,true), (EntityPlayerMP) event.player);
+                         }
+                     }
+                 }
+             }
 			 
 			 /**
 			  * Remove Additional Slot Attribute Modifiers
 			  */
 		      IAttributeInstance attributeRadresistance = event.player.getAttributeMap().getAttributeInstance(TGRadiation.RADIATION_RESISTANCE);
-	         if (attributeRadresistance!=null){
-	        	 AttributeModifier rad_resist_faceslot = attributeRadresistance.getModifier(ItemGasMask.UUID_RAD_RESIST_FACE);
-	        	 if (rad_resist_faceslot!=null){
-	        		 attributeRadresistance.removeModifier(rad_resist_faceslot);
-	        	 }
-	         }
-			 
-			 
-			 /**
+             AttributeModifier rad_resist_faceslot = attributeRadresistance.getModifier(ItemGasMask.UUID_RAD_RESIST_FACE);
+             if (rad_resist_faceslot!=null){
+                 attributeRadresistance.removeModifier(rad_resist_faceslot);
+             }
+
+
+             /**
 			  * Tick addition slots
 			  */
 			 props.isGliding=false;
@@ -528,21 +473,6 @@ public class TGTickHandler {
 				 props.gunMainHand=gunMH;
 				 props.gunOffHand=gunOH;
 			 }
-			 
-//TODO: Remove this
-//			 if (props.isChargingWeapon() && (event.player.getItemInUseCount() <= 0)) { //  || !(event.player.getHeldItemMainhand().getItem() instanceof GenericGunCharge)) {		
-//				 if (event.player.getHeldItemMainhand().getItem() instanceof GenericGunCharge) {
-//					 GenericGunCharge gun = (GenericGunCharge)event.player.getHeldItemMainhand().getItem();
-//					 if (gun.canFireWhileCharging && gun.getAmmoLeft(event.player.getHeldItemMainhand()) > 0) {
-//						 //System.out.println("Keep Lock!");
-//					 }else {
-//							props.lockOnEntity = null;
-//							props.lockOnTicks = 0;
-//					 }
-//				 }
-//				//if (((GenericGunCharge)event.player.getHeldItemMainhand().getItem()).getLockOnTicks() > 0) {
-//				//}
-//			 }
 			
 			 /*
 			  * Charging weapon
@@ -569,12 +499,7 @@ public class TGTickHandler {
 	@SubscribeEvent
 	public static void clientGameTick(ClientTickEvent event) {
 		if(event.phase==Phase.END) {
-			Iterator<LightPulse> iter = ClientProxy.get().activeLightPulses.iterator();
-			while(iter.hasNext()) {
-				if (!iter.next().updateGameTick()) {
-					iter.remove();
-				}
-			}
+            ClientProxy.get().activeLightPulses.removeIf(lightPulse -> !lightPulse.updateGameTick());
 		}
 	}
 	
@@ -583,28 +508,15 @@ public class TGTickHandler {
 	public static void TickParticleSystems(ClientTickEvent event) {
 		if(event.phase==Phase.END) {
 			ClientProxy.get().particleManager.tickParticles();
-			//System.out.println("TGParticleCount:"+ClientProxy.get().particleManager.getList().getSizeDebug()+ " :: "+ClientProxy.get().particleManager.getList().getSize());
 		} else {
 			World w = Minecraft.getMinecraft().world;
 			if(w!=null) {
-				w.<EntityLivingBase>getEntities(EntityLivingBase.class, new Predicate<EntityLivingBase>() {
-					@Override
-					public boolean apply(EntityLivingBase input) {
-						return input instanceof INPCTechgunsShooter;
-					}
-				}).forEach(e -> {
+				w.getEntities(EntityLivingBase.class, input -> input instanceof INPCTechgunsShooter).forEach(e -> {
 					TGShooterValues shooter_values = TGShooterValues.get(e);
-					//Techguns.proxy.tickWeaponParticleSystems(e, shooter_values);
 					shooter_values.tickParticles();
-					//System.out.println("Tick for :"+e);
 				});
 				
-				w.getPlayers(EntityPlayer.class, new Predicate<EntityPlayer>() {
-					@Override
-					public boolean apply(EntityPlayer input) {
-						return true;
-					}
-				}).forEach(p -> {
+				w.getPlayers(EntityPlayer.class, input -> true).forEach(p -> {
 					TGExtendedPlayerClient props = TGExtendedPlayerClient.get(p);
 					props.tickParticles();
 				});
@@ -615,7 +527,6 @@ public class TGTickHandler {
 	@SideOnly(Side.CLIENT)
 	@SubscribeEvent
 	public static void onRenderTick(RenderTickEvent event) {
-
 		if (event.phase==Phase.START) {
 		
 			ClientProxy cp = ClientProxy.get();
@@ -625,13 +536,9 @@ public class TGTickHandler {
 			if (player != null){
 				ItemStack current_item = player.getHeldItemMainhand();
 				
-				if (current_item != null) {
-		
+				if (!current_item.isEmpty()) {
 					if(current_item.getItem() instanceof IGenericGun){
-						
-						
 						if ((((IGenericGun) current_item.getItem())).isHoldZoom()){
-							
 							if (player.isSneaking()) {
 		
 								cp.player_zoom = ((IGenericGun) current_item.getItem()).getZoomMult();

@@ -18,8 +18,6 @@ public class MachineSlotItem {
 	 */
 	public void consume(int amount) {
 		if(amount >0) {
-			/*ItemStack stack = tile.getInventory().getStackInSlot(slotID);
-			stack.shrink(amount);*/
 			this.tile.getInventory().extractWithoutCheck(slotID, amount, false);
 		}
 	}

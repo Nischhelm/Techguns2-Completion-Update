@@ -23,8 +23,7 @@ public class TGPackets implements ITGInitializer {
 	public static SimpleNetworkWrapper wrapper;
 	
 	public static EntityPlayer getPlayerFromContext(MessageContext ctx){
-		EntityPlayer thePlayer = (ctx.side.isClient() ? Techguns.proxy.getPlayerClient() : ctx.getServerHandler().player);
-		return thePlayer;
+        return (ctx.side.isClient() ? Techguns.proxy.getPlayerClient() : ctx.getServerHandler().player);
 	}
 
 	public static TargetPoint targetPointAroundBlockPos(int dimension, BlockPos pos, double distance){
@@ -74,14 +73,6 @@ public class TGPackets implements ITGInitializer {
 		wrapper.registerMessage(PacketGunImpactFX.Handler.class, PacketGunImpactFX.class, packetid++, Side.CLIENT);
 		wrapper.registerMessage(PacketGunImpactFX.Handler.class, PacketGunImpactFX.class, packetid++, Side.CLIENT);
 		wrapper.registerMessage(PacketNBTControl.Handler.class, PacketNBTControl.class, packetid++, Side.SERVER);
-
-		
-		/*
-		network.registerMessage(PacketRequestTurretSync.Handler.class, PacketRequestTurretSync.class, packetid++, Side.SERVER);
-		network.registerMessage(PacketTGMessage.Handler.class, PacketTGMessage.class, packetid++, Side.CLIENT);*/
-		//network.registerMessage(MyMessage.Handler.class, MyMessage.class, 0, Side.SERVER);
-	       // network.registerMessage(SecondMessage.Handler.class, SecondMessage.class, 1, Side.CLIENT);
-	       // ...
 	}
 
 	@Override

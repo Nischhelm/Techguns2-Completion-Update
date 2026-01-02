@@ -5,13 +5,12 @@ import micdoodle8.mods.galacticraft.api.client.tabs.TabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBiped;
 import net.minecraft.client.renderer.ItemMeshDefinition;
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.block.model.*;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
-import net.minecraft.client.renderer.entity.RenderLivingBase;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.client.renderer.entity.layers.LayerBipedArmor;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -36,7 +35,6 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -86,8 +84,6 @@ import techguns.items.guns.GenericGun;
 import techguns.keybind.TGKeybinds;
 import techguns.tileentities.*;
 import techguns.util.EntityCondition;
-
-import java.lang.reflect.Field;
 import java.util.*;
 
 @Mod.EventBusSubscriber(Side.CLIENT)
@@ -96,14 +92,7 @@ public class ClientProxy extends CommonProxy {
 	public TGParticleManager particleManager = new TGParticleManager();
 	
 	protected GuiHandlerRegister guihandler = new GuiHandlerRegister();
-	
-	public static Field Field_ItemRenderer_equippedProgressMainhand = ObfuscationReflectionHelper.findField(ItemRenderer.class, "field_187469_f"); //ReflectionHelper.findField(ItemRenderer.class, "equippedProgressMainHand", "field_187469_f");
-	public static Field Field_ItemRenderer_equippedProgressOffhand =  ObfuscationReflectionHelper.findField(ItemRenderer.class, "field_187471_h");//ReflectionHelper.findField(ItemRenderer.class, "equippedProgressOffHand", "field_187471_h");
-	public static Field Field_ItemRenderer_prevEquippedProgressMainhand = ObfuscationReflectionHelper.findField(ItemRenderer.class, "field_187470_g");//ReflectionHelper.findField(ItemRenderer.class, "prevEquippedProgressMainHand", "field_187470_g");
-	public static Field Field_ItemRenderer_prevEquippedProgressOffhand = ObfuscationReflectionHelper.findField(ItemRenderer.class, "field_187472_i");//ReflectionHelper.findField(ItemRenderer.class, "prevEquippedProgressOffHand", "field_187472_i");
-	
-	protected static Field RenderPlayer_LayerRenderers = ObfuscationReflectionHelper.findField(RenderLivingBase.class, "field_177097_h");//ReflectionHelper.findField(RenderLivingBase.class, "layerRenderers", "field_177097_h");
-	
+
 	public LinkedList<LightPulse> activeLightPulses;
 	
 	private boolean lightPulsesEnabled=true;
@@ -134,32 +123,15 @@ public class ClientProxy extends CommonProxy {
 	protected HashMap<String,ModelBiped> armorModelRegistry = new HashMap<>();
 	
 	public void registerArmorModel(ResourceLocation key, ModelBiped model) {
-		//System.out.println("Registering: "+key.toString()+" "+model);
 		this.armorModelRegistry.put(key.toString(), model);
 	}
 	
 	public ModelBiped getArmorModel(ResourceLocation key) {
 		return this.armorModelRegistry.get(key.toString());
 	}
-	
-	
-	private boolean isLeft(EnumHand handIn){
-		if(this.getPlayerClient().getPrimaryHand()==EnumHandSide.RIGHT){
-			return handIn == EnumHand.OFF_HAND;
-		} else {
-			return handIn == EnumHand.MAIN_HAND;
-		}
-	}
-	
-	private boolean isLeft(boolean left){
-		if(this.getPlayerClient().getPrimaryHand()==EnumHandSide.RIGHT){
-			return left;
-		} else {
-			return !left;
-		}
-	}
-	
-	@Override
+
+
+    @Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 		OBJLoader.INSTANCE.addDomain(Techguns.MODID);
@@ -207,11 +179,11 @@ public class ClientProxy extends CommonProxy {
 		
 		RenderPlayer slim =skinMap.get("slim");
 		//slim.addLayer(new TGLayerRendererer(slim,true));
-		insertLayerAfterArmor(slim, new TGLayerRendererer(slim,true));
+		insertLayerAfterArmor(slim, new TGLayerRendererer(slim));
 		
 		RenderPlayer def = skinMap.get("default");
 		//def.addLayer(new TGLayerRendererer(def,false));
-		insertLayerAfterArmor(def, new TGLayerRendererer(def,false));
+		insertLayerAfterArmor(def, new TGLayerRendererer(def));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(AmmoPressTileEnt.class,
 				new RenderMachine(new ModelAmmoPress(), new ResourceLocation(Techguns.MODID, "textures/blocks/ammopress.png")));
@@ -277,22 +249,18 @@ public class ClientProxy extends CommonProxy {
 		return guihandler;
 	}
 
-	private void insertLayerAfterArmor(RenderPlayer r, TGLayerRendererer tglayer) {
-		try {
-			List<LayerRenderer> layers = (List<LayerRenderer>) RenderPlayer_LayerRenderers.get(r);
+    @SuppressWarnings("unchecked")
+    private void insertLayerAfterArmor(RenderPlayer r, LayerRenderer<? super AbstractClientPlayer> tglayer) {
+        List<LayerRenderer<? super AbstractClientPlayer>> layers = (List<LayerRenderer<? super AbstractClientPlayer>>) (List<?>) r.layerRenderers;
 
-			for(int i=0;i<layers.size();i++) {
-				LayerRenderer layer = layers.get(i);
-				if(layer instanceof LayerBipedArmor){
-					layers.add(i+1, tglayer);
-					break;
-				}				
-			}
-			
-		} catch (IllegalArgumentException | IllegalAccessException e) {
-			e.printStackTrace();
-		}
-	}
+        for (int i = 0; i < layers.size(); i++) {
+            LayerRenderer<? super AbstractClientPlayer> layer = layers.get(i);
+            if (layer instanceof LayerBipedArmor) {
+                layers.add(i + 1, tglayer);
+                break;
+            }
+        }
+    }
 	
 	
 	@Override

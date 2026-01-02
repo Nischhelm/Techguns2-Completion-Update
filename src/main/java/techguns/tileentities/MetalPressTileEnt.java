@@ -15,6 +15,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGFluids;
 import techguns.TGItems;
@@ -196,7 +197,7 @@ public class MetalPressTileEnt extends BasicMachineTileEnt {
 	}
 
 	@Override
-	public NBTTagCompound writeToNBT(NBTTagCompound compound) {
+	public @NotNull NBTTagCompound writeToNBT(NBTTagCompound compound) {
 		super.writeToNBT(compound);
 		compound.setTag("SteamTank", this.steamTank.writeToNBT(new NBTTagCompound()));
 		compound.setInteger("PressureLevel", this.pressureLevel);
@@ -216,7 +217,7 @@ public class MetalPressTileEnt extends BasicMachineTileEnt {
 		int amount = src.get().getCount();
 		int amount2 = amount / 2;
 		int amount1 = amount - amount2;
-		
+
 		ItemStack targetStack = src.get().copy();
 		src.get().setCount(amount1);
 		targetStack.setCount(amount2);
@@ -298,9 +299,8 @@ public class MetalPressTileEnt extends BasicMachineTileEnt {
 
 		ItemStack input1Copy = this.input1.getTypeWithSize(1);
 		ItemStack input2Copy = this.input2.getTypeWithSize(1);
-		ItemStack result = TGItems.newStack(output, output.getCount());
 
-		this.currentOperation = new MachineOperation(result, input1Copy, input2Copy);
+		this.currentOperation = new MachineOperation(output, input1Copy, input2Copy);
 		this.currentOperation.setStackMultiplier(multiplier);
 
 		if (!this.world.isRemote){
@@ -327,9 +327,7 @@ public class MetalPressTileEnt extends BasicMachineTileEnt {
 
 	@Override
 	protected void playAmbientSound() {
-		float prog = (float)this.progress / (float)this.totaltime;
-
-		int soundTick1 = Math.round((float)this.totaltime*0.075f);
+        int soundTick1 = Math.round((float)this.totaltime*0.075f);
 		int halfTime = (Math.round((float)totaltime*0.5f));
 		
 		if (this.progress == soundTick1 || this.progress == soundTick1+halfTime) {
