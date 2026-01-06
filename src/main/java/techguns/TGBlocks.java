@@ -1,16 +1,10 @@
 package techguns;
 
-import java.util.ArrayList;
-import java.util.function.Predicate;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
-import net.minecraft.block.state.IBlockState;
 import net.minecraft.item.Item;
-import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.EnumBlockRenderType;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -18,54 +12,13 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.oredict.OreDictionary;
-import techguns.blocks.BlockBioblob;
-import techguns.blocks.BlockDebugMarker;
-import techguns.blocks.BlockMilitaryCrate;
-import techguns.blocks.BlockOreCluster;
-import techguns.blocks.BlockSandbags;
-import techguns.blocks.BlockTGCamoNet;
-import techguns.blocks.BlockTGCamoNetTop;
-import techguns.blocks.BlockTGDoor2x1;
-import techguns.blocks.BlockTGDoor3x3;
-import techguns.blocks.BlockTGLadder;
-import techguns.blocks.BlockTGLamp;
-import techguns.blocks.BlockTGOre;
-import techguns.blocks.BlockTGSandHard;
-import techguns.blocks.BlockTGSlimy;
-import techguns.blocks.BlockTGSlimyLadder;
-import techguns.blocks.BlockTGSpawner;
-import techguns.blocks.BlockTGStairs;
-import techguns.blocks.EnumCamoNetType;
-import techguns.blocks.EnumConcreteType;
-import techguns.blocks.EnumDebugBlockType;
-import techguns.blocks.EnumDoorType;
-import techguns.blocks.EnumLadderType;
-import techguns.blocks.EnumLampType;
-import techguns.blocks.EnumLightblockType;
-import techguns.blocks.EnumNetherMetalType;
-import techguns.blocks.EnumOreClusterType;
-import techguns.blocks.EnumOreType;
-import techguns.blocks.EnumTGSandHardTypes;
-import techguns.blocks.EnumTGSlimyType;
-import techguns.blocks.GenericBlockMetaEnum;
-import techguns.blocks.GenericBlockMetaEnumCamoChangeable;
-import techguns.blocks.GenericBlockMetaEnumCamoChangeableLightlevel;
-import techguns.blocks.IGenericBlock;
-import techguns.blocks.TGMetalPanelType;
-import techguns.blocks.machines.BasicMachine;
-import techguns.blocks.machines.BlockExplosiveCharge;
-import techguns.blocks.machines.BlockOreDrill;
-import techguns.blocks.machines.EnumExplosiveChargeType;
-import techguns.blocks.machines.EnumMachineType;
-import techguns.blocks.machines.EnumMultiBlockMachineType;
-import techguns.blocks.machines.EnumOreDrillType;
-import techguns.blocks.machines.EnumSimpleMachineType;
-import techguns.blocks.machines.EnumSimpleMachineType2;
-import techguns.blocks.machines.MultiBlockMachine;
-import techguns.blocks.machines.SimpleMachine;
+import techguns.blocks.*;
+import techguns.blocks.machines.*;
 import techguns.init.ITGInitializer;
 import techguns.plugins.chisel.ChiselIMCHelper;
 import techguns.tools.BlockJsonCreator;
+
+import java.util.ArrayList;
 
 public class TGBlocks implements ITGInitializer{
 	public static final ArrayList<IGenericBlock> BLOCKLIST = new ArrayList<>();
@@ -142,25 +95,25 @@ public class TGBlocks implements ITGInitializer{
 	
 	@SideOnly(Side.CLIENT)
 	public static void initModels() {
-		BLOCKLIST.forEach(b -> b.registerItemBlockModels());
+		BLOCKLIST.forEach(IGenericBlock::registerItemBlockModels);
 	}
 	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		BASIC_MACHINE= new BasicMachine<EnumMachineType>("basicmachine",EnumMachineType.class);
-		SIMPLE_MACHINE = new SimpleMachine<EnumSimpleMachineType>("simplemachine",EnumSimpleMachineType.class);
-		SIMPLE_MACHINE2 = new SimpleMachine<EnumSimpleMachineType2>("simplemachine2",EnumSimpleMachineType2.class);
-		MULTIBLOCK_MACHINE = new MultiBlockMachine<EnumMultiBlockMachineType>("multiblockmachine", EnumMultiBlockMachineType.class);
+		BASIC_MACHINE= new BasicMachine<>("basicmachine", EnumMachineType.class);
+		SIMPLE_MACHINE = new SimpleMachine<>("simplemachine", EnumSimpleMachineType.class);
+		SIMPLE_MACHINE2 = new SimpleMachine<>("simplemachine2", EnumSimpleMachineType2.class);
+		MULTIBLOCK_MACHINE = new MultiBlockMachine<>("multiblockmachine", EnumMultiBlockMachineType.class);
 		TG_ORE = new BlockTGOre("basicore");
 		BIOBLOB= new BlockBioblob("bioblob");
 		SANDBAGS = (BlockSandbags) new BlockSandbags("sandbags").setHardness(6.0f);
-		LAMP_0 = (BlockTGLamp<EnumLampType>) new BlockTGLamp<EnumLampType>("lamp0", EnumLampType.class).setHardness(4.0f);
-		METAL_PANEL = (GenericBlockMetaEnum) new GenericBlockMetaEnumCamoChangeable<TGMetalPanelType>("metalpanel", Material.IRON, Material.IRON.getMaterialMapColor(), SoundType.METAL, TGMetalPanelType.class).setHardness(8.0f);
-		NETHER_METAL = (GenericBlockMetaEnum) new GenericBlockMetaEnumCamoChangeableLightlevel<EnumNetherMetalType>("nethermetal", Material.IRON, Material.IRON.getMaterialMapColor(), SoundType.METAL, EnumNetherMetalType.class).setHardness(8.0f);
+		LAMP_0 = (BlockTGLamp<EnumLampType>) new BlockTGLamp<>("lamp0", EnumLampType.class).setHardness(4.0f);
+		METAL_PANEL = (GenericBlockMetaEnum) new GenericBlockMetaEnumCamoChangeable<>("metalpanel", Material.IRON, Material.IRON.getMaterialMapColor(), SoundType.METAL, TGMetalPanelType.class).setHardness(8.0f);
+		NETHER_METAL = (GenericBlockMetaEnum) new GenericBlockMetaEnumCamoChangeableLightlevel<>("nethermetal", Material.IRON, Material.IRON.getMaterialMapColor(), SoundType.METAL, EnumNetherMetalType.class).setHardness(8.0f);
 		
-		CONCRETE = (GenericBlockMetaEnum<EnumConcreteType>) new GenericBlockMetaEnumCamoChangeable<EnumConcreteType>("concrete", Material.ROCK, EnumConcreteType.class).setHardness(8.0f);
-		LADDER_0 = (BlockTGLadder<EnumLadderType>) new BlockTGLadder<EnumLadderType>("ladder0", EnumLadderType.class).setHardness(6.0f);
-		DOOR3x3 = (BlockTGDoor3x3<EnumDoorType>) new BlockTGDoor3x3<EnumDoorType>("door3x3", EnumDoorType.class, TGItems.DOOR3x3).setHardness(6.0f);
+		CONCRETE = (GenericBlockMetaEnum<EnumConcreteType>) new GenericBlockMetaEnumCamoChangeable<>("concrete", Material.ROCK, EnumConcreteType.class).setHardness(8.0f);
+		LADDER_0 = (BlockTGLadder<EnumLadderType>) new BlockTGLadder<>("ladder0", EnumLadderType.class).setHardness(6.0f);
+		DOOR3x3 = (BlockTGDoor3x3<EnumDoorType>) new BlockTGDoor3x3<>("door3x3", EnumDoorType.class, TGItems.DOOR3x3).setHardness(6.0f);
 		CAMONET = new BlockTGCamoNet("camonet");
 		CAMONET_TOP = new BlockTGCamoNetTop("camonet_top");
 		BUNKER_DOOR = (BlockTGDoor2x1) new BlockTGDoor2x1("bunkerdoor",TGItems.BUNKER_DOOR).setHardness(8.0f);
@@ -170,18 +123,18 @@ public class TGBlocks implements ITGInitializer{
 		
 		MONSTER_SPAWNER = new BlockTGSpawner("tg_spawner");
 		
-		NEONLIGHT_BLOCK = (GenericBlockMetaEnumCamoChangeable<EnumLightblockType>) new GenericBlockMetaEnumCamoChangeable<EnumLightblockType>("neonlights", Material.GLASS, MapColor.YELLOW, SoundType.GLASS, EnumLightblockType.class).setLightLevel(1f).setHardness(4.0f);
+		NEONLIGHT_BLOCK = (GenericBlockMetaEnumCamoChangeable<EnumLightblockType>) new GenericBlockMetaEnumCamoChangeable<>("neonlights", Material.GLASS, MapColor.YELLOW, SoundType.GLASS, EnumLightblockType.class).setLightLevel(1f).setHardness(4.0f);
 		
 		MILITARY_CRATE = (BlockMilitaryCrate) new BlockMilitaryCrate("military_crate", Material.WOOD).setHardness(4.0f);
 		
-		EXPLOSIVE_CHARGE = new BlockExplosiveCharge<EnumExplosiveChargeType>("explosive_charge", EnumExplosiveChargeType.class);
+		EXPLOSIVE_CHARGE = new BlockExplosiveCharge<>("explosive_charge", EnumExplosiveChargeType.class);
 		
 		SAND_HARD = new BlockTGSandHard("sand_hard", EnumTGSandHardTypes.class);
 		
 		SLIMY_BLOCK = new BlockTGSlimy("slimy", EnumTGSlimyType.class);
 		SLIMY_LADDER = new BlockTGSlimyLadder("slimyladder");
 		
-		ORE_CLUSTER= new BlockOreCluster<EnumOreClusterType>("orecluster", Material.ROCK, EnumOreClusterType.class);
+		ORE_CLUSTER= new BlockOreCluster<>("orecluster", Material.ROCK, EnumOreClusterType.class);
 		
 		ORE_DRILL_BLOCK = new BlockOreDrill("oredrill");
 		
@@ -190,15 +143,12 @@ public class TGBlocks implements ITGInitializer{
 		//}
 		
 		if(TGItems.WRITE_ITEM_JSON && event.getSide()==Side.CLIENT){
-			BLOCKLIST.stream().filter(new Predicate<IGenericBlock>() {
-				@Override
-				public boolean test(IGenericBlock t) {
-					if(t instanceof GenericBlockMetaEnum) {
-						return ((GenericBlockMetaEnum)t).shouldAutoGenerateJsonForEnum();
-					}
-					return false;
+			BLOCKLIST.stream().filter(t -> {
+				if(t instanceof GenericBlockMetaEnum) {
+					return ((GenericBlockMetaEnum)t).shouldAutoGenerateJsonForEnum();
 				}
-			}).forEach(b -> BlockJsonCreator.writeBlockstateJsonFileForBlock((GenericBlockMetaEnum)b));			
+				return false;
+			}).forEach(b -> BlockJsonCreator.writeBlockstateJsonFileForBlock((GenericBlockMetaEnum)b));
 		}	
 	}
 

@@ -181,11 +181,11 @@ public class ReactionChamberDefinition extends MultiBlockMachineSchematic {
 			
 			ArrayList<BlockPos> glassBlocks = this.getGlassBlocks(masterPos, dir);
 			
-			glassBlocks.forEach(b -> linkSlave(w,player,b,1,masterPos));
-			housings_noConnection.forEach(b -> linkSlave(w,player,b,1,masterPos));
+			glassBlocks.forEach(b -> linkSlave(w, b,1,masterPos));
+			housings_noConnection.forEach(b -> linkSlave(w, b,1,masterPos));
 			
-			housings_SideConnectors.forEach(b -> linkSlave(w,player,b,2,masterPos));
-			housings_EnergyConnector.forEach(b -> linkSlave(w,player,b,3,masterPos));
+			housings_SideConnectors.forEach(b -> linkSlave(w, b,2,masterPos));
+			housings_EnergyConnector.forEach(b -> linkSlave(w, b,3,masterPos));
 			
 		}
 		return false;

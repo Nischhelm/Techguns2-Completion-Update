@@ -88,49 +88,36 @@ public class ReactionChamberContainer extends BasicMachineContainer {
 		int HIGHEST_MACHINE_SLOT = ReactionChamberTileEntMaster.SLOT_OUTPUT+ReactionChamberTileEntMaster.OUTPUT_SLOTS_COUNT-1;
 		ItemStack stack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(id);
+		if(!tile.isFormed()) return stack;
 
-			if(slot.getHasStack()){
-				ItemStack stack1 = slot.getStack();
-				stack=stack1.copy();
-				if (!stack.isEmpty()){
+		if(slot.getHasStack()){
+			ItemStack stack1 = slot.getStack();
+			stack=stack1.copy();
+			if (!stack.isEmpty()){
 					
-					if (id <= HIGHEST_MACHINE_SLOT){
-						//PRESSED IN MACHINE GUI 0-input, 1-focus, 2,3,4,5 -> outputs
-						if (!this.mergeItemStack(stack1, HIGHEST_MACHINE_SLOT+1, HIGHEST_MACHINE_SLOT+37, false)) {
-							return ItemStack.EMPTY;
-						}
-						slot.onSlotChange(stack1, stack);
-					} else if (id < HIGHEST_MACHINE_SLOT+37){
-						
-						int validslot = tile.getValidSlotForItemInMachine(stack1);
-						if (validslot >=0){
-							
-							if(!this.mergeItemStack(stack1, validslot, validslot+1, false)){
-								return ItemStack.EMPTY;
-							}
-							slot.onSlotChange(stack1, stack);
-							
-						} else {
-							return ItemStack.EMPTY;
-						}
-						
-						
-					}
-
-					if (stack1.getCount() == 0) {
-						slot.putStack(ItemStack.EMPTY);
-					} else {
-						slot.onSlotChanged();
-					}
-
-					if (stack1.getCount() == stack.getCount()) {
+				if (id <= HIGHEST_MACHINE_SLOT){
+					//PRESSED IN MACHINE GUI 0-input, 1-focus, 2,3,4,5 -> outputs
+					if (!this.mergeItemStack(stack1, HIGHEST_MACHINE_SLOT+1, HIGHEST_MACHINE_SLOT+37, false)) {
 						return ItemStack.EMPTY;
 					}
+					slot.onSlotChange(stack1, stack);
+				} else if (id < HIGHEST_MACHINE_SLOT+37){
 
-					slot.onTake(ply, stack1);
+					int validslot = tile.getValidSlotForItemInMachine(stack1);
+					if (validslot >=0){
+						if(!this.mergeItemStack(stack1, validslot, validslot+1, false)) return ItemStack.EMPTY;
+						slot.onSlotChange(stack1, stack);
+					} else return ItemStack.EMPTY;
 				}
+
+				if (stack1.getCount() == 0) slot.putStack(ItemStack.EMPTY);
+				else slot.onSlotChanged();
+
+				if (stack1.getCount() == stack.getCount()) return ItemStack.EMPTY;
+				slot.onTake(ply, stack1);
 			}
+		}
 		
-			return stack;
+		return stack;
 	}
 }

@@ -1,5 +1,7 @@
 package techguns.blocks;
 
+import org.jetbrains.annotations.NotNull;
+
 public enum EnumOreClusterType implements IEnumOreClusterType {
 	//Parameter Values are not actually used anymore
 	COAL(0,1f),
@@ -14,16 +16,16 @@ public enum EnumOreClusterType implements IEnumOreClusterType {
 	UNIVERSAL(2, 1f)
 	;
 
-	protected int mininglevel;
-	protected float multiplier;
+	private final int mininglevel;
+	private final float multiplier;
 	
-	private EnumOreClusterType(int mininglevel, float multiplier) {
+	EnumOreClusterType(int mininglevel, float multiplier) {
 		this.mininglevel=mininglevel;
 		this.multiplier=multiplier;
 	}
 	
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return this.name().toLowerCase();
 	}
 

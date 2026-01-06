@@ -3,7 +3,6 @@ package techguns.blocks.machines.multiblocks;
 import java.util.ArrayList;
 
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -99,9 +98,9 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 		} else {
 			
 			if(engines <0) {
-				sendErrorPing(w, masterPos.offset(drill_direction, -engines+1), player, 0, false);
+				sendErrorPing(w, masterPos.offset(drill_direction, -engines+1), player, false);
 			} else if (rods < 0) {
-				sendErrorPing(w, masterPos.offset(drill_direction, (-rods)+Math.abs(engines)+1), player, 0, false);
+				sendErrorPing(w, masterPos.offset(drill_direction, (-rods)+Math.abs(engines)+1), player, false);
 			}
 			return false;
 		}
@@ -233,7 +232,7 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 			
 				if(engines==0 && rods==1) {
 					master.formOreDrill(direction,engines, rods, 0, drill_direction);
-					linkSlave(w, player, masterPos.offset(drill_direction, 1), 0, masterPos);
+					linkSlave(w, masterPos.offset(drill_direction, 1), 0, masterPos);
 					return true; 
 				}
 				
@@ -243,15 +242,15 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 				master.formOreDrill(direction,engines, rods, rad, drill_direction);
 				
 				for(int i=engines;i<engines+rods+1;i++) {
-					linkSlave(w, player, masterPos.offset(drill_direction, i), 0, masterPos);
+					linkSlave(w, masterPos.offset(drill_direction, i), 0, masterPos);
 					//sendErrorPing(w, masterPos.offset(drill_direction, i), player, 0, false);
 				}
 				
-				this.getEngineBlocks(w, masterPos, drill_direction, rad, engines).forEach(p -> linkSlave(w, player, p, 1, masterPos));
+				this.getEngineBlocks(w, masterPos, drill_direction, rad, engines).forEach(p -> linkSlave(w, p, 1, masterPos));
 				
-				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> linkSlave(w, player, p, 2, masterPos));
-				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> linkSlave(w, player, p, 3, masterPos));
-				this.getFinalScaffoldRow(w, masterPos, drill_direction, rad, engines+rods).forEach(p -> {linkSlave(w, player, p, 4, masterPos);
+				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> linkSlave(w, p, 2, masterPos));
+				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> linkSlave(w, p, 3, masterPos));
+				this.getFinalScaffoldRow(w, masterPos, drill_direction, rad, engines+rods).forEach(p -> {linkSlave(w, p, 4, masterPos);
 				/*sendErrorPing(w, p, player, 0, false);*/});
 				
 			}
@@ -325,7 +324,7 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 				if(dir==-1) {
 					dir=f.ordinal();
 				} else {
-					sendErrorPing(w, startPos.offset(f, 1), ply, 0, false);
+					sendErrorPing(w, startPos.offset(f, 1), ply, false);
 					return -1;
 				}
 			}

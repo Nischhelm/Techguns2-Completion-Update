@@ -1,11 +1,5 @@
 package techguns.tileentities;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
-
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Callback;
 import li.cil.oc.api.machine.Context;
@@ -37,6 +31,7 @@ import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGBlocks;
 import techguns.TGPackets;
 import techguns.TGSounds;
@@ -49,14 +44,13 @@ import techguns.blocks.machines.multiblocks.SlavePos;
 import techguns.gui.ButtonConstants;
 import techguns.packets.PacketSpawnParticle;
 import techguns.packets.PacketUpdateTileEntTanks;
-import techguns.tileentities.operation.FluidTankPlus;
-import techguns.tileentities.operation.ITileEntityFluidTanks;
-import techguns.tileentities.operation.ItemStackHandlerPlus;
-import techguns.tileentities.operation.MachineSlotItem;
-import techguns.tileentities.operation.ReactionBeamFocus;
-import techguns.tileentities.operation.ReactionChamberOperation;
-import techguns.tileentities.operation.ReactionChamberRecipe;
+import techguns.tileentities.operation.*;
 import techguns.tileentities.operation.ReactionChamberRecipe.RiskType;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 @Optional.Interface(iface="li.cil.oc.api.network.SimpleComponent", modid="opencomputers")
 public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster implements ITileEntityFluidTanks, SimpleComponent {
@@ -80,8 +74,20 @@ public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster
 	
 	public ReactionChamberTileEntMaster() {
 		super(6, 1000000);
-		
-		this.inputTank = new ReactionChamberFluidTank(this,CAPACITY_INPUT_TANK);
+
+		this.inputTank = new ReactionChamberFluidTank(this,CAPACITY_INPUT_TANK) {
+			@Override
+			public int fill(FluidStack resource, boolean doFill) {
+				if (!ReactionChamberTileEntMaster.this.isFormed()) return 0;
+				return super.fill(resource, doFill);
+			}
+
+			@Override
+			public FluidStack drain(int maxDrain, boolean doDrain) {
+				if (!ReactionChamberTileEntMaster.this.isFormed()) return null;
+				return super.drain(maxDrain, doDrain);
+			}
+		};
 
 		this.inventory = new ItemStackHandlerPlus(6) {
 
@@ -93,17 +99,26 @@ public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster
 
 			@Override
 			protected boolean allowItemInSlot(int slot, ItemStack stack) {
-				if(slot <=SLOT_FOCUS) {
-					return isItemValidForSlot(slot, stack);
-				} else {//if(slot>=SLOT_OUTPUT && slot < SLOT_OUTPUT+OUTPUT_SLOTS_COUNT)
+				if (!ReactionChamberTileEntMaster.this.isFormed()) {
 					return false;
 				}
-				//return false;
+				if(slot <= SLOT_FOCUS) {
+					return isItemValidForSlot(slot, stack);
+				} else {
+					return false;
+				}
 			}
 			
 			@Override
 			protected boolean allowExtractFromSlot(int slot, int amount) {
+				if (!ReactionChamberTileEntMaster.this.isFormed()) return false;
 				return slot >= SLOT_OUTPUT && slot < SLOT_OUTPUT+OUTPUT_SLOTS_COUNT;
+			}
+
+			@Override
+			public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+				if (!ReactionChamberTileEntMaster.this.isFormed()) return false;
+				return super.isItemValid(slot, stack);
 			}
 		};
 		
@@ -122,11 +137,13 @@ public class ReactionChamberTileEntMaster extends MultiBlockMachineTileEntMaster
 
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		if (!this.isFormed()) return false;
 		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY || super.hasCapability(capability, facing);
 	}
 	
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (!this.isFormed()) return null;
 		return capability == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY ? (T)inputTank : super.getCapability(capability, facing);
 	}
 

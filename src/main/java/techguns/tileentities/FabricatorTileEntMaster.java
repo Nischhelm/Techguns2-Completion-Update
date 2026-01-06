@@ -49,38 +49,34 @@ public class FabricatorTileEntMaster extends MultiBlockMachineTileEntMaster impl
 		wireslot = new MachineSlotItem(this, SLOT_WIRES);
 		powderslot = new MachineSlotItem(this, SLOT_POWDER);
 		plateslot = new MachineSlotItem(this, SLOT_PLATE);
-		
+
 		this.inventory = new ItemStackHandlerPlus(6) {
-
-			@Override
-			protected void onContentsChanged(int slot) {
-				super.onContentsChanged(slot);
-				setContentsChanged(true);
-			}
-
 			@Override
 			protected boolean allowItemInSlot(int slot, ItemStack stack) {
+				if (!FabricatorTileEntMaster.this.isFormed()) return false;
 				switch (slot) {
-				case SLOT_INPUT1:
-				case SLOT_WIRES:
-				case SLOT_POWDER:
-				case SLOT_PLATE:
-					return isItemValidForRecipeSlot(slot, stack);
-				case SLOT_OUTPUT:
-					return false;
-				case SLOT_UPGRADE:
-					return TGItems.isMachineUpgrade(stack);
+					case SLOT_INPUT1:
+					case SLOT_WIRES:
+					case SLOT_POWDER:
+					case SLOT_PLATE:
+						return isItemValidForRecipeSlot(slot, stack);
+					case SLOT_OUTPUT:
+						return false;
+					case SLOT_UPGRADE:
+						return TGItems.isMachineUpgrade(stack);
 				}
 				return false;
 			}
 
 			@Override
 			public boolean isItemValid(int slot, @NotNull ItemStack stack) {
+				if (!FabricatorTileEntMaster.this.isFormed()) return false;
 				return allowItemInSlot(slot, stack);
 			}
 
 			@Override
 			protected boolean allowExtractFromSlot(int slot, int amount) {
+				if (!FabricatorTileEntMaster.this.isFormed()) return false;
 				return slot == SLOT_OUTPUT;
 			}
 		};

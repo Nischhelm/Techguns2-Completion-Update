@@ -53,31 +53,32 @@ public class FabricatorContainer extends BasicMachineContainer {
 		}
 
 		this.playerInv(player, 8, 156);
+		if(ent.isFormed()) {
+			final EntityPlayer ep = player.player;
+			if (!ep.world.isRemote && ent.currentRecipe != null) {
+				ItemStack out = ent.currentRecipe.outputItem;
+				if (out != null && !out.isEmpty()
+						&& ItemStack.areItemsEqual(out, TGItems.CYBERNETIC_PARTS)
+						&& ItemStack.areItemStackTagsEqual(out, TGItems.CYBERNETIC_PARTS)) {
 
-        final EntityPlayer ep = player.player;
-        if (!ep.world.isRemote && ent.currentRecipe != null) {
-            ItemStack out = ent.currentRecipe.outputItem;
-            if (out != null && !out.isEmpty()
-                    && ItemStack.areItemsEqual(out, TGItems.CYBERNETIC_PARTS)
-                    && ItemStack.areItemStackTagsEqual(out, TGItems.CYBERNETIC_PARTS)) {
+					ITGExtendedPlayer ext = ep.getCapability(TGExtendedPlayerCapProvider.TG_EXTENDED_PLAYER, null);
+					boolean ok = ext != null && ext.hasFabricatorRecipeUnlocked(TGItems.CYBERNETIC_PARTS);
 
-                ITGExtendedPlayer ext = ep.getCapability(TGExtendedPlayerCapProvider.TG_EXTENDED_PLAYER, null);
-                boolean ok = ext != null && ext.hasFabricatorRecipeUnlocked(TGItems.CYBERNETIC_PARTS);
+					if (!ok) {
+						ent.currentRecipe = null;
 
-                if (!ok) {
-                    ent.currentRecipe = null;
+						refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_INPUT1);
+						refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_WIRES);
+						refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_POWDER);
+						refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_PLATE);
 
-                    refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_INPUT1);
-                    refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_WIRES);
-                    refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_POWDER);
-                    refundSlotToPlayerOrDrop(ep, ent, FabricatorTileEntMaster.SLOT_PLATE);
-
-                    ep.inventory.markDirty();
-                    ent.markChanged();
-                    ent.needUpdate();
-                }
-            }
-        }
+						ep.inventory.markDirty();
+						ent.markChanged();
+						ent.needUpdate();
+					}
+				}
+			}
+		}
 	}
 
     private static void refundSlotToPlayerOrDrop(EntityPlayer player, FabricatorTileEntMaster tile, int slot) {
@@ -98,7 +99,7 @@ public class FabricatorContainer extends BasicMachineContainer {
 	public @NotNull ItemStack transferStackInSlot(@NotNull EntityPlayer player, int index) {
 		ItemStack itemstack = ItemStack.EMPTY;
 		Slot slot = this.inventorySlots.get(index);
-
+		if(!tile.isFormed()) return itemstack;
 		if (slot != null && slot.getHasStack()) {
 			ItemStack stackInSlot = slot.getStack();
 			itemstack = stackInSlot.copy();

@@ -1,6 +1,7 @@
 package techguns.blocks;
 
 import net.minecraft.util.IStringSerializable;
+import org.jetbrains.annotations.NotNull;
 
 public enum EnumDebugBlockType implements IStringSerializable {
 	AIRMARKER,
@@ -11,7 +12,7 @@ public enum EnumDebugBlockType implements IStringSerializable {
 	INTERIORMARKER_WEST;
 
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return name().toLowerCase();
 	}
 }

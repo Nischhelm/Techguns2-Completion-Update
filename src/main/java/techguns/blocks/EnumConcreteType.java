@@ -1,6 +1,7 @@
 package techguns.blocks;
 
 import net.minecraft.util.IStringSerializable;
+import org.jetbrains.annotations.NotNull;
 
 public enum EnumConcreteType implements IStringSerializable{
 	
@@ -12,7 +13,7 @@ public enum EnumConcreteType implements IStringSerializable{
 	CONCRETE_BROWN_LIGHT_SCAFF;
 
 	@Override
-	public String getName() {
+	public @NotNull String getName() {
 		return this.name().toLowerCase();
 	}
 

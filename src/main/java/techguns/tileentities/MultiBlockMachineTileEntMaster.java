@@ -6,6 +6,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.common.capabilities.Capability;
 import techguns.TGBlocks;
 import techguns.blocks.machines.BasicMachine;
 import techguns.blocks.machines.MultiBlockMachine;
@@ -14,7 +15,7 @@ import techguns.blocks.machines.multiblocks.MultiBlockRegister;
 
 public abstract class MultiBlockMachineTileEntMaster extends BasicMachineTileEnt {
 
-	protected boolean formed=false;
+	protected boolean formed = false;
 	protected EnumFacing multiblockDirection;
 	
 	public MultiBlockMachineTileEntMaster(int inventorySize, int maximumPower) {
@@ -43,18 +44,14 @@ public abstract class MultiBlockMachineTileEntMaster extends BasicMachineTileEnt
 	public void readClientDataFromNBT(NBTTagCompound tags) {
 		super.readClientDataFromNBT(tags);
 		this.formed = tags.getBoolean("formed");
-		if (this.formed) {
-			this.multiblockDirection = EnumFacing.byIndex(tags.getByte("multiblockDirection"));
-		}
+		if (this.formed) this.multiblockDirection = EnumFacing.byIndex(tags.getByte("multiblockDirection"));
 	}
 
 	@Override
 	public void writeClientDataToNBT(NBTTagCompound tags) {
 		super.writeClientDataToNBT(tags);
 		tags.setBoolean("formed", this.formed);
-		if (this.formed) {
-			tags.setByte("multiblockDirection", (byte) this.multiblockDirection.getIndex());
-		}
+		if (this.formed) tags.setByte("multiblockDirection", (byte) this.multiblockDirection.getIndex());
 	}
 
 	@Override
@@ -76,26 +73,26 @@ public abstract class MultiBlockMachineTileEntMaster extends BasicMachineTileEnt
 	public void onMultiBlockBreak() {
 		if(!this.world.isRemote && this.formed) {
 			MultiBlockMachineSchematic multiblock = MultiBlockRegister.REGISTER.get(this.getClass());
-			if(multiblock!=null) {
+			if(multiblock != null) {
 				multiblock.unform(this.world, this);
 			}
 		}
 	}
 	
 	public void form(EnumFacing facing) {
-		this.formed=true;
+		this.formed = true;
 		if(!this.world.isRemote) {
-			this.multiblockDirection=facing;
+			this.multiblockDirection = facing;
 			this.world.setBlockState(getPos(), this.world.getBlockState(getPos()).withProperty(MultiBlockMachine.FORMED, true),3);
 			this.needUpdate();
 		}
 	}
 	
 	public void unform() {
-		this.formed=false;
+		this.formed = false;
 		if(!this.world.isRemote){
 			IBlockState bs = world.getBlockState(getPos());
-			if (bs.getBlock()==this.getMachineBlockType()) {
+			if (bs.getBlock() == this.getMachineBlockType()) {
 				this.world.setBlockState(getPos(), this.world.getBlockState(getPos()).withProperty(MultiBlockMachine.FORMED, false),3);
 			}
 		}
@@ -103,9 +100,25 @@ public abstract class MultiBlockMachineTileEntMaster extends BasicMachineTileEnt
 	
 	@Override
 	public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newState) {
-		return (oldState.getBlock()!=newState.getBlock()) || (oldState.getValue(getMachineBlockType().MACHINE_TYPE) != newState.getValue(getMachineBlockType().MACHINE_TYPE));
+		return (oldState.getBlock() != newState.getBlock()) || (oldState.getValue(getMachineBlockType().MACHINE_TYPE) != newState.getValue(getMachineBlockType().MACHINE_TYPE));
 	}
 	
 	public abstract AxisAlignedBB getBBforSlave(BlockPos slavePos);
+
+	@Override
+	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
+		if (!this.isFormed()) {
+			return false;
+		}
+		return super.hasCapability(capability, facing);
+	}
+
+	@Override
+	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
+		if (!this.isFormed()) {
+			return null;
+		}
+		return super.getCapability(capability, facing);
+	}
 	
 }

@@ -14,7 +14,7 @@ import techguns.Techguns;
  */
 public interface IGenericBlock {
 
-	public default void init(Block b, String name, boolean addToList) {
+	default void init(Block b, String name, boolean addToList) {
 		b.setRegistryName(new ResourceLocation(Techguns.MODID,name));
 		b.setTranslationKey(Techguns.MODID+"."+name);
 		b.setCreativeTab(Techguns.tabTechgun);
@@ -27,10 +27,10 @@ public interface IGenericBlock {
 	/**
 	 * return the correct itemblock for initialization
 	 */
-	public ItemBlock createItemBlock();
+	ItemBlock createItemBlock();
 	
-	public void registerBlock(RegistryEvent.Register<Block> event);
+	void registerBlock(RegistryEvent.Register<Block> event);
 	
 	@SideOnly(Side.CLIENT)
-	public void registerItemBlockModels();
+	void registerItemBlockModels();
 }

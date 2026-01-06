@@ -10,6 +10,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import techguns.blocks.GenericItemBlockMeta;
 import techguns.blocks.GenericItemBlockMetaMachineBlock;
 import techguns.blocks.ItemBlockOreDrill;
@@ -44,7 +45,7 @@ public class BlockOreDrill extends MultiBlockMachine<EnumOreDrillType> {
 	}
 
 	@Override
-	public BlockFaceShape getBlockFaceShape(IBlockAccess worldIn, IBlockState state, BlockPos pos, EnumFacing face) {
+	public @NotNull BlockFaceShape getBlockFaceShape(@NotNull IBlockAccess worldIn, IBlockState state, @NotNull BlockPos pos, @NotNull EnumFacing face) {
 		return BlockFaceShape.SOLID;
 	}
 	

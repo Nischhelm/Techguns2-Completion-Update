@@ -27,7 +27,7 @@ public class GenericItemBlockMetaMachineBlock extends GenericItemBlockMeta {
         {
             setTileEntityNBT(world, player, pos, stack);
             if(this.block instanceof BasicMachine) {
-            	((BasicMachine)this.block).onBlockPlacedByExtended(world, pos, state, player, stack, side);
+            	((BasicMachine)this.block).onBlockPlacedByExtended(world, pos, player, stack, side);
             } else {
             	this.block.onBlockPlacedBy(world, pos, state, player, stack);
             }

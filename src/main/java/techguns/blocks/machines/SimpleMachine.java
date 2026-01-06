@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import techguns.api.machines.IMachineType;
 import techguns.util.BlockUtils;
 
@@ -40,7 +41,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta) {
+	public @NotNull IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 	    .withProperty(FACING, EnumFacing.byHorizontalIndex(meta >> 2))
 	    .withProperty(MACHINE_TYPE, clazz.getEnumConstants()[meta & 0b11]);
@@ -55,7 +56,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	
 	
 	@Override
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@NotNull IBlockState state) {
 		T t = state.getValue(MACHINE_TYPE);
 		return t.isFullCube();
 	}
@@ -67,7 +68,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
 		/**
 		 * Required to check this, because vanilla block constructor calls this method too early.
 		 */
@@ -127,7 +128,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 
 	@Override
-	public boolean rotateBlock(World world, BlockPos pos, EnumFacing axis) {
+	public boolean rotateBlock(@NotNull World world, @NotNull BlockPos pos, @NotNull EnumFacing axis) {
 		if (axis == EnumFacing.DOWN || axis==EnumFacing.UP) {
 			IBlockState state = world.getBlockState(pos);
 			IBlockState statenew = state.withProperty(FACING, state.getValue(FACING).rotateY());
