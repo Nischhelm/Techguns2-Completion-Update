@@ -8,7 +8,5 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 
 public interface IItemRenderer {
-
 	void renderItem(@Nonnull ItemCameraTransforms.TransformType transform, @Nonnull ItemStack stack, @Nullable EntityLivingBase elb, boolean leftHanded);
-	
 }

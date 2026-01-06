@@ -16,7 +16,7 @@ apply plugin: 'eclipse'
 apply plugin: 'org.jetbrains.gradle.plugin.idea-ext'
 
 
-version = "1.12.2-2.1.1.1"
+version = "1.12.2-2.1.1.2"
 group = "techguns" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "techguns"
 

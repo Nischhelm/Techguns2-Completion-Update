@@ -7,6 +7,7 @@ import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGItems;
 import techguns.TGSounds;
 
@@ -32,7 +33,7 @@ public class Chainsaw extends GenericGunMeleeCharge {
 
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull EnumHand handIn) {
 		ItemStack stack = player.getHeldItem(handIn);
 		this.shootGunPrimary(stack, worldIn, player, false, handIn, null);
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);

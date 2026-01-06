@@ -22,7 +22,7 @@ import techguns.items.guns.GenericGunCharge;
 
 public class RenderGunBase extends RenderItemBase {
 
-	protected IScreenEffect muzzleFX= null; //ScreenEffect.muzzleFlash2;
+	protected IScreenEffect muzzleFX= null;
 	
 	protected IScreenEffect scope=null;
 	

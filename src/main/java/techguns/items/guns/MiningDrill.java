@@ -11,6 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGItems;
 import techguns.TGPackets;
 import techguns.TGSounds;
@@ -45,7 +46,7 @@ public class MiningDrill extends GenericGunMeleeCharge {
 	}
 	
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull EnumHand handIn) {
 		ItemStack stack = player.getHeldItem(handIn);
 		this.shootGunPrimary(stack, worldIn, player, false, handIn, null);
 		return new ActionResult<ItemStack>(EnumActionResult.FAIL, stack);
@@ -82,8 +83,8 @@ public class MiningDrill extends GenericGunMeleeCharge {
 	}
 	
 	@Override
-	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX, double motionY,
-			double motionZ) {
+	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX,
+									  double motionZ) {
 		TGPackets.wrapper.sendToAllAround(new PacketSpawnParticle("PowerhammerImpact",x,y,z), new TargetPoint(w.provider.getDimension(), x, y, z, 32.0f));
 	}
 

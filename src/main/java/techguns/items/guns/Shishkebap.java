@@ -10,6 +10,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.common.network.NetworkRegistry.TargetPoint;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGPackets;
 import techguns.TGSounds;
 import techguns.api.damagesystem.DamageType;
@@ -48,8 +49,8 @@ public class Shishkebap extends GenericGunMeleeCharge {
 	}
 
 	@Override
-	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX, double motionY,
-			double motionZ) {
+	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX,
+									  double motionZ) {
 		TGPackets.wrapper.sendToAllAround(new PacketSpawnParticle("PowerhammerImpact",x,y,z), new TargetPoint(w.provider.getDimension(), x, y, z, 32.0f));
 	}
 	
@@ -82,8 +83,8 @@ public class Shishkebap extends GenericGunMeleeCharge {
 	}
 
 	@Override
-	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer player, EnumHand handIn) {
-		return new ActionResult<ItemStack>(EnumActionResult.PASS, player.getHeldItem(handIn));
+	public @NotNull ActionResult<ItemStack> onItemRightClick(@NotNull World worldIn, @NotNull EntityPlayer player, @NotNull EnumHand handIn) {
+		return new ActionResult<>(EnumActionResult.PASS, player.getHeldItem(handIn));
 	}
 
 	@Override

@@ -277,12 +277,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 		this.fireCenteredZoomed=fireCenteredWhileZooming;
 		return this;
 	}
-	
-	
-	public GenericGun setShotgunSpred(int count, float spread){
-		return this.setShotgunSpread(count, spread, false);
-	}
-	
+
+
 	public GenericGun setShotgunSpread(int count, float spread, boolean burst){
 		this.shotgun=true;
 		this.spread=spread;
@@ -368,7 +364,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 	 * @param player
 	 * @param stack
 	 */
-	public boolean gunSecondaryAction(EntityPlayer player, ItemStack stack) {
+	public void gunSecondaryAction(EntityPlayer player, ItemStack stack) {
 		if (player.world.isRemote && canZoom  && this.toggleZoom && !ShooterValues.getPlayerIsReloading(player, false)) {
 			ClientProxy cp = ClientProxy.get();
 			if (cp.player_zoom != 1.0f) {
@@ -377,9 +373,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 				cp.player_zoom = this.zoomMult;
 				
 			}
-			return true;
-    	}
-		return false;
+		}
 	}
 
 	@Override
@@ -796,11 +790,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 				if (this.projectile_selector == ROCKET_PROJECTILES || this.projectile_selector == GUIDED_MISSILE_PROJECTILES) {
 					int ammoCount = this.getCurrentAmmo(item);
 					this.useAmmo(item, oldAmmo);
-					Techguns.logger.debug("Ammo count: {}", ammoCount);
 					for (int i = 0; i < ammoCount; i++) {
-						Techguns.logger.debug("I: {}", i);
 						int amount = InventoryUtil.addAmmoToPlayerInventory(player, TGItems.newStack(this.getAmmoType().getBullet(currentVariant)[0], 1));
-						Techguns.logger.debug("Amount: {}", amount);
 						if (amount > 0 && !world.isRemote) {
 							player.world.spawnEntity(new EntityItem(player.world, player.posX, player.posY, player.posZ, TGItems.newStack(this.ammoType.getBullet(currentVariant)[0], amount)));
 						}
@@ -1152,10 +1143,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 
     @Override
 	public boolean onLeftClickEntity(@NotNull ItemStack stack, @NotNull EntityPlayer player, @NotNull Entity targetEntity) {
-		
-		if (this.shootWithLeftClick) {
-			return true;
-		} else {
+
+		if (!this.shootWithLeftClick) {
 			if (player.world.isRemote) {
 
 				int time = (int) (((float) this.recoiltime / 20.0f) * 1000);
@@ -1207,7 +1196,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 						double d0 = player.distanceWalkedModified - player.prevDistanceWalkedModified;
 
 						if (flag && !flag2 && !flag1 && player.onGround && d0 < (double) player.getAIMoveSpeed()) {
-                            flag3= this.hasSwordSweep() && this.getAmmoLeft(stack)>0;
+							flag3 = this.hasSwordSweep() && this.getAmmoLeft(stack) > 0;
 						}
 
 						float f4 = 0.0F;
@@ -1226,22 +1215,22 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 						double d1 = targetEntity.motionX;
 						double d2 = targetEntity.motionY;
 						double d3 = targetEntity.motionZ;
-						
+
 						//EDIT: return parameter workaround for attackEntityFrom
-						TGDamageSource src = getMeleeDamageSource(player,stack);
+						TGDamageSource src = getMeleeDamageSource(player, stack);
 						targetEntity.attackEntityFrom(src, f);
 						boolean flag5 = src.wasSuccessful();
 
 						if (flag5) {
 							this.consumeAmmoOnMeleeHit(player, stack);
-							
+
 							if (i > 0) {
 								if (targetEntity instanceof EntityLivingBase) {
 									((EntityLivingBase) targetEntity).knockBack(player, (float) i * 0.5F, MathHelper.sin(player.rotationYaw * 0.017453292F),
-                                            -MathHelper.cos(player.rotationYaw * 0.017453292F));
+											-MathHelper.cos(player.rotationYaw * 0.017453292F));
 								} else {
 									targetEntity.addVelocity(-MathHelper.sin(player.rotationYaw * 0.017453292F) * (float) i * 0.5F, 0.1D,
-                                            MathHelper.cos(player.rotationYaw * 0.017453292F) * (float) i * 0.5F);
+											MathHelper.cos(player.rotationYaw * 0.017453292F) * (float) i * 0.5F);
 								}
 
 								player.motionX *= 0.6D;
@@ -1257,18 +1246,14 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 									if (entitylivingbase != player && entitylivingbase != targetEntity && !player.isOnSameTeam(entitylivingbase)
 											&& player.getDistanceSq(entitylivingbase) < 9.0D) {
 										entitylivingbase.knockBack(player, 0.4F, MathHelper.sin(player.rotationYaw * 0.017453292F),
-                                                -MathHelper.cos(player.rotationYaw * 0.017453292F));
-										TGDamageSource dmgsrc = getMeleeDamageSource(player,stack);
+												-MathHelper.cos(player.rotationYaw * 0.017453292F));
+										TGDamageSource dmgsrc = getMeleeDamageSource(player, stack);
 										entitylivingbase.attackEntityFrom(dmgsrc, f3);
-										if(dmgsrc.wasSuccessful()) {
+										if (dmgsrc.wasSuccessful()) {
 											this.onMeleeHitTarget(stack, entitylivingbase);
 										}
 									}
 								}
-
-								/*player.world.playSound((EntityPlayer) null, player.posX, player.posY, player.posZ, SoundEvents.ENTITY_PLAYER_ATTACK_SWEEP,
-										player.getSoundCategory(), 1.0F, 1.0F);
-								player.spawnSweepParticles();*/
 								this.doSweepAttackEffect(player);
 							}
 
@@ -1276,7 +1261,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 							 * Extra hit effect 
 							 */
 							this.onMeleeHitTarget(stack, targetEntity);
-							
+
 							if (targetEntity instanceof EntityPlayerMP && targetEntity.velocityChanged) {
 								((EntityPlayerMP) targetEntity).connection.sendPacket(new SPacketEntityVelocity(targetEntity));
 								targetEntity.velocityChanged = false;
@@ -1361,8 +1346,8 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 				}
 			}
 
-			return true;
 		}
+		return true;
 	}
 	
 	protected void onMeleeHitTarget(ItemStack stack, Entity target) {
@@ -1383,7 +1368,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
         	double x = player.posX+d0;
         	double y = player.posY+player.height*0.8d;
         	double z = player.posZ+d1;
-        	this.spawnSweepParticle(player.world, x, y, z, d0, 0, d1);
+        	this.spawnSweepParticle(player.world, x, y, z, d0, d1);
         	this.playSweepSoundEffect(player);
         }
 	}
@@ -1393,7 +1378,7 @@ public class GenericGun extends GenericItem implements IGenericGun, IItemTGRende
 				player.getSoundCategory(), 1.0F, 1.0F);
 	}
 	
-	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX, double motionY, double motionZ) {
+	protected void spawnSweepParticle(World w, double x, double y, double z, double motionX, double motionZ) {
 		
 	}
 	

@@ -21,6 +21,7 @@ import techguns.capabilities.TGShooterValues;
 import techguns.client.ClientProxy;
 import techguns.client.models.ModelMultipart;
 import techguns.client.particle.ITGParticle;
+import techguns.entities.npcs.NPCTurret;
 
 public class RenderItemBase implements IItemRenderer {
 
@@ -231,9 +232,12 @@ public class RenderItemBase implements IItemRenderer {
 	}
 
 	protected void renderItemParticles(EntityLivingBase ent, TransformType transform, float ptt) {
-		
 		EnumHand hand = EnumHand.MAIN_HAND;
-		if (transform == TransformType.FIRST_PERSON_LEFT_HAND || transform == TransformType.THIRD_PERSON_LEFT_HAND) {
+		if(ent == null) return;
+		if (ent instanceof NPCTurret) {
+
+		}
+		else if (transform == TransformType.FIRST_PERSON_LEFT_HAND || transform == TransformType.THIRD_PERSON_LEFT_HAND) {
 			GlStateManager.translate(-1f, 0f, 0f);
 			if(ent.getPrimaryHand() == EnumHandSide.RIGHT) {
 				hand = EnumHand.OFF_HAND;
@@ -242,9 +246,7 @@ public class RenderItemBase implements IItemRenderer {
 			if(ent.getPrimaryHand() == EnumHandSide.LEFT) {
 				hand = EnumHand.OFF_HAND;
 			}
-		} else {
-			return;
-		}
+		} else return;
 		
 		
 		List<ITGParticle> particles = null;
@@ -263,12 +265,10 @@ public class RenderItemBase implements IItemRenderer {
 		} 
 			
 		if (particles != null && !particles.isEmpty()) {
-			//GlStateManager.disableCull();
 			Tessellator tessellator = Tessellator.getInstance();
 			BufferBuilder buffer = tessellator.getBuffer();
 			
 			particles.forEach(p -> p.doRender(buffer, ent, ptt, 1.0f, 1.0f, 0, 0, 0));
-			//GlStateManager.enableCull();
 		}
 		
 	}
