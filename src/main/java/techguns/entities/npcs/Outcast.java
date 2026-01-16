@@ -14,12 +14,12 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.world.World;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.armors.GenericArmorMultiCamo;
 
 public class Outcast extends GenericNPCGearSpecificStats implements ILivingSoldier {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/outcast");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/outcast");
 
     private int soundAggroCooldown = 0;
 

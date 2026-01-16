@@ -1,30 +1,24 @@
 package techguns.radiation;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import io.netty.util.internal.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.MobEffects;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.SoundCategory;
-import techguns.TGRadiationSystem;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGSounds;
-import techguns.Techguns;
 import techguns.api.radiation.TGRadiation;
 import techguns.capabilities.TGExtendedPlayer;
 import techguns.damagesystem.TGDamageSource;
 import techguns.deatheffects.EntityDeathUtils.DeathType;
-import techguns.gui.player.TGPlayerInventory;
 import techguns.gui.player.TGPlayerInventoryGui;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadiationPotion extends Potion {
 
@@ -33,7 +27,7 @@ public class RadiationPotion extends Potion {
 	}
 
 	@Override
-	public void renderInventoryEffect(int x, int y, PotionEffect effect, Minecraft mc) {
+	public void renderInventoryEffect(int x, int y, @NotNull PotionEffect effect, @NotNull Minecraft mc) {
 		super.renderInventoryEffect(x, y, effect, mc);
 
 		if(mc.currentScreen!=null) {
@@ -44,7 +38,7 @@ public class RadiationPotion extends Potion {
 	}
 
 	@Override
-	public void renderHUDEffect(int x, int y, PotionEffect effect, Minecraft mc, float alpha) {
+	public void renderHUDEffect(int x, int y, @NotNull PotionEffect effect, @NotNull Minecraft mc, float alpha) {
 		super.renderHUDEffect(x, y, effect, mc, alpha);
 		
 		mc.getTextureManager().bindTexture(TGPlayerInventoryGui.texture);
@@ -54,10 +48,9 @@ public class RadiationPotion extends Potion {
 	}
 
 	@Override
-	public List<ItemStack> getCurativeItems() {
+	public @NotNull List<ItemStack> getCurativeItems() {
 		//Rad can't be cured by milk buckets, return new list
-		ArrayList<ItemStack> ret = new ArrayList<ItemStack>();
-		return ret;
+		return new ArrayList<>();
 	}
 
 	@Override

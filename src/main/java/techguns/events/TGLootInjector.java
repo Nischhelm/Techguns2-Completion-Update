@@ -9,11 +9,11 @@ import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import techguns.TGItems;
-import techguns.Techguns;
+import techguns.*;
 
 import static net.minecraft.world.storage.loot.LootTableList.CHESTS_NETHER_BRIDGE;
 
-@Mod.EventBusSubscriber(modid = Techguns.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public final class TGLootInjector {
 
     @SubscribeEvent

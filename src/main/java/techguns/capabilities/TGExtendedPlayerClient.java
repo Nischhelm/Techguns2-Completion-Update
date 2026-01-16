@@ -1,9 +1,5 @@
 package techguns.capabilities;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -14,8 +10,10 @@ import techguns.client.audio.TGSoundCategory;
 import techguns.client.particle.ITGParticle;
 import techguns.client.particle.ITGParticleAttachments;
 import techguns.client.particle.TGParticleSystem;
-import techguns.client.particle.TGParticleSystemItemAttached;
 import techguns.util.SoundUtil;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class TGExtendedPlayerClient extends TGExtendedPlayer implements ITGParticleAttachments {
 	
@@ -29,10 +27,7 @@ public class TGExtendedPlayerClient extends TGExtendedPlayer implements ITGParti
 	protected List<TGParticleSystem> particleSysOH=null;
 	protected List<ITGParticle> entityParticlesMH = null;
 	protected List<ITGParticle> entityParticlesOH = null;
-	
-	//used to count down from 20 since last tick when radiation was applied
-	public int radiationticks = 0;
-	
+
 	public TGExtendedPlayerClient(EntityPlayer entity) {
 		super(entity);
 	}
@@ -57,15 +52,13 @@ public class TGExtendedPlayerClient extends TGExtendedPlayer implements ITGParti
 	public void setJumpkeyPressed(boolean isJumpkeyPressed) {
 		
 		if(this.entity.world.isRemote){
-			if(isJumpkeyPressed==true && jetPackLoop==null){
+			if(isJumpkeyPressed && jetPackLoop==null){
 				jetPackLoop = new TGSound(TGSounds.JETPACK_LOOP, this.entity, 0.75f, 1.0f, true, true, false, TGSoundCategory.PLAYER_EFFECT);
 				SoundUtil.playSoundAtEntityPos(this.entity.world, this.entity, TGSounds.JETPACK_START, 0.75f, 1.0f, false, TGSoundCategory.PLAYER_EFFECT);
 				Minecraft.getMinecraft().getSoundHandler().playSound(jetPackLoop);
 			}
 			
-			if(isJumpkeyPressed && !this.isJumpkeyPressed){
-				//Minecraft.getMinecraft().getSoundHandler().playSound(jetPackLoop);
-			} else if ( !isJumpkeyPressed && this.isJumpkeyPressed){
+			if (!isJumpkeyPressed && this.isJumpkeyPressed){
 				if(jetPackLoop!=null){
 					jetPackLoop.setDonePlaying();
 					jetPackLoop=null;
@@ -99,13 +92,6 @@ public class TGExtendedPlayerClient extends TGExtendedPlayer implements ITGParti
 
 	@SideOnly(Side.CLIENT)
 	@Override
-	public List<ITGParticle> getOrInitEntityParticles() {
-		if (this.entityParticles==null) this.entityParticles = new LinkedList<ITGParticle>();
-		return this.entityParticles;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
 	public List<TGParticleSystem> getOrInitParticleSysMainhand() {
 		if(this.particleSysMH==null) this.particleSysMH = new LinkedList<>();
 		return this.particleSysMH;
@@ -130,13 +116,13 @@ public class TGExtendedPlayerClient extends TGExtendedPlayer implements ITGParti
 
 	@Override
 	public List<ITGParticle> getOrInitEntityParticlesOH() {
-		if(this.entityParticlesOH==null) this.entityParticlesOH = new LinkedList<ITGParticle>();
+		if(this.entityParticlesOH==null) this.entityParticlesOH = new LinkedList<>();
 		return this.entityParticlesOH;
 	}
 
 	@Override
 	public List<ITGParticle> getOrInitEntityParticlesMH() {
-		if(this.entityParticlesMH==null) this.entityParticlesMH = new LinkedList<ITGParticle>();
+		if(this.entityParticlesMH==null) this.entityParticlesMH = new LinkedList<>();
 		return this.entityParticlesMH;
 	}
 }

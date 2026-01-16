@@ -660,13 +660,6 @@ public class TGItems implements ITGInitializer {
 			Recipewriter.writeRecipes();
 		}
 	}
-	
-	// TODO: fucking obliterate this nonsense
-	public static ItemStack newStack(ItemStack stack, int size) {
-		ItemStack ret = stack.copy();
-		ret.setCount(size);
-		return ret;
-	}
 
 	public static void registerItemsToOreDict() {
 		

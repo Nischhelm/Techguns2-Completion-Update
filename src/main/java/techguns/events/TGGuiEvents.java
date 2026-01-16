@@ -18,7 +18,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import techguns.TGConfig;
 import techguns.TGItems;
 import techguns.TGRadiationSystem;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.guns.GunHandType;
 import techguns.api.guns.GunManager;
 import techguns.api.radiation.TGRadiation;
@@ -39,8 +39,8 @@ import techguns.util.MathUtil;
 
 public class TGGuiEvents extends Gui {
 
-	public static ResourceLocation crosshairsTexture = new ResourceLocation(Techguns.MODID,"textures/gui/crosshairs.png");
-	public static ResourceLocation tgCrosshairsTexture = new ResourceLocation(Techguns.MODID,"textures/gui/tg_crosshairs.png");
+	public static ResourceLocation crosshairsTexture = new ResourceLocation(Tags.MOD_ID,"textures/gui/crosshairs.png");
+	public static ResourceLocation tgCrosshairsTexture = new ResourceLocation(Tags.MOD_ID,"textures/gui/tg_crosshairs.png");
 
     private static float AMMO_TEXT_SCALE;
     private static float AMMO_ICON_SCALE;
@@ -78,7 +78,7 @@ public class TGGuiEvents extends Gui {
 		}
 
 		if(!itemOff.isEmpty() && itemOff.getItem() instanceof GenericGun){
-			if (GunManager.canUseOffhand(item,itemOff,ply)) {
+			if (GunManager.canUseOffhand(item,itemOff)) {
 				GenericGun gun = ((GenericGun) itemOff.getItem());
 				if(TGConfig.cl_enableLegacyHud) this.drawGunAmmoCount(mc, sr, gun, itemOff, ply, props, -12);
 				else this.drawGunAmmoCount(mc, sr, gun, itemOff, ply, props, 0);

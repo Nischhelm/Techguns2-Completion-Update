@@ -134,7 +134,7 @@ public class ClientProxy extends CommonProxy {
     @Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
-		OBJLoader.INSTANCE.addDomain(Techguns.MODID);
+		OBJLoader.INSTANCE.addDomain(Tags.MOD_ID);
 		TGFX.loadFXList();
 		if (!Loader.isModLoaded("albedo")){
 			this.lightPulsesEnabled=false;
@@ -186,13 +186,13 @@ public class ClientProxy extends CommonProxy {
 		insertLayerAfterArmor(def, new TGLayerRendererer(def));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(AmmoPressTileEnt.class,
-				new RenderMachine(new ModelAmmoPress(), new ResourceLocation(Techguns.MODID, "textures/blocks/ammopress.png")));
+				new RenderMachine(new ModelAmmoPress(), new ResourceLocation(Tags.MOD_ID, "textures/blocks/ammopress.png")));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(MetalPressTileEnt.class,
-				new RenderMachine(new ModelMetalPress(), new ResourceLocation(Techguns.MODID, "textures/blocks/metalpress.png")));
+				new RenderMachine(new ModelMetalPress(), new ResourceLocation(Tags.MOD_ID, "textures/blocks/metalpress.png")));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(ChemLabTileEnt.class,
-				new RenderMachine(new ModelChemLab(), new ResourceLocation(Techguns.MODID, "textures/blocks/chemlab.png")));
+				new RenderMachine(new ModelChemLab(), new ResourceLocation(Tags.MOD_ID, "textures/blocks/chemlab.png")));
 		
 		ClientRegistry.bindTileEntitySpecialRenderer(TurretTileEnt.class,
 				new RenderTurret(new ModelTurretBase()));
@@ -326,30 +326,30 @@ public class ClientProxy extends CommonProxy {
 		})
 		
 		*/
-		sharedRenderer.addRenderForType("assaultriflemagazine", new RenderItemBase(new ModelARMagazine(false), new ResourceLocation(Techguns.MODID,"textures/guns/ar_mag.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
-		sharedRenderer.addRenderForType("assaultriflemagazineempty", new RenderItemBase(new ModelARMagazine(true), new ResourceLocation(Techguns.MODID,"textures/guns/ar_mag.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
+		sharedRenderer.addRenderForType("assaultriflemagazine", new RenderItemBase(new ModelARMagazine(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/ar_mag.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
+		sharedRenderer.addRenderForType("assaultriflemagazineempty", new RenderItemBase(new ModelARMagazine(true), new ResourceLocation(Tags.MOD_ID,"textures/guns/ar_mag.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
 		
-		sharedRenderer.addRenderForType("assaultriflemagazine_incendiary", new RenderItemBase(new ModelARMagazine(false), new ResourceLocation(Techguns.MODID,"textures/guns/ar_mag_inc.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
-		
-		
-		sharedRenderer.addRenderForType("lmgmagazine", new RenderItemLMGMag(new ModelLmgMag(false), new ResourceLocation(Techguns.MODID,"textures/guns/lmg_mag.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));
-		sharedRenderer.addRenderForType("lmgmagazineempty", new RenderItemLMGMag(new ModelLmgMag(true), new ResourceLocation(Techguns.MODID,"textures/guns/lmg_mag.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));	
-		
-		sharedRenderer.addRenderForType("lmgmagazine_incendiary", new RenderItemLMGMag(new ModelLmgMag(false), new ResourceLocation(Techguns.MODID,"textures/guns/lmg_mag_inc.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));
+		sharedRenderer.addRenderForType("assaultriflemagazine_incendiary", new RenderItemBase(new ModelARMagazine(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/ar_mag_inc.png")).setBaseScale(1.25f).setGUIScale(0.85f).setBaseTranslation(0, -0.2f, 0).setTransformTranslations(m4magTranslations));
 		
 		
-		sharedRenderer.addRenderForType("as50magazine", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Techguns.MODID,"textures/guns/as50_mag.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
-		sharedRenderer.addRenderForType("as50magazineempty", new RenderItemBase(new ModelAS50Mag(true), new ResourceLocation(Techguns.MODID,"textures/guns/as50_mag.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
+		sharedRenderer.addRenderForType("lmgmagazine", new RenderItemLMGMag(new ModelLmgMag(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/lmg_mag.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));
+		sharedRenderer.addRenderForType("lmgmagazineempty", new RenderItemLMGMag(new ModelLmgMag(true), new ResourceLocation(Tags.MOD_ID,"textures/guns/lmg_mag.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));	
 		
-		sharedRenderer.addRenderForType("as50magazine_incendiary", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Techguns.MODID,"textures/guns/as50_mag_inc.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
-		sharedRenderer.addRenderForType("as50magazine_explosive", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Techguns.MODID,"textures/guns/as50_mag_exp.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
+		sharedRenderer.addRenderForType("lmgmagazine_incendiary", new RenderItemLMGMag(new ModelLmgMag(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/lmg_mag_inc.png")).setBaseScale(1.25f).setGUIScale(0.75f).setBaseTranslation(0, 0f, 0.2f).setTransformTranslations(lmgmagTranslations));
 		
 		
-		sharedRenderer.addRenderForType("rocket", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Techguns.MODID,"textures/guns/rocket.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
+		sharedRenderer.addRenderForType("as50magazine", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/as50_mag.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
+		sharedRenderer.addRenderForType("as50magazineempty", new RenderItemBase(new ModelAS50Mag(true), new ResourceLocation(Tags.MOD_ID,"textures/guns/as50_mag.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
 		
-		sharedRenderer.addRenderForType("rocket_nuke", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Techguns.MODID,"textures/guns/rocket_nuke.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
+		sharedRenderer.addRenderForType("as50magazine_incendiary", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/as50_mag_inc.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
+		sharedRenderer.addRenderForType("as50magazine_explosive", new RenderItemBase(new ModelAS50Mag(false), new ResourceLocation(Tags.MOD_ID,"textures/guns/as50_mag_exp.png")).setBaseScale(1.5f).setGUIScale(0.75f).setBaseTranslation(0.0325f, -0.2f, 0.33f).setTransformTranslations(as50magTranslations));
 		
-		sharedRenderer.addRenderForType("rocket_high_velocity", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Techguns.MODID,"textures/guns/rocket_hv.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
+		
+		sharedRenderer.addRenderForType("rocket", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Tags.MOD_ID,"textures/guns/rocket.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
+		
+		sharedRenderer.addRenderForType("rocket_nuke", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Tags.MOD_ID,"textures/guns/rocket_nuke.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
+		
+		sharedRenderer.addRenderForType("rocket_high_velocity", new RenderItemBaseRocketItem(new ModelRocket(), new ResourceLocation(Tags.MOD_ID,"textures/guns/rocket_hv.png")).setBaseScale(1.5f).setGUIScale(0.5f).setBaseTranslation(0, 0, 0.1f).setTransformTranslations(rocketTranslations).setFirstPersonScale(0.35f));
 		
 		ItemRenderHack.registerItemRenderer(TGItems.SHARED_ITEM, sharedRenderer);
 		
@@ -564,7 +564,7 @@ public class ClientProxy extends CommonProxy {
 					{0f,0f,-0.05f} //frame
 				}).setMuzzleFXPos3P(0.09f, -0.57f).setScope(ScreenEffect.sniperScope).setScopeRecoilAnim(GunAnimation.scopeRecoil, 0.05f, 1.0f));
 		
-		ResourceLocation[] powerhammer_textures = {new ResourceLocation(Techguns.MODID, "textures/guns/powerHammer.png"),new ResourceLocation(Techguns.MODID, "textures/guns/powerHammer_obsidian.png"),new ResourceLocation(Techguns.MODID, "textures/guns/powerHammer_carbon.png")};
+		ResourceLocation[] powerhammer_textures = {new ResourceLocation(Tags.MOD_ID, "textures/guns/powerHammer.png"),new ResourceLocation(Tags.MOD_ID, "textures/guns/powerHammer_obsidian.png"),new ResourceLocation(Tags.MOD_ID, "textures/guns/powerHammer_carbon.png")};
 		ItemRenderHack.registerItemRenderer(TGuns.powerhammer,new RenderMiningToolMultiTexture(new ModelPowerHammer(),2, powerhammer_textures).setBaseTranslation(0.15f, -0.2f, RenderItemBase.SCALE-0.09f)
 				.setBaseScale(1.25f).setGUIScale(0.45f).setMuzzleFx(null, 0, 0.26f, -0.67f, 0.5f,0).setTransformTranslations(new float[][]{
 					{0f,0.18f,0.09f}, //First Person
@@ -575,7 +575,7 @@ public class ClientProxy extends CommonProxy {
 				}).setMuzzleFXPos3P(0.12f, -0.65f).setChargeTranslationAmount(0.125f));	
 		
 		ItemRenderHack.registerItemRenderer(TGuns.grenadelauncher,new RenderGunBaseObj(new ModelBaseBakedGrenadeLauncher(
-				new ResourceLocation(Techguns.MODID,"textures/guns/grenadelauncher.png"), new ModelResourceLocation(TGuns.grenadelauncher.getRegistryName(), "inventory"), new ModelResourceLocation(TGuns.grenadelauncher.getRegistryName()+"_1", "inventory")),1,90.0f)
+				new ResourceLocation(Tags.MOD_ID,"textures/guns/grenadelauncher.png"), new ModelResourceLocation(TGuns.grenadelauncher.getRegistryName(), "inventory"), new ModelResourceLocation(TGuns.grenadelauncher.getRegistryName()+"_1", "inventory")),1,90.0f)
 				.setBaseTranslation(0f, 0f, 0f)
 				.setBaseScale(0.125f).setGUIScale(0.45f).setMuzzleFx(ScreenEffect.muzzleFlash_gun, 0, 0.22f, -0.63f, 0.5f,0).setTransformTranslations(new float[][]{
 					{0f,0.19f,-0.09f}, //First Person
@@ -667,7 +667,7 @@ public class ClientProxy extends CommonProxy {
 				}).setRecoilAnim(GunAnimation.genericRecoil, 0.025f, 10.0f).setMuzzleFXPos3P(0.06f, -0.31f).setReloadAnim(GunAnimation.breechReload, -0.15f, 55.0f).setReloadAnim3p(GunAnimation.breechReload, 0f, 55.0f));
 	
 		
-		ItemRenderHack.registerItemRenderer(TGuns.gaussrifle,new RenderGunBaseObj(new ModelBaseBaked(new ResourceLocation(Techguns.MODID,"textures/guns/gaussrifle.png"), new ModelResourceLocation(TGuns.gaussrifle.getRegistryName(), "inventory")),1,-90f)
+		ItemRenderHack.registerItemRenderer(TGuns.gaussrifle,new RenderGunBaseObj(new ModelBaseBaked(new ResourceLocation(Tags.MOD_ID,"textures/guns/gaussrifle.png"), new ModelResourceLocation(TGuns.gaussrifle.getRegistryName(), "inventory")),1,-90f)
 				.setBaseTranslation(0.6f, 0f, RenderItemBase.SCALE*0.5f-0.09f)
 				.setBaseScale(0.9f).setGUIScale(0.25f).setMuzzleFx(ScreenEffect.muzzleFlashSonic, 0, 0.21f, -1.56f, 1.0f,0).setTransformTranslations(new float[][]{
 					{0f,0.12f,-0.1f}, //First Person
@@ -686,7 +686,7 @@ public class ClientProxy extends CommonProxy {
 					{0,0,-0.04f} //frame
 				}).setMuzzleFXPos3P(0.09f, -0.26f));
 		
-		ResourceLocation[] drill_textures = {new ResourceLocation(Techguns.MODID, "textures/guns/miningdrill_obsidian.png"), new ResourceLocation(Techguns.MODID, "textures/guns/miningdrill_carbon.png")};
+		ResourceLocation[] drill_textures = {new ResourceLocation(Tags.MOD_ID, "textures/guns/miningdrill_obsidian.png"), new ResourceLocation(Tags.MOD_ID, "textures/guns/miningdrill_carbon.png")};
 		ItemRenderHack.registerItemRenderer(TGuns.miningdrill,new RenderMiningToolMultiTexture(new ModelMiningDrill(),2, drill_textures).setBaseTranslation(0, -0.2f, -RenderItemBase.SCALE*0.5f).setBaseScale(2.0f)
 				.setGUIScale(0.35f).setTransformTranslations(new float[][]{
 					{0f,-0.03f,0.0f}, //First Person
@@ -723,22 +723,22 @@ public class ClientProxy extends CommonProxy {
 					{0,0,0f} //frame
 				}).setRecoilAnim(GunAnimation.genericRecoil, 0.0125f, 6.0f).setMuzzleFXPos3P(0.07f, -0.26f));
 		
-		ItemRenderHack.registerItemRenderer(TGArmors.steam_Helmet,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.HEAD) );
-		ItemRenderHack.registerItemRenderer(TGArmors.steam_Chestplate,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.CHEST) );
-		ItemRenderHack.registerItemRenderer(TGArmors.steam_Leggings,  new RenderArmorItem(new ModelSteamArmor(1), new ResourceLocation(Techguns.MODID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.LEGS) );
-		ItemRenderHack.registerItemRenderer(TGArmors.steam_Boots,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.FEET) );
+		ItemRenderHack.registerItemRenderer(TGArmors.steam_Helmet,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.HEAD) );
+		ItemRenderHack.registerItemRenderer(TGArmors.steam_Chestplate,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.CHEST) );
+		ItemRenderHack.registerItemRenderer(TGArmors.steam_Leggings,  new RenderArmorItem(new ModelSteamArmor(1), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.LEGS) );
+		ItemRenderHack.registerItemRenderer(TGArmors.steam_Boots,  new RenderArmorItem(new ModelSteamArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/steam_armor.png"), EntityEquipmentSlot.FEET) );
 	
-		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Helmet,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.HEAD) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Chestplate,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.CHEST) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Leggings,  new RenderArmorItem(new ModelT3PowerArmor(1), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.LEGS) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Boots,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.FEET) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Helmet,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.HEAD) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Chestplate,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.CHEST) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Leggings,  new RenderArmorItem(new ModelT3PowerArmor(1), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.LEGS) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t3_power_Boots,  new RenderArmorItem(new ModelT3PowerArmor(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor.png"), EntityEquipmentSlot.FEET) );
 		
-		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Helmet,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.HEAD) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Chestplate,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.CHEST) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Leggings,  new RenderArmorItem(new ModelT4PowerArmorMk2(1), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.LEGS) );
-		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Boots,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Techguns.MODID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.FEET) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Helmet,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.HEAD) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Chestplate,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.CHEST) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Leggings,  new RenderArmorItem(new ModelT4PowerArmorMk2(1), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.LEGS) );
+		ItemRenderHack.registerItemRenderer(TGArmors.t4_power_Boots,  new RenderArmorItem(new ModelT4PowerArmorMk2(0), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/powerarmor_mk2_darkgrey.png"), EntityEquipmentSlot.FEET) );
 	
-		ItemRenderHack.registerItemRenderer(TGuns.stielgranate,new RenderGrenade(new ModelStielgranate(), new ResourceLocation(Techguns.MODID,"textures/guns/stielgranate.png")).setBaseScale(1f).setGUIScale(0.8f).setBaseTranslation(-RenderItemBase.SCALE*0.5f, 0.48f, -RenderItemBase.SCALE).setTransformTranslations(new float[][]{
+		ItemRenderHack.registerItemRenderer(TGuns.stielgranate,new RenderGrenade(new ModelStielgranate(), new ResourceLocation(Tags.MOD_ID,"textures/guns/stielgranate.png")).setBaseScale(1f).setGUIScale(0.8f).setBaseTranslation(-RenderItemBase.SCALE*0.5f, 0.48f, -RenderItemBase.SCALE).setTransformTranslations(new float[][]{
 			{0f,-0.06f,0f}, //First Person
 			{0f,-0.15f,0.06f}, //Third Person
 			{-0.05f,-0.49f,0f}, //GUI
@@ -746,7 +746,7 @@ public class ClientProxy extends CommonProxy {
 			{0f,0f,-0.05f} //frame
 		}));	
 		
-		ItemRenderHack.registerItemRenderer(TGuns.fraggrenade,new RenderGrenade(new ModelFragGrenade(true), new ResourceLocation(Techguns.MODID,"textures/guns/frag_grenade_texture.png"),90.0f).setBaseScale(1.25f).setGUIScale(1.35f).setBaseTranslation(-0.02f,0.65f,-RenderItemBase.SCALE+0.02f).setTransformTranslations(new float[][]{
+		ItemRenderHack.registerItemRenderer(TGuns.fraggrenade,new RenderGrenade(new ModelFragGrenade(true), new ResourceLocation(Tags.MOD_ID,"textures/guns/frag_grenade_texture.png"),90.0f).setBaseScale(1.25f).setGUIScale(1.35f).setBaseTranslation(-0.02f,0.65f,-RenderItemBase.SCALE+0.02f).setTransformTranslations(new float[][]{
 			{0f,-0.06f,0f}, //First Person
 			{0f,-0.11f,-0.01f}, //Third Person
 			{-0.05f,-0.49f,0f}, //GUI
@@ -754,28 +754,28 @@ public class ClientProxy extends CommonProxy {
 			{0f,0f,-0.05f} //frame
 		}));	
 		
-		AdditionalSlotRenderRegistry.register(TGItems.GAS_MASK, new RenderAdditionalSlotItem(new ModelGasMask(), new ResourceLocation(Techguns.MODID, "textures/armors/gasmask.png")));
-		AdditionalSlotRenderRegistry.register(TGItems.GLIDER, new RenderAdditionalSlotItem(new ModelGlider(), new ResourceLocation(Techguns.MODID, "textures/armors/glider.png")));
-		AdditionalSlotRenderRegistry.register(TGItems.JUMPPACK, new RenderAdditionalSlotItem(new ModelJetPack(1), Techguns.MODID, "textures/armors/jetpack",4));
-		AdditionalSlotRenderRegistry.register(TGItems.JETPACK, new RenderAdditionalSlotItem(new ModelJetPack(0), Techguns.MODID, "textures/armors/jetpack",4));
-		AdditionalSlotRenderRegistry.register(TGItems.SCUBA_TANKS, new RenderAdditionalSlotItem(new ModelOxygenTanks(), new ResourceLocation(Techguns.MODID,"textures/armors/oxygentanks.png")));
-		AdditionalSlotRenderRegistry.register(TGItems.NIGHTVISION_GOGGLES, new RenderAdditionalSlotItem(new ModelNightVisionGoggles(), new ResourceLocation(Techguns.MODID,"textures/armors/nightvisiongoggles.png")));
-		AdditionalSlotRenderRegistry.register(TGItems.ANTI_GRAV_PACK, new RenderAdditionalSlotItem(new ModelAntiGravPack(), Techguns.MODID, "textures/armors/antigravpack",5));
-		AdditionalSlotRenderRegistry.register(TGItems.TACTICAL_MASK, new RenderAdditionalSlotItem(new ModelFaceMask(true), Techguns.MODID, "textures/armors/tacticalmask",4));
+		AdditionalSlotRenderRegistry.register(TGItems.GAS_MASK, new RenderAdditionalSlotItem(new ModelGasMask(), new ResourceLocation(Tags.MOD_ID, "textures/armors/gasmask.png")));
+		AdditionalSlotRenderRegistry.register(TGItems.GLIDER, new RenderAdditionalSlotItem(new ModelGlider(), new ResourceLocation(Tags.MOD_ID, "textures/armors/glider.png")));
+		AdditionalSlotRenderRegistry.register(TGItems.JUMPPACK, new RenderAdditionalSlotItem(new ModelJetPack(1), Tags.MOD_ID, "textures/armors/jetpack",4));
+		AdditionalSlotRenderRegistry.register(TGItems.JETPACK, new RenderAdditionalSlotItem(new ModelJetPack(0), Tags.MOD_ID, "textures/armors/jetpack",4));
+		AdditionalSlotRenderRegistry.register(TGItems.SCUBA_TANKS, new RenderAdditionalSlotItem(new ModelOxygenTanks(), new ResourceLocation(Tags.MOD_ID,"textures/armors/oxygentanks.png")));
+		AdditionalSlotRenderRegistry.register(TGItems.NIGHTVISION_GOGGLES, new RenderAdditionalSlotItem(new ModelNightVisionGoggles(), new ResourceLocation(Tags.MOD_ID,"textures/armors/nightvisiongoggles.png")));
+		AdditionalSlotRenderRegistry.register(TGItems.ANTI_GRAV_PACK, new RenderAdditionalSlotItem(new ModelAntiGravPack(), Tags.MOD_ID, "textures/armors/antigravpack",5));
+		AdditionalSlotRenderRegistry.register(TGItems.TACTICAL_MASK, new RenderAdditionalSlotItem(new ModelFaceMask(true), Tags.MOD_ID, "textures/armors/tacticalmask",4));
 		
 		RenderAdditionalSlotSharedItem sharedItemRenderer = new RenderAdditionalSlotSharedItem();
-		sharedItemRenderer.addRenderForSharedItem(TGItems.OXYGEN_MASK.getItemDamage(),new RenderAdditionalSlotItem(new ModelFaceMask(true), new ResourceLocation(Techguns.MODID,"textures/armors/oxygenmask.png")));
-		sharedItemRenderer.addRenderForSharedItem(TGItems.WORKING_GLOVES.getItemDamage(),new RenderAdditionalSlotItem(new ModelGloves(0.45f,false), new ModelGloves(0.45f, true), new ResourceLocation(Techguns.MODID,"textures/models/armor/working_gloves.png"), new ResourceLocation(Techguns.MODID,"textures/models/armor/working_gloves_slim.png")));
+		sharedItemRenderer.addRenderForSharedItem(TGItems.OXYGEN_MASK.getItemDamage(),new RenderAdditionalSlotItem(new ModelFaceMask(true), new ResourceLocation(Tags.MOD_ID,"textures/armors/oxygenmask.png")));
+		sharedItemRenderer.addRenderForSharedItem(TGItems.WORKING_GLOVES.getItemDamage(),new RenderAdditionalSlotItem(new ModelGloves(0.45f,false), new ModelGloves(0.45f, true), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/working_gloves.png"), new ResourceLocation(Tags.MOD_ID,"textures/models/armor/working_gloves_slim.png")));
 		
 		AdditionalSlotRenderRegistry.register(TGItems.SHARED_ITEM, sharedItemRenderer);
 	
-		TGArmors.riot_shield.setTileEntityItemStackRenderer(new TileEntityItemRendererTGShield(new ModelRiotShield(), new ResourceLocation(Techguns.MODID, "textures/armors/riot_shield.png"),
-				new ResourceLocation(Techguns.MODID, "textures/armors/riot_shield_black.png"), new ResourceLocation(Techguns.MODID, "textures/armors/riot_shield_darkgreen.png"),
-				new ResourceLocation(Techguns.MODID, "textures/armors/riot_shield_grey.png")));
+		TGArmors.riot_shield.setTileEntityItemStackRenderer(new TileEntityItemRendererTGShield(new ModelRiotShield(), new ResourceLocation(Tags.MOD_ID, "textures/armors/riot_shield.png"),
+				new ResourceLocation(Tags.MOD_ID, "textures/armors/riot_shield_black.png"), new ResourceLocation(Tags.MOD_ID, "textures/armors/riot_shield_darkgreen.png"),
+				new ResourceLocation(Tags.MOD_ID, "textures/armors/riot_shield_grey.png")));
 		
-		TGArmors.ballistic_shield.setTileEntityItemStackRenderer(new TileEntityItemRendererTGShield(new ModelBallisticShield(), new ResourceLocation(Techguns.MODID, "textures/armors/ballistic_shield.png"),
-				new ResourceLocation(Techguns.MODID, "textures/armors/ballistic_shield_black.png"), new ResourceLocation(Techguns.MODID, "textures/armors/ballistic_shield_green.png"),
-				new ResourceLocation(Techguns.MODID, "textures/armors/ballistic_shield_grey.png")));
+		TGArmors.ballistic_shield.setTileEntityItemStackRenderer(new TileEntityItemRendererTGShield(new ModelBallisticShield(), new ResourceLocation(Tags.MOD_ID, "textures/armors/ballistic_shield.png"),
+				new ResourceLocation(Tags.MOD_ID, "textures/armors/ballistic_shield_black.png"), new ResourceLocation(Tags.MOD_ID, "textures/armors/ballistic_shield_green.png"),
+				new ResourceLocation(Tags.MOD_ID, "textures/armors/ballistic_shield_grey.png")));
 		
 		TGArmors.advanced_shield.setTileEntityItemStackRenderer(new TileEntityItemRendererTGShield(new ModelAdvancedShield(), getTextures("textures/armors/advanced_shield", "silver", "green" )));
 				
@@ -851,7 +851,7 @@ public class ClientProxy extends CommonProxy {
 	public void setGunTextures(GenericGun gun, String path, int variations) {
 		gun.textures = new ArrayList<>();
 		for(int i = 0; i < variations; i++){
-			gun.textures.add(new ResourceLocation(Techguns.MODID,path + ( i != 0 ? ("_" + i) : "") + ".png"));
+			gun.textures.add(new ResourceLocation(Tags.MOD_ID,path + ( i != 0 ? ("_" + i) : "") + ".png"));
 		}
 	}
 	
@@ -1088,7 +1088,7 @@ public class ClientProxy extends CommonProxy {
 		
 		ModelBakery.registerItemVariants(item);
 		
-		final ModelResourceLocation modelResourceLocation = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "fluid"), f.getFluid().getName());
+		final ModelResourceLocation modelResourceLocation = new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, "fluid"), f.getFluid().getName());
 
 		ModelLoader.setCustomMeshDefinition(item, new ItemMeshDefinition() {
 			@Override
@@ -1136,10 +1136,10 @@ public class ClientProxy extends CommonProxy {
 
 	protected static ResourceLocation[] getTextures(String name, String ...suffixes) {
 		ResourceLocation[] tex = new ResourceLocation[suffixes.length+1];
-		tex[0]=new ResourceLocation(Techguns.MODID, name+".png");
+		tex[0]=new ResourceLocation(Tags.MOD_ID, name+".png");
 		
 		for(int i=1; i<=suffixes.length; i++) {
-			tex[i] = new ResourceLocation(Techguns.MODID, name+"_"+suffixes[i-1]+".png");
+			tex[i] = new ResourceLocation(Tags.MOD_ID, name+"_"+suffixes[i-1]+".png");
 		}
 		
 		return tex;

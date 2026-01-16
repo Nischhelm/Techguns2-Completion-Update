@@ -9,14 +9,14 @@ import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import techguns.Techguns;
+import techguns.*;
 import techguns.gui.AmmoPressGui;
 import techguns.tileentities.operation.GrinderRecipes;
 import techguns.util.TextUtil;
 
 public class GrinderJeiRecipeCategory extends BasicRecipeCategory<GrinderJeiRecipe> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Techguns.MODID, "textures/gui/jei/grinder.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/gui/jei/grinder.png");
 
     private static final int BG_U = 4;
     private static final int BG_V = 4;

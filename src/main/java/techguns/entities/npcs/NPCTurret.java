@@ -25,7 +25,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.INPCTechgunsShooter;
 import techguns.api.npc.factions.ITGNpcTeam;
 import techguns.api.npc.factions.TGNpcFaction;
@@ -40,11 +40,11 @@ import techguns.tileentities.TurretTileEnt;
 public class NPCTurret extends EntityCreature implements IAnimals, IRangedAttackMob, INPCTechgunsShooter, ITGNpcTeam{
 
 	private static final ResourceLocation[] textures = new ResourceLocation[] {
-			new ResourceLocation(Techguns.MODID,"textures/blocks/turret_base.png"),
-			new ResourceLocation(Techguns.MODID,"textures/blocks/turret_base2.png"),
-			new ResourceLocation(Techguns.MODID,"textures/blocks/turret_base3.png"),
-			new ResourceLocation(Techguns.MODID,"textures/blocks/turret_base4.png"),
-			new ResourceLocation(Techguns.MODID,"textures/blocks/turret_base5.png")
+			new ResourceLocation(Tags.MOD_ID,"textures/blocks/turret_base.png"),
+			new ResourceLocation(Tags.MOD_ID,"textures/blocks/turret_base2.png"),
+			new ResourceLocation(Tags.MOD_ID,"textures/blocks/turret_base3.png"),
+			new ResourceLocation(Tags.MOD_ID,"textures/blocks/turret_base4.png"),
+			new ResourceLocation(Tags.MOD_ID,"textures/blocks/turret_base5.png")
 	};
 	
 	

@@ -12,7 +12,7 @@ import techguns.tileentities.FabricatorTileEntSlave;
 import techguns.tileentities.ReactionChamberTileEntMaster;
 import techguns.tileentities.ReactionChamberTileEntSlave;
 
-public enum EnumMultiBlockMachineType implements IStringSerializable, IMachineType<EnumMultiBlockMachineType> {
+public enum EnumMultiBlockMachineType implements IStringSerializable, IMachineType {
 		FABRICATOR_HOUSING(0,FabricatorTileEntSlave.class,true,EnumBlockRenderType.MODEL),
 		FABRICATOR_GLASS(1,FabricatorTileEntSlave.class,false,EnumBlockRenderType.MODEL,BlockRenderLayer.CUTOUT,SoundType.GLASS),
 		FABRICATOR_CONTROLLER(2,FabricatorTileEntMaster.class,true,EnumBlockRenderType.MODEL),

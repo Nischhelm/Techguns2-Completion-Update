@@ -27,11 +27,7 @@ import net.minecraftforge.fml.common.gameevent.TickEvent.PlayerTickEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent.RenderTickEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import techguns.TGConfig;
-import techguns.TGPackets;
-import techguns.TGRadiationSystem;
-import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.guns.IGenericGun;
 import techguns.api.npc.INPCTechgunsShooter;
 import techguns.api.radiation.TGRadiation;
@@ -59,7 +55,7 @@ import techguns.radiation.ItemRadiationData;
 import techguns.radiation.ItemRadiationRegistry;
 import techguns.util.InventoryUtil;
 
-@Mod.EventBusSubscriber(modid = Techguns.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TGTickHandler {
 	private static final UUID UUID_SPEED = UUID.fromString("5D8E53EB-DCFA-4121-B4DB-99BCAFA6B70B");
 	private static final UUID UUID_HEALTH = UUID.fromString("4CFA49EB-D215-498B-9CC9-4BD0D1350B1F");

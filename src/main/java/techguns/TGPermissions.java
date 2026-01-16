@@ -10,7 +10,7 @@ import net.minecraftforge.server.permission.PermissionAPI;
 import techguns.init.ITGInitializer;
 
 public class TGPermissions implements ITGInitializer {
-	public static final String ALLOW_UNSAFE_MODE = Techguns.MODID+".allowunsafemode";
+	public static final String ALLOW_UNSAFE_MODE = Tags.MOD_ID+".allowunsafemode";
 
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {

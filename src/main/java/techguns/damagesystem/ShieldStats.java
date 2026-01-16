@@ -1,20 +1,16 @@
 package techguns.damagesystem;
 
-import java.util.HashMap;
-
-import javax.annotation.Nullable;
-
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemShield;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import techguns.TGSounds;
 import techguns.api.damagesystem.DamageType;
-import techguns.util.MathUtil;
+
+import javax.annotation.Nullable;
+import java.util.HashMap;
 
 /**
  * Defensive stats of a shield against projectiles
@@ -24,7 +20,7 @@ public class ShieldStats {
 	public static final HashMap<Item, ShieldStats> SHIELD_STATS = new HashMap<>();
 	
 	//damage threshold, damage less than this will have no effect, subtract from reduced damage
-	protected double dt=0f;
+	protected double dt;
 	//reduction rate for each damage type, 0.0= take full damage, 1.0= take no damage
 	protected double[] rates; 
 	//used for sound effects
@@ -102,32 +98,14 @@ public class ShieldStats {
 			0.75d,	//RADIATION
 			0.75d	//DARK
 		});
-	
-	public ShieldStats(double dt, double[] rates) {
-		this(ShieldMaterial.METAL,dt,rates);
-	}
-	
+
 	public ShieldStats(ShieldMaterial mat, double dt, double[] rates) {
 		super();
 		this.mat=mat;
 		this.dt = dt;
 		this.rates = rates;
 	}
-	
-	public ShieldStats(double dt, double allrates) {
-		this(ShieldMaterial.METAL,dt,allrates);
-	}
-	
-	public ShieldStats(ShieldMaterial mat, double dt, double allrates) {
-		super();
-		this.mat=mat;
-		this.dt = dt;
-		this.rates = new double[DamageType.class.getEnumConstants().length];
-		for(int i=0;i<rates.length; i++) {
-			rates[i]=allrates;
-		}
-	}
-	
+
 	/**
 	 * for tooltip
 	 * @param dt
@@ -146,7 +124,7 @@ public class ShieldStats {
 		return (float) Math.max(d-effective_dt,0d);
 	}
 
-	public static enum ShieldMaterial {
+	public enum ShieldMaterial {
 		WOOD,
 		STONE,
 		METAL,
@@ -155,7 +133,7 @@ public class ShieldStats {
 		NONE
 	}
 	
-	public static void playBlockSound(EntityLivingBase ent, TGDamageSource src) {	
+	public static void playBlockSound(EntityLivingBase ent) {
 		World w = ent.getEntityWorld();
 		if(!w.isRemote) {
 			ItemStack active = ent.getActiveItemStack();

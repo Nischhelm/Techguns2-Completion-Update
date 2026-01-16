@@ -11,7 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.BlockTGLadder;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.ZombieMiner;
@@ -21,7 +21,7 @@ import techguns.world.dungeon.presets.specialblocks.MBlockChestLoottable;
 import techguns.world.dungeon.presets.specialblocks.MBlockTGSpawner;
 
 public class FactoryHouseSmall extends WorldgenStructure{
-	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/factory_building");
+	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/factory_building");
 	
 	static ArrayList<MBlock> blockList = new ArrayList<>();
 	static short[][] blocks;

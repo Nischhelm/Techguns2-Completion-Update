@@ -10,7 +10,7 @@ import techguns.api.machines.IMachineType;
 import techguns.tileentities.OreDrillTileEntSlave;
 import techguns.tileentities.OreDrillTileEntMaster;
 
-public enum EnumOreDrillType implements IStringSerializable, IMachineType<EnumOreDrillType> {
+public enum EnumOreDrillType implements IStringSerializable, IMachineType {
 	FRAME(0,OreDrillTileEntSlave.class,true,EnumBlockRenderType.MODEL),
 	SCAFFOLD(1,OreDrillTileEntSlave.class,false,EnumBlockRenderType.MODEL,BlockRenderLayer.CUTOUT,SoundType.METAL, false),
 	ROD(2,OreDrillTileEntSlave.class,true,EnumBlockRenderType.MODEL),

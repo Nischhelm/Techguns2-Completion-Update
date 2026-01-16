@@ -30,16 +30,16 @@ public class I18nUtil {
         //starting indent is the width of the first word
         int indent = fontRenderer.getStringWidth(words[0]);
 
-        for(int w = 1; w < words.length; w++) {
+        for (int w = 1; w < words.length; w++) {
 
             //increment the indent by the width of the next word + leading space
             indent += fontRenderer.getStringWidth(" " + words[w]);
 
             //if the indent is within bounds
-            if(indent <= width) {
+            if (indent <= width) {
                 //add the next word to the last line (i.e. the one in question)
                 String last = lines.get(lines.size() - 1);
-                lines.set(lines.size() - 1, last += (" " + words[w]));
+                lines.set(lines.size() - 1, last + (" " + words[w]));
             } else {
                 //otherwise, start a new line and reset the indent
                 lines.add(words[w]);

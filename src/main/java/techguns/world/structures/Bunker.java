@@ -11,7 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.ItemTGDoor2x1;
 import techguns.util.MBlock;
 import techguns.world.BlockRotator;
@@ -19,7 +19,7 @@ import techguns.world.EnumLootType;
 
 public class Bunker extends WorldgenStructure {
 
-	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/militarybase_bunker");
+	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/militarybase_bunker");
 	
 	 MBlock groundBlock = new MBlock(TGBlocks.CONCRETE,1);//new MBlock(TGBlocks.CONCRETE, 5);
 	 MBlock stairsblock = new MBlock(Blocks.STONE_STAIRS, 0);

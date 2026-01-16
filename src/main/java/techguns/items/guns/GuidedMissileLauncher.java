@@ -1,25 +1,24 @@
 package techguns.items.guns;
 
-import java.util.List;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.capabilities.TGExtendedPlayer;
 import techguns.client.audio.TGSoundCategory;
 import techguns.entities.projectiles.EnumBulletFirePos;
 import techguns.entities.projectiles.GenericProjectile;
 import techguns.entities.projectiles.GuidedMissileProjectile;
 import techguns.util.SoundUtil;
+
+import java.util.List;
 
 public class GuidedMissileLauncher extends GenericGunCharge {
 	
@@ -139,7 +138,7 @@ public class GuidedMissileLauncher extends GenericGunCharge {
 		Vec3d ray = shooter.getLookVec().scale(LOCK_RANGE);
 		List<Entity> list = shooter.world.getEntitiesInAABBexcluding(shooter,
 				shooter.getEntityBoundingBox().expand(ray.x, ray.y, ray.z).grow(1.0D),
-				GenericProjectile.BULLET_TARGETS);
+                GenericProjectile.BULLET_TARGETS::test);
 		double d0 = 0.0D;
 		
 		Entity prevTarget = null;

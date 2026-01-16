@@ -62,13 +62,13 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 			
 			if (this.checkDrillSize(rods, engines, rad)) {
 				//check engine block
-				if(allBlocksMatch(w, player, getEngineBlocks(w, masterPos, drill_direction, rad, engines), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.ENGINE).withProperty(TGBlocks.ORE_DRILL_BLOCK.FORMED, false), false)) {
+				if(allBlocksMatch(w, player, getEngineBlocks(masterPos, drill_direction, rad, engines), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.ENGINE).withProperty(MultiBlockMachine.FORMED, false), false)) {
 					//engines OK, check outer frame
-					if(allBlocksMatch(w, player, getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, true, true), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.FRAME).withProperty(TGBlocks.ORE_DRILL_BLOCK.FORMED, false), false)) {
+					if(allBlocksMatch(w, player, getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, true, true), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.FRAME).withProperty(MultiBlockMachine.FORMED, false), false)) {
 						
-						if(allBlocksMatch(w, player, getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, false, true), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.SCAFFOLD).withProperty(TGBlocks.ORE_DRILL_BLOCK.FORMED, false), false)) {
+						if(allBlocksMatch(w, player, getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, false, true), TGBlocks.ORE_DRILL_BLOCK.getDefaultState().withProperty(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE, EnumOreDrillType.SCAFFOLD).withProperty(MultiBlockMachine.FORMED, false), false)) {
 							
-							if(allBlocksMatch(w, player, getAirBlocks(w, masterPos.offset(drill_direction, engines), drill_direction, rad, rods-1), Blocks.AIR.getDefaultState(), false)) {
+							if(allBlocksMatch(w, player, getAirBlocks(masterPos.offset(drill_direction, engines), drill_direction, rad, rods-1), Blocks.AIR.getDefaultState(), false)) {
 								return true;
 							} else {
 								//Air Block Error
@@ -92,9 +92,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 			} else {
 				sendErrorMSG(w, masterPos, player, PacketMultiBlockFormInvalidBlockMessage.MSG_TYPE_ROD_SIZE);
 			}
-			return false;
-			
-			
+
+
 		} else {
 			
 			if(engines <0) {
@@ -102,8 +101,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 			} else if (rods < 0) {
 				sendErrorPing(w, masterPos.offset(drill_direction, (-rods)+Math.abs(engines)+1), player, false);
 			}
-			return false;
 		}
+		return false;
 	}
 
 	public boolean checkDrillSize(int rods, int engines, int radius) {
@@ -112,33 +111,26 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 	}
 	
 	public static EnumFacing getSide1(EnumFacing facing) {
-		switch(facing.getAxis()) {
-		case X:
-			return facing.DOWN;
-		case Y:
-			return facing.NORTH;
-		case Z:
-			return facing.DOWN;
-		default:
-			return facing.DOWN; //WOn't happen
+		if (facing.getAxis() == EnumFacing.Axis.Y) {
+			return EnumFacing.NORTH;
 		}
+		return EnumFacing.DOWN; //WOn't happen
 	}
 	
 	public static EnumFacing getSide2(EnumFacing facing) {
 		switch(facing.getAxis()) {
 		case X:
-			return facing.NORTH;
+			return EnumFacing.NORTH;
 		case Y:
-			return facing.EAST;
 		case Z:
-			return facing.EAST;
-		default:
-			return facing.DOWN; //WOn't happen
+				return EnumFacing.EAST;
+			default:
+			return EnumFacing.DOWN; //WOn't happen
 		}
 	}
 	
-	protected ArrayList<BlockPos> getEngineBlocks(World w, BlockPos masterPos, EnumFacing direction, int radius, int len){
-		ArrayList<BlockPos> positions = new ArrayList<BlockPos>((radius*2+1)*(radius*2+1)*len);
+	protected ArrayList<BlockPos> getEngineBlocks(BlockPos masterPos, EnumFacing direction, int radius, int len){
+		ArrayList<BlockPos> positions = new ArrayList<>((radius * 2 + 1) * (radius * 2 + 1) * len);
 		
 		for(int r1=-radius;r1<=radius; r1++) for (int r2=-radius;r2<=radius;r2++) for (int h=0; h<len; h++){
 			BlockPos p = masterPos.offset(direction, h+1).offset(getSide1(direction), r1).offset(getSide2(direction), r2);
@@ -147,8 +139,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 		return positions;
 	}
 	
-	protected ArrayList<BlockPos> getAirBlocks(World w, BlockPos startPos, EnumFacing direction, int radius, int len){
-		ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+	protected ArrayList<BlockPos> getAirBlocks(BlockPos startPos, EnumFacing direction, int radius, int len){
+		ArrayList<BlockPos> positions = new ArrayList<>();
 		
 		for(int r1=-radius;r1<=radius; r1++) for (int r2=-radius;r2<=radius;r2++) for (int h=0; h<len; h++){
 			
@@ -160,8 +152,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 		return positions;
 	}
 	
-	protected ArrayList<BlockPos> getFrameBlocks(World w, BlockPos masterPos, EnumFacing direction, int radius, int len, boolean outer, boolean lastRow){
-		ArrayList<BlockPos> positions = new ArrayList<BlockPos>();
+	protected ArrayList<BlockPos> getFrameBlocks(BlockPos masterPos, EnumFacing direction, int radius, int len, boolean outer, boolean lastRow){
+		ArrayList<BlockPos> positions = new ArrayList<>();
 		
 		for(int r1=-radius;r1<=radius; r1++) for (int r2=-radius;r2<=radius;r2++) for (int h=0; h<len; h++){
 			
@@ -178,8 +170,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 		return positions;
 	}
 	
-	protected ArrayList<BlockPos> getFinalScaffoldRow(World w, BlockPos masterPos, EnumFacing direction, int radius, int len){
-		ArrayList<BlockPos> positions = new ArrayList<BlockPos>((radius*2+1)*(radius*2+1)-1);
+	protected ArrayList<BlockPos> getFinalScaffoldRow(BlockPos masterPos, EnumFacing direction, int radius, int len){
+		ArrayList<BlockPos> positions = new ArrayList<>((radius * 2 + 1) * (radius * 2 + 1) - 1);
 		for(int r1=-radius;r1<=radius; r1++) for (int r2=-radius;r2<=radius;r2++) {
 			if (!(r1==0 && r2==0)) {
 				BlockPos p = masterPos.offset(direction, len).offset(getSide1(direction), r1).offset(getSide2(direction), r2);
@@ -212,7 +204,7 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 	@Override
 	public boolean form(World w, EntityPlayer player, BlockPos masterPos, EnumFacing direction) {
 		TileEntity tile = w.getTileEntity(masterPos);
-		if(tile!=null && tile instanceof OreDrillTileEntMaster) {
+		if(tile instanceof OreDrillTileEntMaster) {
 		
 			OreDrillTileEntMaster master = (OreDrillTileEntMaster) tile;
 			
@@ -246,11 +238,11 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 					//sendErrorPing(w, masterPos.offset(drill_direction, i), player, 0, false);
 				}
 				
-				this.getEngineBlocks(w, masterPos, drill_direction, rad, engines).forEach(p -> linkSlave(w, p, 1, masterPos));
+				this.getEngineBlocks(masterPos, drill_direction, rad, engines).forEach(p -> linkSlave(w, p, 1, masterPos));
 				
-				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> linkSlave(w, p, 2, masterPos));
-				this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> linkSlave(w, p, 3, masterPos));
-				this.getFinalScaffoldRow(w, masterPos, drill_direction, rad, engines+rods).forEach(p -> {linkSlave(w, p, 4, masterPos);
+				this.getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> linkSlave(w, p, 2, masterPos));
+				this.getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> linkSlave(w, p, 3, masterPos));
+				this.getFinalScaffoldRow(masterPos, drill_direction, rad, engines+rods).forEach(p -> {linkSlave(w, p, 4, masterPos);
 				/*sendErrorPing(w, p, player, 0, false);*/});
 				
 			}
@@ -302,11 +294,11 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 				//sendErrorPing(w, masterPos.offset(drill_direction, i), player, 0, false);
 			}
 			
-			this.getEngineBlocks(w, masterPos, drill_direction, rad, engines).forEach(p -> unlinkSlave(w, p));
+			this.getEngineBlocks(masterPos, drill_direction, rad, engines).forEach(p -> unlinkSlave(w, p));
 			
-			this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> unlinkSlave(w, p));
-			this.getFrameBlocks(w, masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> unlinkSlave(w, p));
-			this.getFinalScaffoldRow(w, masterPos, drill_direction, rad, engines+rods).forEach(p -> unlinkSlave(w, p));
+			this.getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, true, true).forEach(p -> unlinkSlave(w, p));
+			this.getFrameBlocks(masterPos, drill_direction, rad+1, engines+rods, false, false).forEach(p -> unlinkSlave(w, p));
+			this.getFinalScaffoldRow(masterPos, drill_direction, rad, engines+rods).forEach(p -> unlinkSlave(w, p));
 			
 			master.unform();
 		}
@@ -397,20 +389,15 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 	
 	public static boolean isOreCluster(World w, BlockPos p) {
 		IBlockState bs = w.getBlockState(p);
-		if(bs.getBlock() instanceof BlockOreCluster) {
-			return true;
-		}
-		return false;
+		return bs.getBlock() instanceof BlockOreCluster;
 	}
 	
 	protected boolean isDrillType(World w, BlockPos p,EnumOreDrillType type) {
 		IBlockState bs = w.getBlockState(p);
 		if(bs.getBlock()==TGBlocks.ORE_DRILL_BLOCK) {
 			EnumOreDrillType t = bs.getValue(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE);
-			boolean formed = bs.getValue(TGBlocks.ORE_DRILL_BLOCK.FORMED);
-			if( !formed && t == type) {
-				return true;
-			}
+			boolean formed = bs.getValue(MultiBlockMachine.FORMED);
+			return !formed && t == type;
 		}
 		return false;
 	}
@@ -419,10 +406,8 @@ public class OreDrillDefinition extends MultiBlockMachineSchematic {
 		IBlockState bs = w.getBlockState(p);
 		if(bs.getBlock()==TGBlocks.ORE_DRILL_BLOCK) {
 			EnumOreDrillType type = bs.getValue(TGBlocks.ORE_DRILL_BLOCK.MACHINE_TYPE);
-			boolean formed = bs.getValue(TGBlocks.ORE_DRILL_BLOCK.FORMED);
-			if( !formed && (type == EnumOreDrillType.ROD || type == EnumOreDrillType.ENGINE)) {
-				return true;
-			}
+			boolean formed = bs.getValue(MultiBlockMachine.FORMED);
+			return !formed && (type == EnumOreDrillType.ROD || type == EnumOreDrillType.ENGINE);
 		}
 		return false;
 	}

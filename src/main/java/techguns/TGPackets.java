@@ -46,7 +46,7 @@ public class TGPackets implements ITGInitializer {
 	@Override
 	public void init(FMLInitializationEvent event) {
 
-		wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Techguns.MODID);
+		wrapper = NetworkRegistry.INSTANCE.newSimpleChannel(Tags.MOD_ID);
 		int packetid=0;
 		
 		wrapper.registerMessage(PacketShootGun.Handler.class, PacketShootGun.class, packetid++, Side.SERVER);

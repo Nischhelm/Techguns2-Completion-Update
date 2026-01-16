@@ -75,14 +75,9 @@ public class PacketNBTControl implements IMessage {
                 TileEntity te = p.world.getTileEntity(new BlockPos(m.x, m.y, m.z));
 
                 try {
-
                     NBTTagCompound nbt = m.buffer.readCompoundTag();
-
                     if(nbt != null) {
-                        if(te instanceof IControlReceiver) {
-
-                            IControlReceiver tile = (IControlReceiver)te;
-
+                        if(te instanceof IControlReceiver tile) {
                             if(tile.hasPermission(p)) {
                                 tile.receiveControl(p, nbt);
                                 tile.receiveControl(nbt);

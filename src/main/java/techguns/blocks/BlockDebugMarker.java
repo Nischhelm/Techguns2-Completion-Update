@@ -8,10 +8,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
-import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGConfig;
 
 public class BlockDebugMarker extends GenericBlockMetaEnum<EnumDebugBlockType> {
@@ -21,27 +21,27 @@ public class BlockDebugMarker extends GenericBlockMetaEnum<EnumDebugBlockType> {
 	}
 
 	@Override
-	public BlockRenderLayer getRenderLayer() {
+	public @NotNull BlockRenderLayer getRenderLayer() {
 		return BlockRenderLayer.CUTOUT;
 	}
 	
 	@Override
-	public boolean isFullBlock(IBlockState state) {
+	public boolean isFullBlock(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isOpaqueCube(IBlockState state) {
+	public boolean isOpaqueCube(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isNormalCube(IBlockState state) {
+	public boolean isNormalCube(@NotNull IBlockState state) {
 		return false;
 	}
 
 	@Override
-	public boolean isFullCube(IBlockState state) {
+	public boolean isFullCube(@NotNull IBlockState state) {
 		return false;
 	}
 
@@ -55,7 +55,7 @@ public class BlockDebugMarker extends GenericBlockMetaEnum<EnumDebugBlockType> {
 	}
 
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubBlocks(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		if(TGConfig.debug) {
 			items.add(new ItemStack(this,1,this.getMetaFromState(getDefaultState().withProperty(TYPE, EnumDebugBlockType.AIRMARKER))));
 			items.add(new ItemStack(this,1,this.getMetaFromState(getDefaultState().withProperty(TYPE, EnumDebugBlockType.ANTIAIRMARKER))));
@@ -64,8 +64,8 @@ public class BlockDebugMarker extends GenericBlockMetaEnum<EnumDebugBlockType> {
 	}
 
 	@Override
-	public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY,
-			float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
+	public @NotNull IBlockState getStateForPlacement(@NotNull World world, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY,
+													 float hitZ, int meta, @NotNull EntityLivingBase placer, @NotNull EnumHand hand) {
 		if(meta>=EnumDebugBlockType.INTERIORMARKER_NORTH.ordinal() && meta <= EnumDebugBlockType.INTERIORMARKER_WEST.ordinal()) {
 			switch(placer.getHorizontalFacing().getOpposite()) {
 			case WEST:

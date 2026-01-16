@@ -19,13 +19,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 import techguns.items.armors.GenericArmorMultiCamo;
 
 public class ZombiePoliceman extends GenericNPCUndead {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/zombiepoliceman");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/zombiepoliceman");
 	
 	public ZombiePoliceman(World world) {
 		super(world);

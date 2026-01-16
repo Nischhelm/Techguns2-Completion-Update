@@ -2,7 +2,7 @@ package techguns.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
-import techguns.Techguns;
+import techguns.*;
 
 public class GenericItemBlock extends ItemBlock {
 

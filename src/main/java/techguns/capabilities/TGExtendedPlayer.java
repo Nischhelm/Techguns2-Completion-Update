@@ -13,7 +13,7 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.util.EnumHand;
 import techguns.TGItems;
 import techguns.TGRadiationSystem;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.capabilities.AttackTime;
 import techguns.api.capabilities.ITGExtendedPlayer;
 import techguns.gui.player.TGPlayerInventory;

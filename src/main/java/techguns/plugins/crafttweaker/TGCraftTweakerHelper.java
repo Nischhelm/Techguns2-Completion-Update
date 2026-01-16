@@ -34,14 +34,4 @@ public class TGCraftTweakerHelper {
 	public static ItemStackOreDict toItemStackOreDict(String oreDictName){
 		return new ItemStackOreDict(oreDictName);
 	}
-	
-	public static ItemStackOreDict toItemStackOreDict(Object o){
-		//System.out.println("OBJECT:"+o);
-		if (o instanceof IItemStack){
-			return new ItemStackOreDict(CraftTweakerMC.getItemStack((IItemStack)o));
-		} else if (o instanceof String){
-			return new ItemStackOreDict((String)o);
-		}
-		return ItemStackOreDict.EMPTY;
-	}
 }

@@ -21,7 +21,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGItems;
 import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.capabilities.ITGExtendedPlayer;
 import techguns.api.render.IItemTGRenderer;
 import techguns.api.tginventory.ITGSpecialSlot;
@@ -146,7 +146,7 @@ public class GenericItemShared extends GenericItem implements IItemTGRenderer, I
 	@Override
 	public void initModel() {
         for (int i = 0; i < this.sharedItems.size(); i++) {
-            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(new ResourceLocation(Techguns.MODID, this.sharedItems.get(i).name), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(this, i, new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, this.sharedItems.get(i).name), "inventory"));
         }
 	}
 
@@ -172,7 +172,7 @@ public class GenericItemShared extends GenericItem implements IItemTGRenderer, I
 
 	@Override
 	public @NotNull String getTranslationKey(ItemStack stack) {
-		return "item."+Techguns.MODID+"."+getSharedItems().get(stack.getItemDamage()).name;
+		return "item."+Tags.MOD_ID+"."+getSharedItems().get(stack.getItemDamage()).name;
 	}
 
 	@Override
@@ -336,8 +336,8 @@ public class GenericItemShared extends GenericItem implements IItemTGRenderer, I
 			
 			ItemStack newStack = stack.copy();
 			int amount = InventoryUtil.addAmmoToAmmoInventory(player, newStack);
-			
-			Techguns.logger.warn("amount not merged:"+amount);
+
+            Techguns.logger.warn("amount not merged: {}", amount);
 			
 			stack.setCount(amount);
 			return new ActionResult<>(EnumActionResult.SUCCESS, stack);

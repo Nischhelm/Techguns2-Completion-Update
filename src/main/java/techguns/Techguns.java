@@ -12,6 +12,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 import techguns.init.ITGInitializer;
 import techguns.items.guns.ammo.AmmoTypes;
 import techguns.plugins.chisel.TGChiselBlocks;
@@ -21,26 +22,22 @@ import techguns.world.OreGenerator;
 import techguns.world.WorldGenTGStructureSpawn;
 import techguns.world.dungeon.DungeonTemplate;
 
-@Mod(modid = Techguns.MODID, version = Techguns.VERSION, name=Techguns.NAME, acceptedMinecraftVersions=Techguns.MCVERSION, guiFactory=Techguns.GUI_FACTORY, updateJSON=Techguns.UPDATEURL, dependencies=Techguns.DEPENDENCIES)
-public class Techguns
-{
-    public static final String MODID = "techguns";
+@Mod(modid = Tags.MOD_ID, version = Tags.VERSION, name = Tags.MOD_NAME, acceptedMinecraftVersions = Techguns.MCVERSION, guiFactory = Techguns.GUI_FACTORY, updateJSON = Techguns.UPDATEURL, dependencies = Techguns.DEPENDENCIES)
+public class Techguns {
     public static final String MCVERSION = "1.12.2";
-    public static final String VERSION = "2.1";
-    public static final String NAME = "Techguns";
     public static final String GUI_FACTORY = "techguns.gui.config.GuiFactoryTechguns";
 
-	public static final Logger logger = LogManager.getLogger(MODID);
+    public static final Logger logger = LogManager.getLogger(Tags.MOD_ID);
     public static final String UPDATEURL = "https://raw.githubusercontent.com/pWn3d1337/Techguns2/master/update.json";
-    public static final String FORGE_BUILD = "14.23.5.2807";
-    public static final String DEPENDENCIES = "required:forge@["+FORGE_BUILD+",);after:ftblib;after:chisel;after:patchouli";
-    
+    public static final String FORGE_BUILD = "14.23.5.2847";
+    public static final String DEPENDENCIES = "required:forge@[" + FORGE_BUILD + ",);after:ftblib;after:chisel";
+
     @Mod.Instance
     public static Techguns instance;
-    
+
     @SidedProxy(clientSide = "techguns.client.ClientProxy", serverSide = "techguns.server.ServerProxy")
     public static CommonProxy proxy;
-    
+
     public TGItems items = new TGItems();
     public TGBlocks blocks = new TGBlocks();
     public TGuns guns = new TGuns();
@@ -51,108 +48,106 @@ public class Techguns
     public TGFluids fluids = new TGFluids();
     public TGPermissions permissions = new TGPermissions();
     public static TGOreClusters orecluster = new TGOreClusters();
-    
+
     public static TGRadiationSystem rad = new TGRadiationSystem();
-    
+
     //Mod integration
-    public boolean FTBLIB_ENABLED=false;
-    public boolean CHISEL_ENABLED=false;
-    
+    public boolean FTBLIB_ENABLED = false;
+    public boolean CHISEL_ENABLED = false;
+
     protected ITGInitializer[] initializers = {
-    	items,
-    	armors,
-    	ammoTypes,
-    	guns,
-    	fluids,
-    	blocks,
-    	entities,
-    	packets,
-    	rad,
-    	orecluster,
-    	permissions
+            items,
+            armors,
+            ammoTypes,
+            guns,
+            fluids,
+            blocks,
+            entities,
+            packets,
+            rad,
+            orecluster,
+            permissions
     };
-    
-    
-	public static CreativeTabs tabTechgun = new CreativeTabs(Techguns.MODID) {
-		
-	    @Override
-	    @SideOnly(Side.CLIENT)
-	    public ItemStack createIcon() {
-	        return new ItemStack(TGItems.PISTOL_ROUNDS.getItem(), 1, TGItems.PISTOL_ROUNDS.getItemDamage());
-	    }
 
-		@Override
-		public String getTranslationKey() {
-			return Techguns.MODID+"."+super.getTranslationKey();
-		}
 
-		@Override
-		public boolean hasSearchBar() {
-			return true;
-		}
-	};
-	static {
-		tabTechgun.setBackgroundImageName("item_search.png");
-	};
-	
-	public static int modEntityID=-1;
-    
-    @EventHandler
-    public void init(FMLInitializationEvent event)
-    {
-    	if(Loader.isModLoaded("ftblib")) {
-    		FTBLIB_ENABLED=true;
-    	}
-    	if(Loader.isModLoaded("chisel")) {
-    		CHISEL_ENABLED=true;
-    	}
-    	
-    	for (ITGInitializer init : initializers){
-    		init.init(event);
-    	}
-    	proxy.init(event);
-    }
-    
-    @EventHandler
-    public void preinit(FMLPreInitializationEvent event)
-    {
-    	TGConfig.init(event);
-    	for (ITGInitializer init : initializers){
-    		init.preInit(event);
-    	}
-    	proxy.preInit(event);
-    	
-    	if(Loader.isModLoaded("crafttweaker")){
-    		TGCraftTweakerIntegration.init();
-    	}
-    	
-    	if(TGConfig.doOreGenTitanium||TGConfig.doOreGenUranium||TGConfig.doOreGenLead||TGConfig.doOreGenTin||TGConfig.doOreGenCopper) {
-    		GameRegistry.registerWorldGenerator(new OreGenerator(), 1);
-    	}
-    	
-    	 if(TGConfig.doWorldspawn){
-         	GameRegistry.registerWorldGenerator(new WorldGenTGStructureSpawn(), 6);
-         }
-    }
-    
-    @EventHandler
-    public void postinit(FMLPostInitializationEvent event)
-    {
-    	for (ITGInitializer init : initializers){
-    		init.postInit(event);
-    	}
-    	proxy.postInit(event);
-    	
-    	if(this.CHISEL_ENABLED) {
-    		TGChiselBlocks.postInit();
-    	}
-    	DungeonTemplate.init();
+    public static CreativeTabs tabTechgun = new CreativeTabs(Tags.MOD_ID) {
+
+        @Override
+        @SideOnly(Side.CLIENT)
+        public @NotNull ItemStack createIcon() {
+            return new ItemStack(TGItems.PISTOL_ROUNDS.getItem(), 1, TGItems.PISTOL_ROUNDS.getItemDamage());
+        }
+
+        @Override
+        public @NotNull String getTranslationKey() {
+            return Tags.MOD_ID + "." + super.getTranslationKey();
+        }
+
+        @Override
+        public boolean hasSearchBar() {
+            return true;
+        }
+    };
+
+    static {
+        tabTechgun.setBackgroundImageName("item_search.png");
     }
 
-	@EventHandler
-	public void serverStarting(FMLServerStartingEvent evt) {
-		evt.registerServerCommand(new CommandSetSpawner());
-	}
-    
-    
+    public static int modEntityID = -1;
+
+    @EventHandler
+    public void init(FMLInitializationEvent event) {
+        if (Loader.isModLoaded("ftblib")) {
+            FTBLIB_ENABLED = true;
+        }
+        if (Loader.isModLoaded("chisel")) {
+            CHISEL_ENABLED = true;
+        }
+
+        for (ITGInitializer init : initializers) {
+            init.init(event);
+        }
+        proxy.init(event);
+    }
+
+    @EventHandler
+    public void preinit(FMLPreInitializationEvent event) {
+        TGConfig.init(event);
+        for (ITGInitializer init : initializers) {
+            init.preInit(event);
+        }
+        proxy.preInit(event);
+
+        if (Loader.isModLoaded("crafttweaker")) {
+            TGCraftTweakerIntegration.init();
+        }
+
+        if (TGConfig.doOreGenTitanium || TGConfig.doOreGenUranium || TGConfig.doOreGenLead || TGConfig.doOreGenTin || TGConfig.doOreGenCopper) {
+            GameRegistry.registerWorldGenerator(new OreGenerator(), 1);
+        }
+
+        if (TGConfig.doWorldspawn) {
+            GameRegistry.registerWorldGenerator(new WorldGenTGStructureSpawn(), 6);
+        }
+    }
+
+    @EventHandler
+    public void postinit(FMLPostInitializationEvent event) {
+        for (ITGInitializer init : initializers) {
+            init.postInit(event);
+        }
+        proxy.postInit(event);
+
+        if (this.CHISEL_ENABLED) {
+            TGChiselBlocks.postInit();
+        }
+        DungeonTemplate.init();
+    }
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent evt) {
+        evt.registerServerCommand(new CommandSetSpawner());
+    }
+
+
 }

@@ -7,7 +7,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.ZombiePoliceman;
 import techguns.util.BlockUtils;
@@ -17,7 +17,7 @@ import techguns.world.dungeon.presets.specialblocks.MBlockTGSpawner;
 
 public class PoliceStation extends WorldgenStructure {
 
-	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/policestation");
+	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/policestation");
 	
 	static ArrayList<MBlock> blockList = new ArrayList<MBlock>();
 	static short[][] blocks;

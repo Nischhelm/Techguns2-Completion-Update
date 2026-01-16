@@ -1,16 +1,14 @@
 package techguns;
 
-import java.util.ArrayList;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.fluids.*;
+import net.minecraftforge.fluids.BlockFluidClassic;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
@@ -18,6 +16,8 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import techguns.blocks.BlockFluidAcid;
 import techguns.init.ITGInitializer;
+
+import java.util.ArrayList;
 
 public class TGFluids implements ITGInitializer {
 	
@@ -64,7 +64,7 @@ public class TGFluids implements ITGInitializer {
 		WATER=FluidRegistry.WATER;
 		LAVA=FluidRegistry.LAVA;
 
-		addedSteam = FluidRegistry.registerFluid(new Fluid("steam", new ResourceLocation(Techguns.MODID, "blocks/steam_still"), new ResourceLocation(Techguns.MODID, "blocks/steam_flow"))
+		addedSteam = FluidRegistry.registerFluid(new Fluid("steam", new ResourceLocation(Tags.MOD_ID, "blocks/steam_still"), new ResourceLocation(Tags.MOD_ID, "blocks/steam_flow"))
 				.setGaseous(true)
 				.setDensity(-800)
 				.setViscosity(100)
@@ -73,23 +73,23 @@ public class TGFluids implements ITGInitializer {
 		STEAM = FluidRegistry.getFluid("steam");
 
 		if (addedSteam) {
-			BLOCK_STEAM = new BlockFluidClassic(STEAM, Material.WATER).setRegistryName(Techguns.MODID, "steam").setTranslationKey(Techguns.MODID + ".steam");
+			BLOCK_STEAM = new BlockFluidClassic(STEAM, Material.WATER).setRegistryName(Tags.MOD_ID, "steam").setTranslationKey(Tags.MOD_ID + ".steam");
 			STEAM.setBlock(BLOCK_STEAM);
 		}
 		
-		addedAcid = FluidRegistry.registerFluid(new Fluid("creeper_acid", new ResourceLocation(Techguns.MODID, "blocks/acid_still"), new ResourceLocation(Techguns.MODID, "blocks/acid_flow")).setGaseous(false).setLuminosity(0).setUnlocalizedName("creeperAcid").setDensity(100));
+		addedAcid = FluidRegistry.registerFluid(new Fluid("creeper_acid", new ResourceLocation(Tags.MOD_ID, "blocks/acid_still"), new ResourceLocation(Tags.MOD_ID, "blocks/acid_flow")).setGaseous(false).setLuminosity(0).setUnlocalizedName("creeperAcid").setDensity(100));
 		ACID = FluidRegistry.getFluid("creeper_acid");
 		if(addedAcid) {
 			
-			BLOCK_FLUID_ACID = new BlockFluidAcid(ACID,Material.WATER).setRegistryName(new ResourceLocation(Techguns.MODID, "block_creeper_acid"))
-					.setTranslationKey(Techguns.MODID+".block_creeper_acid").setCreativeTab(Techguns.tabTechgun);
+			BLOCK_FLUID_ACID = new BlockFluidAcid(ACID,Material.WATER).setRegistryName(new ResourceLocation(Tags.MOD_ID, "block_creeper_acid"))
+					.setTranslationKey(Tags.MOD_ID+".block_creeper_acid").setCreativeTab(Techguns.tabTechgun);
 		}
 		
-		addedMilk = FluidRegistry.registerFluid(new Fluid("milk", new ResourceLocation(Techguns.MODID, "blocks/milk_still"), new ResourceLocation(Techguns.MODID, "blocks/milk_flow")).setUnlocalizedName("milk"));
+		addedMilk = FluidRegistry.registerFluid(new Fluid("milk", new ResourceLocation(Tags.MOD_ID, "blocks/milk_still"), new ResourceLocation(Tags.MOD_ID, "blocks/milk_flow")).setUnlocalizedName("milk"));
 		MILK = FluidRegistry.getFluid("milk");
 		if(addedMilk) {			
-			BLOCK_FLUID_MILK = new BlockFluidAcid(MILK,Material.WATER).setRegistryName(new ResourceLocation(Techguns.MODID, "block_milk"))
-					.setTranslationKey(Techguns.MODID+".block_milk").setCreativeTab(Techguns.tabTechgun);
+			BLOCK_FLUID_MILK = new BlockFluidAcid(MILK,Material.WATER).setRegistryName(new ResourceLocation(Tags.MOD_ID, "block_milk"))
+					.setTranslationKey(Tags.MOD_ID+".block_milk").setCreativeTab(Techguns.tabTechgun);
 		}
 	}
 

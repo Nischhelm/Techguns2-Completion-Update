@@ -70,7 +70,6 @@ import static techguns.TGItems.TURRET_ARMOR_IRON;
 import static techguns.TGItems.TURRET_ARMOR_OBSIDIAN_STEEL;
 import static techguns.TGItems.TURRET_ARMOR_STEEL;
 import static techguns.TGItems.WIRE_COPPER;
-import static techguns.TGItems.newStack;
 import static techguns.TGItems.*;
 import static techguns.TGuns.ak47;
 import static techguns.TGuns.as50;
@@ -465,9 +464,6 @@ public class Recipewriter {
         addArmorRecipes();
         addUpgradeRecipes();
         addAmmoChangeRecipes();
-        
-		RecipeJsonConverter.addTGManualRecipe(Items.IRON_INGOT, Blocks.GLASS_PANE, TGItems.STONE_BULLETS);
-		RecipeJsonConverter.addTGManualRecipe(Items.IRON_INGOT, Blocks.GLASS_PANE, TGItems.PISTOL_ROUNDS);
 	}
 
 	

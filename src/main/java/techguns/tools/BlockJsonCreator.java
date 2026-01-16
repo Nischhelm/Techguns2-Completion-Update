@@ -13,12 +13,12 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 
 import net.minecraft.util.ResourceLocation;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.GenericBlockMetaEnum;
 
 public class BlockJsonCreator {
 
-	private static final String prefix = "../src/main/resources/assets/"+Techguns.MODID+"/";
+	private static final String prefix = "../src/main/resources/assets/"+Tags.MOD_ID+"/";
 	private static final String blockstates = "blockstates/";
 	private static final String blocks = "models/block/";
 	
@@ -38,7 +38,7 @@ public class BlockJsonCreator {
 		        parent.addProperty("parent","block/cube_all");
 
 		        JsonObject model = new JsonObject();
-		        model.addProperty("all", Techguns.MODID+":"+"blocks/"+name);
+		        model.addProperty("all", Tags.MOD_ID+":"+"blocks/"+name);
 		        
 		        parent.add("textures", model);
 		        
@@ -80,7 +80,7 @@ public class BlockJsonCreator {
 		        	String key = "type="+name;
 		        	
 		        	HashMap<String,String> model = new HashMap<>();
-		        	model.put("model",new ResourceLocation(Techguns.MODID,name).toString());
+		        	model.put("model",new ResourceLocation(Tags.MOD_ID,name).toString());
 		        	
 		        	entry.put(key, ImmutableMap.copyOf(model));
 		        	

@@ -9,7 +9,7 @@ import mezz.jei.api.recipe.IRecipeCategoryRegistration;
 import mezz.jei.api.recipe.VanillaRecipeCategoryUid;
 import net.minecraft.item.ItemStack;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.machines.EnumMachineType;
 import techguns.blocks.machines.EnumMultiBlockMachineType;
 import techguns.blocks.machines.EnumSimpleMachineType;
@@ -22,17 +22,17 @@ import techguns.recipes.MiningToolUpgradeHeadRecipeFactory.MiningToolUpgradeReci
 @JEIPlugin
 public class TGJeiPlugin implements IModPlugin {
 
-	public static final String AMMO_PRESS = Techguns.MODID+".ammopress";
-	public static final String METAL_PRESS = Techguns.MODID+".metalpress";
-	public static final String CHEM_LAB = Techguns.MODID+".chemlab";
-	public static final String FABRICATOR = Techguns.MODID+".fabricator";
-	public static final String CAMO_BENCH = Techguns.MODID+".camobench";
-	public static final String CHARGING_STATION = Techguns.MODID+".chargingstation";
-	public static final String REACTION_CHAMBER = Techguns.MODID+".reactionchamber";
-	public static final String ORE_DRILL = Techguns.MODID+".oredrill";
-	public static final String BLAST_FURNACE = Techguns.MODID+".blastfurnace";
-	public static final String GRINDER = Techguns.MODID+".grinder";
-	public static final String UPGRADE_BENCH = Techguns.MODID+".upgradebench";
+	public static final String AMMO_PRESS = Tags.MOD_ID+".ammopress";
+	public static final String METAL_PRESS = Tags.MOD_ID+".metalpress";
+	public static final String CHEM_LAB = Tags.MOD_ID+".chemlab";
+	public static final String FABRICATOR = Tags.MOD_ID+".fabricator";
+	public static final String CAMO_BENCH = Tags.MOD_ID+".camobench";
+	public static final String CHARGING_STATION = Tags.MOD_ID+".chargingstation";
+	public static final String REACTION_CHAMBER = Tags.MOD_ID+".reactionchamber";
+	public static final String ORE_DRILL = Tags.MOD_ID+".oredrill";
+	public static final String BLAST_FURNACE = Tags.MOD_ID+".blastfurnace";
+	public static final String GRINDER = Tags.MOD_ID+".grinder";
+	public static final String UPGRADE_BENCH = Tags.MOD_ID+".upgradebench";
 	
 	@Override
 	public void registerCategories(IRecipeCategoryRegistration registry) {

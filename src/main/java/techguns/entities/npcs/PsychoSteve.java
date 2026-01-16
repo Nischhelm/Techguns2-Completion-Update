@@ -16,14 +16,14 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.armors.GenericArmorMultiCamo;
 
 import java.util.List;
 
 public class PsychoSteve extends GenericNPC implements ILivingSoldier {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/psychosteve");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/psychosteve");
 
     private int soundAggroCooldown = 0;
 

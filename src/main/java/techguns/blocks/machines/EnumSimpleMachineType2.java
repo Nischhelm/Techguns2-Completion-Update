@@ -15,12 +15,12 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.machines.IMachineType;
 import techguns.tileentities.GrinderTileEnt;
 import techguns.tileentities.UpgradeBenchTileEnt;
 
-public enum EnumSimpleMachineType2 implements IStringSerializable, IMachineType<EnumSimpleMachineType2> {
+public enum EnumSimpleMachineType2 implements IStringSerializable, IMachineType {
 	GRINDER(0, GrinderTileEnt.class,true,EnumBlockRenderType.MODEL),
 	ARMOR_BENCH(1, UpgradeBenchTileEnt.class, false, EnumBlockRenderType.MODEL);
 	
@@ -101,7 +101,7 @@ public enum EnumSimpleMachineType2 implements IStringSerializable, IMachineType<
 	@SideOnly(Side.CLIENT)
 	@Override
 	public void setCustomModelLocation(Item itemblock, int meta, ResourceLocation registryName, IBlockState state) {
-		ResourceLocation loc = new ResourceLocation(Techguns.MODID, registryName.getPath()+"_"+this.name().toLowerCase()+"_inv");
+		ResourceLocation loc = new ResourceLocation(Tags.MOD_ID, registryName.getPath()+"_"+this.name().toLowerCase()+"_inv");
 		ModelLoader.setCustomModelResourceLocation(itemblock, meta, new ModelResourceLocation(loc, "inventory"));
 	}
 

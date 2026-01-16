@@ -13,19 +13,13 @@ import techguns.tileentities.DungeonScannerTileEnt;
 import techguns.tileentities.MetalPressTileEnt;
 import techguns.tileentities.TurretTileEnt;
 
-public enum EnumMachineType implements IStringSerializable, IMachineType<EnumMachineType> {
+public enum EnumMachineType implements IStringSerializable, IMachineType {
 	AMMO_PRESS(0,AmmoPressTileEnt.class,false,false,EnumBlockRenderType.ENTITYBLOCK_ANIMATED),
 	METAL_PRESS(1,MetalPressTileEnt.class,false,false,EnumBlockRenderType.ENTITYBLOCK_ANIMATED),
 	CHEM_LAB(2,ChemLabTileEnt.class,false,false,EnumBlockRenderType.ENTITYBLOCK_ANIMATED),
 	TURRET(3,TurretTileEnt.class,false,false,EnumBlockRenderType.ENTITYBLOCK_ANIMATED),
 	DUNGEON_SCANNER(4,DungeonScannerTileEnt.class,true,true,EnumBlockRenderType.MODEL),
 	DUNGEON_GENERATOR(5,DungeonGeneratorTileEnt.class,true,true,EnumBlockRenderType.MODEL);
-
-	/*
-	EXPLOSIVE_CHARGE(6,"explosivecharge"),
-	CAMP_FLAG(7,"campflag"),
-	EXPLOSIVE_CHARGE_ADVANCED(8,"explosivechargeadvanced"),
-	CHARGING_STATION(9,"chargingstation");*/
 
 	private final int id;
 	private final String name;

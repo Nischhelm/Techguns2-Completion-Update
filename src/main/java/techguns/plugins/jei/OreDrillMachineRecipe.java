@@ -11,7 +11,7 @@ import net.minecraftforge.fluids.FluidStack;
 import techguns.TGBlocks;
 import techguns.TGFluids;
 import techguns.TGItems;
-import techguns.Techguns;
+import techguns.*;
 import techguns.TGOreClusters.OreClusterWeightedEntry;
 import techguns.blocks.EnumOreClusterType;
 import techguns.tileentities.operation.IMachineRecipe;

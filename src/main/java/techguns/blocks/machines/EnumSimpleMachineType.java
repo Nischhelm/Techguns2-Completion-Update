@@ -11,7 +11,7 @@ import techguns.tileentities.ChargingStationTileEnt;
 import techguns.tileentities.RepairBenchTileEnt;
 import techguns.tileentities.BlastFurnaceTileEnt;
 
-public enum EnumSimpleMachineType implements IStringSerializable, IMachineType<EnumSimpleMachineType> {
+public enum EnumSimpleMachineType implements IStringSerializable, IMachineType {
 	CAMO_BENCH(0, CamoBenchTileEnt.class,true,EnumBlockRenderType.MODEL),
 	REPAIR_BENCH(1, RepairBenchTileEnt.class,true,EnumBlockRenderType.MODEL),
 	CHARGING_STATION(2, ChargingStationTileEnt.class, false, EnumBlockRenderType.MODEL),

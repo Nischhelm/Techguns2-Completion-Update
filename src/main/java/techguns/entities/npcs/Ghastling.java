@@ -31,7 +31,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGPackets;
 import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.INPCTechgunsShooter;
 import techguns.api.npc.INpcTGDamageSystem;
 import techguns.api.npc.factions.ITGNpcTeam;
@@ -47,7 +47,7 @@ public class Ghastling extends EntityMob implements IMob, INpcTGDamageSystem, IN
 
     private static final DataParameter<Boolean> ATTACKING = EntityDataManager.createKey(Ghastling.class, DataSerializers.BOOLEAN);
 
-    protected static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/ghastling");
+    protected static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/ghastling");
     
     protected boolean tryLink=true;
     

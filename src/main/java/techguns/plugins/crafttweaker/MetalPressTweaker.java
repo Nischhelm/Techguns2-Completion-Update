@@ -42,7 +42,7 @@ public class MetalPressTweaker {
 	
 	@ZenMethod
 	public static void removeRecipe(IItemStack output){
-		CraftTweakerAPI.apply(new removeInputAction((ItemStackOreDict)null,(ItemStackOreDict)null,output));
+		CraftTweakerAPI.apply(new removeInputAction(null, null,output));
 	}
 	
 	@ZenMethod

@@ -79,40 +79,40 @@ public class TGEntities implements ITGInitializer {
 		 */
 		//int bulletTrackRange = 128;
 		
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GenericProjectile"),GenericProjectile.class, "GenericProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GenericProjectileIncendiary"),GenericProjectileIncendiary.class, "GenericProjectileIncendiary", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"RocketProjectile"),RocketProjectile.class, "RocketProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"StoneBulletProjectile"),StoneBulletProjectile.class, "StoneBulletProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"BioGunProjectile"),BioGunProjectile.class, "BioGunProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"FlamethrowerProjectile"),FlamethrowerProjectile.class, "FlamethrowerProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GrenadeProjectile"),GrenadeProjectile.class, "GrenadeProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"Grenade40mmProjectile"),Grenade40mmProjectile.class, "Grenade40mmProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"LaserProjectile"),LaserProjectile.class, "LaserProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"TeslaProjectile"),TeslaProjectile.class, "TeslaProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"NDRProjectile"),NDRProjectile.class, "NDRProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"BlasterProjectile"),BlasterProjectile.class, "BlasterProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GaussProjectile"),GaussProjectile.class, "GaussProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"AdvancedBulletProjectile"),AdvancedBulletProjectile.class, "AdvancedBulletProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GuidedMissileProjectile"),GuidedMissileProjectile.class, "GuidedMissileProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"DeatomizerProjectile"),DeatomizerProjectile.class, "DeatomizerProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"SonicShotgunProjectile"),SonicShotgunProjectile.class, "SonicShotgunProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"CyberdemonBlasterProjectile"),CyberdemonBlasterProjectile.class, "CyberdemonBlasterProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"PowerHammerProjectile"),PowerHammerProjectile.class, "PowerHammerProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"ChainsawProjectile"),ChainsawProjectile.class, "ChainsawProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"FragGrenadeProjectile"),FragGrenadeProjectile.class, "FragGrenadeProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"RocketProjectileNuke"),RocketProjectileNuke.class, "RocketProjectileNuke", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"TFGProjectile"),TFGProjectile.class, "TFGProjectile", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GenericProjectileExplosive"),GenericProjectileExplosive.class, "GenericProjectileExplosive", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"RocketProjectileHV"),RocketProjectileHV.class, "RocketProjectileHV", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"RadiationEntity"), EntityRadiation.class, "RadiationEntity", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, false);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"GuidedMissileProjectileHV"),GuidedMissileProjectileHV.class, "GuidedMissileProjectileHV", ++Techguns.modEntityID, Techguns.MODID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GenericProjectile"),GenericProjectile.class, "GenericProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GenericProjectileIncendiary"),GenericProjectileIncendiary.class, "GenericProjectileIncendiary", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"RocketProjectile"),RocketProjectile.class, "RocketProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"StoneBulletProjectile"),StoneBulletProjectile.class, "StoneBulletProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"BioGunProjectile"),BioGunProjectile.class, "BioGunProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"FlamethrowerProjectile"),FlamethrowerProjectile.class, "FlamethrowerProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GrenadeProjectile"),GrenadeProjectile.class, "GrenadeProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"Grenade40mmProjectile"),Grenade40mmProjectile.class, "Grenade40mmProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"LaserProjectile"),LaserProjectile.class, "LaserProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"TeslaProjectile"),TeslaProjectile.class, "TeslaProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"NDRProjectile"),NDRProjectile.class, "NDRProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"BlasterProjectile"),BlasterProjectile.class, "BlasterProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GaussProjectile"),GaussProjectile.class, "GaussProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"AdvancedBulletProjectile"),AdvancedBulletProjectile.class, "AdvancedBulletProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GuidedMissileProjectile"),GuidedMissileProjectile.class, "GuidedMissileProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"DeatomizerProjectile"),DeatomizerProjectile.class, "DeatomizerProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"SonicShotgunProjectile"),SonicShotgunProjectile.class, "SonicShotgunProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"CyberdemonBlasterProjectile"),CyberdemonBlasterProjectile.class, "CyberdemonBlasterProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"PowerHammerProjectile"),PowerHammerProjectile.class, "PowerHammerProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"ChainsawProjectile"),ChainsawProjectile.class, "ChainsawProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"FragGrenadeProjectile"),FragGrenadeProjectile.class, "FragGrenadeProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"RocketProjectileNuke"),RocketProjectileNuke.class, "RocketProjectileNuke", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"TFGProjectile"),TFGProjectile.class, "TFGProjectile", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GenericProjectileExplosive"),GenericProjectileExplosive.class, "GenericProjectileExplosive", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"RocketProjectileHV"),RocketProjectileHV.class, "RocketProjectileHV", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"RadiationEntity"), EntityRadiation.class, "RadiationEntity", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, false);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"GuidedMissileProjectileHV"),GuidedMissileProjectileHV.class, "GuidedMissileProjectileHV", ++Techguns.modEntityID, Tags.MOD_ID, bulletTrackRange, 1, true);
 		
 		
 		/**
 		 * NPCS
 		 */
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"turret"),NPCTurret.class,  Techguns.MODID+".Turret", ++Techguns.modEntityID, Techguns.MODID, 80, 3, false);
-		EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,"TGDummySpawn"),TGDummySpawn.class,  Techguns.MODID+".DummySpawn", ++Techguns.modEntityID, Techguns.MODID, 80, 3, false);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"turret"),NPCTurret.class,  Tags.MOD_ID+".Turret", ++Techguns.modEntityID, Tags.MOD_ID, 80, 3, false);
+		EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,"TGDummySpawn"),TGDummySpawn.class,  Tags.MOD_ID+".DummySpawn", ++Techguns.modEntityID, Tags.MOD_ID, 80, 3, false);
 		registerModEntityWithEgg(ZombieSoldier.class, "ZombieSoldier",0x757468, 0x38B038);
 		registerModEntityWithEgg(ZombieFarmer.class, "ZombieFarmer",0x757468, 0x38B038);
 		registerModEntityWithEgg(ZombieMiner.class, "ZombieMiner",0x757468, 0x38B038);
@@ -146,7 +146,7 @@ public class TGEntities implements ITGInitializer {
 	static void registerModEntityWithEgg(Class parEntityClass, String parEntityName, 
 		      int parEggColor, int parEggSpotsColor, int trackingrange)
 	{
-	    EntityRegistry.registerModEntity(new ResourceLocation(Techguns.MODID,parEntityName),parEntityClass, Techguns.MODID+"."+parEntityName, ++Techguns.modEntityID, Techguns.instance, trackingrange, 3, false, parEggColor, parEggSpotsColor);
+	    EntityRegistry.registerModEntity(new ResourceLocation(Tags.MOD_ID,parEntityName),parEntityClass, Tags.MOD_ID+"."+parEntityName, ++Techguns.modEntityID, Techguns.instance, trackingrange, 3, false, parEggColor, parEggSpotsColor);
 	}
 	
 	@Override
@@ -192,13 +192,13 @@ public class TGEntities implements ITGInitializer {
 			}
 		});
 
-		if(TGConfig.spawnWeightTGOverworld>0) {
+		if(TGConfig.spawnWeightTGOverworld > 0) {
 			EntityRegistry.addSpawn(TGDummySpawn.class, TGConfig.spawnWeightTGOverworld, 1, 3, EnumCreatureType.MONSTER,overworldBiomes.toArray(new Biome[overworldBiomes.size()]));
 		}
-		if(TGConfig.spawnWeightTGNether>0) {
+		if(TGConfig.spawnWeightTGNether > 0) {
 			EntityRegistry.addSpawn(TGDummySpawn.class, TGConfig.spawnWeightTGNether, 1, 3, EnumCreatureType.MONSTER,netherBiomes.toArray(new Biome[netherBiomes.size()]));
 		}
-		if(TGConfig.spawnWeightTGEnd>0) {
+		if(TGConfig.spawnWeightTGEnd > 0) {
 			EntityRegistry.addSpawn(TGDummySpawn.class, TGConfig.spawnWeightTGEnd, 1, 3, EnumCreatureType.MONSTER,endBiomes.toArray(new Biome[endBiomes.size()]));
 		}
 	}

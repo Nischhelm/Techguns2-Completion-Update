@@ -6,11 +6,11 @@ import mezz.jei.api.ingredients.IIngredients;
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
-import techguns.Techguns;
+import techguns.*;
 
 public class MetalPressJeiRecipeCategory extends BasicRecipeCategory<MetalPressJeiRecipe> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Techguns.MODID, "textures/gui/jei/metal_press.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/gui/jei/metal_press.png");
 
     private static final int BG_U = 4;
     private static final int BG_V = 4;

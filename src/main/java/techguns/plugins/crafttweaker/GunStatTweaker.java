@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.guns.GenericGun;
 
 @ZenClass("mods.techguns.GunStats")
@@ -23,8 +23,8 @@ public class GunStatTweaker {
 		protected String weaponname;
 		protected String fieldname;
 		
-		protected GenericGun gun=null;
-		protected EnumGunStat field=null;
+		protected GenericGun gun;
+		protected EnumGunStat field;
 		protected float value;
 		
 		protected boolean gunOk;
@@ -32,11 +32,11 @@ public class GunStatTweaker {
 		public setGunStatAction(String weaponname, String fieldname, float value) {
 			this.fieldname=fieldname;
 			this.weaponname=weaponname;
-			Item item = GameRegistry.findRegistry(Item.class).getValue(new ResourceLocation(Techguns.MODID, weaponname));
+			Item item = GameRegistry.findRegistry(Item.class).getValue(new ResourceLocation(Tags.MOD_ID, weaponname));
 			this.field = EnumGunStat.parseFromString(fieldname);
 			this.value = value;
 
-			this.gunOk = item !=null && item instanceof GenericGun;
+			this.gunOk = item instanceof GenericGun;
 			this.gun = (GenericGun) item;
 		}
 

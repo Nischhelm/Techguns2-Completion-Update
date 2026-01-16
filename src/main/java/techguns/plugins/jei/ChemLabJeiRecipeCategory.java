@@ -10,12 +10,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGItems;
-import techguns.Techguns;
+import techguns.*;
 import techguns.gui.AmmoPressGui;
 
 public class ChemLabJeiRecipeCategory extends BasicRecipeCategory<ChemLabJeiRecipe> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Techguns.MODID, "textures/gui/jei/chem_lab.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/gui/jei/chem_lab.png");
 
     private static final int BG_U = 4;
     private static final int BG_V = 10;

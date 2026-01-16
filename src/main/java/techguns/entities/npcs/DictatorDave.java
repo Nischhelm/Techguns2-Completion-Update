@@ -19,14 +19,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 
 import java.util.List;
 
 public class DictatorDave extends GenericNPC implements ILivingSoldier {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/dictatordave");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/dictatordave");
 
     private int soundAggroCooldown = 0;
 

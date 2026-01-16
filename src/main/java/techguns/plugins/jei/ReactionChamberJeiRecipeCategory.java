@@ -9,12 +9,12 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fluids.Fluid;
 import org.jetbrains.annotations.NotNull;
-import techguns.Techguns;
+import techguns.*;
 import techguns.util.TextUtil;
 
 public class ReactionChamberJeiRecipeCategory extends BasicRecipeCategory<ReactionChamberJeiRecipe> {
 
-    public static final ResourceLocation TEXTURE = new ResourceLocation(Techguns.MODID, "textures/gui/jei/reaction_chamber.png");
+    public static final ResourceLocation TEXTURE = new ResourceLocation(Tags.MOD_ID, "textures/gui/jei/reaction_chamber.png");
 
     private static final int BG_U = 4;
     private static final int BG_V = 4;

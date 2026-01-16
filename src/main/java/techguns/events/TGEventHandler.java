@@ -1,6 +1,5 @@
 package techguns.events;
 
-import com.google.common.collect.ImmutableMap;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import elucent.albedo.event.GatherLightsEvent;
 import net.minecraft.block.Block;
@@ -16,10 +15,6 @@ import net.minecraft.client.renderer.GlStateManager.DestFactor;
 import net.minecraft.client.renderer.GlStateManager.SourceFactor;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.block.model.IBakedModel;
-import net.minecraft.client.renderer.block.model.ModelResourceLocation;
-import net.minecraft.client.renderer.block.model.ModelRotation;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.IAttributeInstance;
@@ -37,9 +32,6 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.loot.LootContext;
 import net.minecraft.world.storage.loot.LootTable;
 import net.minecraftforge.client.event.*;
-import net.minecraftforge.client.model.IModel;
-import net.minecraftforge.client.model.ModelLoader;
-import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.event.entity.EntityEvent.EntityConstructing;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.*;
@@ -101,7 +93,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
-@Mod.EventBusSubscriber(modid = Techguns.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TGEventHandler {
 
 	@SideOnly(Side.CLIENT)
@@ -195,7 +187,7 @@ public class TGEventHandler {
 	public static void rightClickEvent(PlayerInteractEvent.RightClickItem event) {
 		boolean cancel = !allowOffhandUse(event.getEntityPlayer(), event.getHand());
 		if (cancel) {
-			event.setCanceled(cancel);
+			event.setCanceled(true);
 			event.setCancellationResult(EnumActionResult.PASS);
 		}
 		//System.out.println("Right Click Item:"+event.getEntityPlayer()+" "+event.getHand());
@@ -205,7 +197,7 @@ public class TGEventHandler {
 	public static void rightClickEvent(PlayerInteractEvent.RightClickBlock event) {
 		boolean cancel = !allowOffhandUse(event.getEntityPlayer(), event.getHand());
 		if (cancel) {
-			event.setCanceled(cancel);
+			event.setCanceled(true);
 			event.setUseBlock(Result.ALLOW);
 			event.setUseItem(Result.DENY);
 			event.setCancellationResult(EnumActionResult.PASS);
@@ -223,7 +215,7 @@ public class TGEventHandler {
 	public static void rightClickEvent(PlayerInteractEvent.EntityInteract event) {
 		boolean cancel = !allowOffhandUse(event.getEntityPlayer(), event.getHand());
 		if (cancel) {
-			event.setCanceled(cancel);
+			event.setCanceled(true);
 			event.setCancellationResult(EnumActionResult.PASS);
 		}
 		//System.out.println("EntityInteract:"+event.getEntityPlayer()+" "+event.getHand());
@@ -344,12 +336,8 @@ public class TGEventHandler {
 	    {
 	        EntityPlayer ply = (EntityPlayer) event.getEntity();
 	        float jumpbonus = GenericArmor.getArmorBonusForPlayer(ply, TGArmorBonus.JUMP,true);
-	        
-	        /*if (ply.onGround && ply.isSneaking()){
-	        	jumpbonus*=5;
-	        }*/
-	        
-	        ply.motionY+=jumpbonus;
+
+			ply.motionY+=jumpbonus;
 	    }  
 	}
 	
@@ -451,16 +439,10 @@ public class TGEventHandler {
 				EntityPlayer ply = (EntityPlayer) event.getEntity();
 				TGExtendedPlayer props = TGExtendedPlayer.get(ply);
 				if (props!=null){
-					//System.out.println("SENT EXTENDED PLAYER SYNC");
-					//TGPackets.network.sendToDimension(new PacketTGExtendedPlayerSync(props, false), event.entity.dimension);
 					TGPackets.wrapper.sendTo(new PacketTGExtendedPlayerSync(ply,props, true), (EntityPlayerMP) ply);
-					
 					ply.getDataManager().set(TGExtendedPlayer.DATA_FACE_SLOT, props.tg_inventory.getStackInSlot(TGPlayerInventory.SLOT_FACE));
 					ply.getDataManager().set(TGExtendedPlayer.DATA_BACK_SLOT, props.tg_inventory.getStackInSlot(TGPlayerInventory.SLOT_BACK));
 					ply.getDataManager().set(TGExtendedPlayer.DATA_HAND_SLOT, props.tg_inventory.getStackInSlot(TGPlayerInventory.SLOT_HAND));
-					//ply.getDataWatcher().updateObject(TechgunsExtendedPlayerProperties.DATA_WATCHER_ID_FACESLOT, props.TG_inventory.inventory[TGPlayerInventory.SLOT_FACE]);
-					//ply.getDataWatcher().updateObject(TechgunsExtendedPlayerProperties.DATA_WATCHER_ID_BACKSLOT, props.TG_inventory.inventory[TGPlayerInventory.SLOT_BACK]);
-				
 				}
 
 			} else if (event.getEntity() instanceof TGDummySpawn){

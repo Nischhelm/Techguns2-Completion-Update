@@ -46,14 +46,6 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	    .withProperty(FACING, EnumFacing.byHorizontalIndex(meta >> 2))
 	    .withProperty(MACHINE_TYPE, clazz.getEnumConstants()[meta & 0b11]);
     }
-
-	/*@Override
-	public boolean isFullCube(IBlockState state) {
-		
-		return true;
-	}*/
-
-	
 	
 	@Override
 	public boolean isFullCube(@NotNull IBlockState state) {
@@ -62,7 +54,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 	
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	public @NotNull AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
 		T t = state.getValue(MACHINE_TYPE);
 		return t.getBoundingBox(state, source, pos);
 	}
@@ -86,7 +78,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
      * IBlockstate
      */
 	@Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
     {
         return this.getStateFromMeta(meta).withProperty(FACING, placer.getHorizontalFacing().getOpposite());
     }
@@ -106,7 +98,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot) {
+	public @NotNull IBlockState withRotation(IBlockState state, Rotation rot) {
 		EnumFacing facing = state.getValue(FACING);
 		switch(rot) {
 		case CLOCKWISE_180:
@@ -122,7 +114,7 @@ public class SimpleMachine<T extends Enum<T> & IStringSerializable & IMachineTyp
 	}
 
 	@Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+	public @NotNull IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		EnumFacing facing = state.getValue(FACING);
 		return state.withProperty(FACING,mirrorIn.mirror(facing));
 	}

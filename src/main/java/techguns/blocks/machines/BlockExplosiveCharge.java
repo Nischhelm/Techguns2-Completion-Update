@@ -22,7 +22,6 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import techguns.api.machines.IMachineType;
-import techguns.tileentities.BasicInventoryTileEnt;
 import techguns.tileentities.ExplosiveChargeTileEnt;
 import techguns.util.BlockUtils;
 
@@ -54,7 +53,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
 	};
 
 	@Override
-	public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
+	public @NotNull AxisAlignedBB getBoundingBox(IBlockState state, @NotNull IBlockAccess source, @NotNull BlockPos pos) {
 		EnumFacing facing = state.getValue(FACING);
 		return boundingBoxes[facing.getIndex()];
 	}
@@ -72,9 +71,9 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
     }
 	
 	@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
+	public @NotNull IBlockState getActualState(@NotNull IBlockState state, IBlockAccess worldIn, @NotNull BlockPos pos) {
 		TileEntity tile = worldIn.getTileEntity(pos);
-		if(tile!=null && tile instanceof ExplosiveChargeTileEnt) {
+		if(tile instanceof ExplosiveChargeTileEnt) {
 			ExplosiveChargeTileEnt charge = (ExplosiveChargeTileEnt) tile;
 			return state.withProperty(ARMED,charge.isArmed());
 		}
@@ -96,7 +95,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
      * IBlockstate
      */
 	@Override
-    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer)
+    public @NotNull IBlockState getStateForPlacement(@NotNull World worldIn, @NotNull BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, @NotNull EntityLivingBase placer)
     {
         return this.getStateFromMeta(meta).withProperty(FACING, facing.getOpposite());
     }
@@ -121,7 +120,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
 	}
 
 	@Override
-	public IBlockState withRotation(IBlockState state, Rotation rot) {
+	public @NotNull IBlockState withRotation(IBlockState state, Rotation rot) {
 		EnumFacing facing = state.getValue(FACING);
 		switch(rot) {
 		case CLOCKWISE_180:
@@ -137,7 +136,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
 	}
 
 	@Override
-	public IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
+	public @NotNull IBlockState withMirror(IBlockState state, Mirror mirrorIn) {
 		EnumFacing facing = state.getValue(FACING);
 		return state.withProperty(FACING,mirrorIn.mirror(facing));
 	}
@@ -156,7 +155,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
 	@Override
 	public boolean onBlockActivated(World world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EntityPlayer player, @NotNull EnumHand hand, @NotNull EnumFacing facing, float hitX, float hitY, float hitZ) {
 		TileEntity tile = world.getTileEntity(pos);
-		if (!world.isRemote && tile != null && tile instanceof ExplosiveChargeTileEnt) {
+		if (!world.isRemote && tile instanceof ExplosiveChargeTileEnt) {
 			((ExplosiveChargeTileEnt) tile).buttonClicked(0, player, "");
 			return true;
 		}
@@ -164,7 +163,7 @@ public class BlockExplosiveCharge<T extends Enum<T> & IStringSerializable & IMac
 	}
 
 	@Override
-	public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+	public void addInformation(ItemStack stack, @Nullable World worldIn, @NotNull List<String> tooltip, @NotNull ITooltipFlag flagIn) {
 		int meta = stack.getMetadata();
 		EnumExplosiveChargeType type = EnumExplosiveChargeType.values()[meta];
 

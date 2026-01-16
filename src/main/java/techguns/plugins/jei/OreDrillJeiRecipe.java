@@ -12,7 +12,7 @@ import techguns.TGConfig;
 import techguns.TGOreClusters;
 import techguns.TGOreClusters.OreCluster;
 import techguns.TGOreClusters.OreClusterWeightedEntry;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumOreClusterType;
 import techguns.gui.PoweredTileEntGui;
 import techguns.gui.TGBaseGui;

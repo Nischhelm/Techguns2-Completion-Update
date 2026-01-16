@@ -8,7 +8,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@ObjectHolder(Techguns.MODID)
+@ObjectHolder(Tags.MOD_ID)
 public class TGSounds {
 
 	private static ArrayList<SoundEvent> events = new ArrayList<>();
@@ -247,8 +247,8 @@ public class TGSounds {
 	}
 	
 	private static SoundEvent createSoundEvent(String name){
-		SoundEvent event = new SoundEvent(new ResourceLocation(Techguns.MODID, name));
-		event.setRegistryName(Techguns.MODID, name);
+		SoundEvent event = new SoundEvent(new ResourceLocation(Tags.MOD_ID, name));
+		event.setRegistryName(Tags.MOD_ID, name);
 		events.add(event);
 		return event;
 	}

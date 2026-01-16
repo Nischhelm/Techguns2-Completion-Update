@@ -7,13 +7,12 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.damagesystem.DamageType;
 import techguns.items.armors.EnumArmorStat;
 import techguns.items.armors.GenericArmor;
 import techguns.items.armors.PoweredArmor;
 import techguns.items.armors.TGArmorMaterial;
-import techguns.items.guns.GenericGun;
 import techguns.util.MathUtil;
 
 @ZenClass("mods.techguns.ArmorStats")
@@ -98,7 +97,7 @@ public class ArmorStatTweaker {
 		protected float value;
 		protected float value_unpowered;
 		
-		protected boolean itemOk=false;
+		protected boolean itemOk;
 		
 		public setArmorStatAction(String armorname, String statname, float value) {
 			this(armorname, statname, value, 0f);
@@ -110,11 +109,11 @@ public class ArmorStatTweaker {
 			this.value = value;
 			this.value_unpowered = value_unpowered;
 			
-			Item item = GameRegistry.findRegistry(Item.class).getValue(new ResourceLocation(Techguns.MODID, armorname));
+			Item item = GameRegistry.findRegistry(Item.class).getValue(new ResourceLocation(Tags.MOD_ID, armorname));
 			this.stat = EnumArmorStat.parseFromString(statname);
 		
 
-			this.itemOk = item !=null && item instanceof GenericArmor;
+			this.itemOk = item instanceof GenericArmor;
 			if(itemOk) {
 				this.armor = (GenericArmor) item;
 			}

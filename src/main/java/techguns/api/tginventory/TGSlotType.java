@@ -49,7 +49,7 @@ public enum TGSlotType {
 		}
 	}
 	
-	protected String trans(String key) {
+	private String trans(String key) {
 		return TextUtil.transTG("tooltip.tgslottype."+key);
 	}
 	

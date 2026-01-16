@@ -17,11 +17,11 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 
 public class SkeletonSoldier extends GenericNPCUndead {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/skeletonsoldier");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/skeletonsoldier");
 	
 	public SkeletonSoldier(World world) {
 		super(world);

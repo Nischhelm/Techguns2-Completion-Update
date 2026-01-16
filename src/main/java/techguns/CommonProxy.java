@@ -48,7 +48,7 @@ public abstract class CommonProxy implements ITGInitializer {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		this.registerItemRenderers();
-		NetworkRegistry.INSTANCE.registerGuiHandler(Techguns.MODID, new TechgunsGuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(Tags.MOD_ID, new TechgunsGuiHandler());
 	}
 
 	@Override
@@ -88,16 +88,16 @@ public abstract class CommonProxy implements ITGInitializer {
     {
 
 		TGRadiationSystem.RAD_POTION = new PotionType(new PotionEffect(TGRadiationSystem.radiation_effect, 300, 4))
-                .setRegistryName(Techguns.MODID, "radpotion");
+                .setRegistryName(Tags.MOD_ID, "radpotion");
 		
 		TGRadiationSystem.RAD_POTION_SEVERE = new PotionType(new PotionEffect(TGRadiationSystem.radiation_effect, 300, 24))
-                .setRegistryName(Techguns.MODID, "radpotion_severe");
+                .setRegistryName(Tags.MOD_ID, "radpotion_severe");
 
 		TGRadiationSystem.RAD_REGENERATION_POTION = new PotionType(new PotionEffect(TGRadiationSystem.radregen_effect, 400, 9))
-                .setRegistryName(Techguns.MODID, "radregenerationpotion");
+                .setRegistryName(Tags.MOD_ID, "radregenerationpotion");
 		
 		TGRadiationSystem.RAD_RESISTANCE_POTION = new PotionType(new PotionEffect(TGRadiationSystem.radresistance_effect, 900, 1))
-                .setRegistryName(Techguns.MODID, "radresistancepotion");
+                .setRegistryName(Tags.MOD_ID, "radresistancepotion");
 		
 
 		

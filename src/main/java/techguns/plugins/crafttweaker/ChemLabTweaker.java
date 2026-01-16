@@ -69,7 +69,7 @@ public class ChemLabTweaker {
 		FluidStack fluidIn;
 		FluidStack fluidOut;
 		boolean swap;
-		ItemStack output = ItemStack.EMPTY;
+		ItemStack output;
 		int power;
 		int amount1;
 		int amount2;
@@ -128,7 +128,7 @@ public class ChemLabTweaker {
 		FluidStack fluidIn;
 		FluidStack fluidOut;
 		boolean swap;
-		ItemStack output = ItemStack.EMPTY;
+		ItemStack output;
 		int power;
 		int amount1;
 		int amount2;
@@ -184,11 +184,10 @@ public class ChemLabTweaker {
 
 		ChemLabRecipe added_recipe=null;
 		ItemStackOreDict input1;
-		//ItemStackOreDict bottle=null;
 		FluidStack fluidIn;
 		FluidStack fluidOut;
 		boolean swap;
-		ItemStack output = ItemStack.EMPTY;
+		ItemStack output;
 		int power;
 		int amount1;
 
@@ -247,20 +246,7 @@ public class ChemLabTweaker {
 			this.output = CraftTweakerMC.getItemStack(output);
 			checkInput=false;
 		}
-		
-		
-		public removeInputAction(IItemStack output,ILiquidStack fluidOut, ItemStackOreDict input1, ItemStackOreDict input2, ILiquidStack fluidIn) {
-			super();
-			this.fluidOut = CraftTweakerMC.getLiquidStack(fluidOut);
-			this.output = CraftTweakerMC.getItemStack(output);
-			checkInput=true;
-			this.input1=input1;
-			this.input2=input2;
-			this.fluidIn = CraftTweakerMC.getLiquidStack(fluidIn);
-		}
-		
-		
-		
+
 		@Override
 		public void apply() {
 			

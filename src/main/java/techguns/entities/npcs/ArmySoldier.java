@@ -23,12 +23,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 
 public class ArmySoldier extends GenericNPC implements ILivingSoldier {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/armysoldier");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/armysoldier");
 
     private int soundAggroCooldown = 0;
 

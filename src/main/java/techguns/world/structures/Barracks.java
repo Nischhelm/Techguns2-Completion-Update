@@ -10,13 +10,13 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos.MutableBlockPos;
 import net.minecraft.world.World;
-import techguns.Techguns;
+import techguns.*;
 import techguns.util.MBlock;
 import techguns.world.BlockRotator;
 
 public class Barracks extends WorldgenStructure {
 	
-	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/militarybase_barracks");
+	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/militarybase_barracks");
 	
 	MBlock b_pillar = MBlockRegister.BARRACKS_WOOD_PILLAR; //TGChiselBlocks.wood_pillar;
 	MBlock b_wall = MBlockRegister.BARRACKS_WOOD_WALL; //TGChiselBlocks.wood_wall;

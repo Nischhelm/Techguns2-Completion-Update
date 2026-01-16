@@ -17,13 +17,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGSounds;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 import techguns.damagesystem.TGDamageSource;
 
 public class SuperMutantBasic extends GenericNPC {
 	
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/supermutantbasic");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/supermutantbasic");
 
 	public SuperMutantBasic(World world) {
 		super(world);

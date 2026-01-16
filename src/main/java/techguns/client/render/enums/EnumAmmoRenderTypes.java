@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import techguns.TGItems;
-import techguns.Techguns;
+import techguns.*;
 
 public enum EnumAmmoRenderTypes {
     EMPTY(256, 256, 0, 0, ItemStack.EMPTY),
@@ -41,7 +41,7 @@ public enum EnumAmmoRenderTypes {
     public final int width;
     public final int height;
     public final ItemStack stack;
-    public static final ResourceLocation ammoTypesTexture = new ResourceLocation(Techguns.MODID,"textures/gui/ammo_types.png");
+    public static final ResourceLocation ammoTypesTexture = new ResourceLocation(Tags.MOD_ID,"textures/gui/ammo_types.png");
 
     EnumAmmoRenderTypes(int x, int y, int width, int height, ItemStack ammo) {
         this.x = x;

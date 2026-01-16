@@ -15,6 +15,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 import techguns.util.BlockUtils;
 
 public class GenericBlockMetaEnum<T extends Enum<T> & IStringSerializable> extends GenericBlock {
@@ -41,7 +42,7 @@ public class GenericBlockMetaEnum<T extends Enum<T> & IStringSerializable> exten
 	}
 
 	@Override
-	public BlockStateContainer getBlockState() {
+	public @NotNull BlockStateContainer getBlockState() {
 		return this.blockStateOverride;
 	}
 	
@@ -51,7 +52,7 @@ public class GenericBlockMetaEnum<T extends Enum<T> & IStringSerializable> exten
 	}
 	
 	@Override
-	public void getSubBlocks(CreativeTabs tab, NonNullList<ItemStack> items) {
+	public void getSubBlocks(@NotNull CreativeTabs tab, @NotNull NonNullList<ItemStack> items) {
 		for (T t : clazz.getEnumConstants()) {
 			items.add(new ItemStack(this,1,this.getMetaFromState(getDefaultState().withProperty(TYPE, t))));
 		}
@@ -69,7 +70,7 @@ public class GenericBlockMetaEnum<T extends Enum<T> & IStringSerializable> exten
 	}
 
 	@Override
-	public IBlockState getStateFromMeta(int meta) {
+	public @NotNull IBlockState getStateFromMeta(int meta) {
 		return this.getDefaultState()
 	    .withProperty(TYPE, clazz.getEnumConstants()[meta]);
     }

@@ -19,13 +19,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 import techguns.items.armors.GenericArmorMultiCamo;
 
 public class ZombieFarmer extends GenericNPCUndead {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/zombiefarmer");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/zombiefarmer");
 	
 	public ZombieFarmer(World world) {
 		super(world);

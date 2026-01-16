@@ -30,29 +30,29 @@ public class TGArmors implements ITGInitializer {
 	public static final ArrayList<GenericArmor> armors = new ArrayList<>();
 	public static final ArrayList<GenericShield> shields = new ArrayList<>();
 	
-	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_0 = new ResourceLocation(Techguns.MODID, "steam_armor_0");
-	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_1 = new ResourceLocation(Techguns.MODID, "steam_armor_1");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_0 = new ResourceLocation(Techguns.MODID, "power_armor_0");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_1 = new ResourceLocation(Techguns.MODID, "power_armor_1");
-	public static final ResourceLocation ARMORMODEL_EXO_SUIT_0 = new ResourceLocation(Techguns.MODID, "exo_suit_0");
-	public static final ResourceLocation ARMORMODEL_EXO_SUIT_1 = new ResourceLocation(Techguns.MODID, "exo_suit_1");
-	public static final ResourceLocation ARMORMODEL_EXO_SUIT_2 = new ResourceLocation(Techguns.MODID, "exo_suit_2");
-	public static final ResourceLocation ARMORMODEL_BERET_0 = new ResourceLocation(Techguns.MODID, "beret_0");
-	public static final ResourceLocation ARMORMODEL_COAT_0 = new ResourceLocation(Techguns.MODID, "coat_0");
-	public static final ResourceLocation ARMORMODEL_COAT_1 = new ResourceLocation(Techguns.MODID, "coat_1");
-	public static final ResourceLocation ARMORMODEL_COAT_2 = new ResourceLocation(Techguns.MODID, "coat_2");
-	public static final ResourceLocation ARMORMODEL_COAT_3 = new ResourceLocation(Techguns.MODID, "coat_3");
-	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_2 = new ResourceLocation(Techguns.MODID, "steam_armor_2");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_2 = new ResourceLocation(Techguns.MODID, "power_armor_2");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_0 = new ResourceLocation(Techguns.MODID, "power_armor_mk2_0");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_1 = new ResourceLocation(Techguns.MODID, "power_armor_mk2_1");
-	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_2 = new ResourceLocation(Techguns.MODID, "power_armor_mk2_2");
+	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_0 = new ResourceLocation(Tags.MOD_ID, "steam_armor_0");
+	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_1 = new ResourceLocation(Tags.MOD_ID, "steam_armor_1");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_0 = new ResourceLocation(Tags.MOD_ID, "power_armor_0");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_1 = new ResourceLocation(Tags.MOD_ID, "power_armor_1");
+	public static final ResourceLocation ARMORMODEL_EXO_SUIT_0 = new ResourceLocation(Tags.MOD_ID, "exo_suit_0");
+	public static final ResourceLocation ARMORMODEL_EXO_SUIT_1 = new ResourceLocation(Tags.MOD_ID, "exo_suit_1");
+	public static final ResourceLocation ARMORMODEL_EXO_SUIT_2 = new ResourceLocation(Tags.MOD_ID, "exo_suit_2");
+	public static final ResourceLocation ARMORMODEL_BERET_0 = new ResourceLocation(Tags.MOD_ID, "beret_0");
+	public static final ResourceLocation ARMORMODEL_COAT_0 = new ResourceLocation(Tags.MOD_ID, "coat_0");
+	public static final ResourceLocation ARMORMODEL_COAT_1 = new ResourceLocation(Tags.MOD_ID, "coat_1");
+	public static final ResourceLocation ARMORMODEL_COAT_2 = new ResourceLocation(Tags.MOD_ID, "coat_2");
+	public static final ResourceLocation ARMORMODEL_COAT_3 = new ResourceLocation(Tags.MOD_ID, "coat_3");
+	public static final ResourceLocation ARMORMODEL_STEAM_ARMOR_2 = new ResourceLocation(Tags.MOD_ID, "steam_armor_2");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_2 = new ResourceLocation(Tags.MOD_ID, "power_armor_2");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_0 = new ResourceLocation(Tags.MOD_ID, "power_armor_mk2_0");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_1 = new ResourceLocation(Tags.MOD_ID, "power_armor_mk2_1");
+	public static final ResourceLocation ARMORMODEL_POWER_ARMOR_MK2_2 = new ResourceLocation(Tags.MOD_ID, "power_armor_mk2_2");
 	
 	
 	public static TGArmorMaterial T1_COMBAT = new TGArmorMaterial("T1_COMBAT", 60, 0, 15.0f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0.5f);
 	public static TGArmorMaterial T1_SCOUT = new TGArmorMaterial("T1_SCOUT", 60, 0, 13.0f,  SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0f);
 	public static TGArmorMaterial T1_MINER = new TGArmorMaterial("T1_MINER", 60, 0, 13.0f,  SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0f);
-	public static TGArmorMaterial T1_STEAM = new TGArmorMaterial("T1_STEAM", 200, 0, 19.0f,  SoundEvents.ITEM_ARMOR_EQUIP_IRON,1f).setArmorElemental(17.0f).setArmorExplosion(18.0f).setArmorPoison(10.0f).setArmorRadiation(6.0f).setPenetrationResistance(0.1f);
+	public static TGArmorMaterial T1_STEAM = new TGArmorMaterial("T1_STEAM", 200, 0, 19.0f,  SoundEvents.ITEM_ARMOR_EQUIP_IRON,1f).setArmorElemental(17.0f).setArmorExplosion(18.0f).setArmorPoison(10.0f).setArmorRadiation(6.0f);
 	
 	public static TGArmorMaterial T2_HAZMAT = new TGArmorMaterial("T2_HAZMAT", 80, 0, 10.0f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0f).setArmorElemental(16.0f).setArmorExplosion(10.0f).setArmorPoison(20.0f).setArmorRadiation(20.0f);
 	
@@ -60,24 +60,24 @@ public class TGArmors implements ITGInitializer {
 	public static TGArmorMaterial T2_COMBAT = new TGArmorMaterial("T2_COMBAT", 72, 0, 18.0f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,1f);
 	public static TGArmorMaterial T2_COMMANDO = new TGArmorMaterial("T2_COMMANDO", 72, 0, 18.0f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,1f).setArmorElemental(16.0f).setArmorExplosion(16.0f).setArmorPoison(10.0f).setArmorRadiation(5.0f);
 	
-	public static TGArmorMaterial T2_RIOT = new TGArmorMaterial("T2_RIOT", 96, 0, 18.5f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,1.5f).setArmorFire(18.0f).setArmorExplosion(18.0f).setArmorEnergy(18.0f).setArmorIce(17.0f).setArmorLightning(17.0f).setArmorPoison(16.0f).setArmorRadiation(16.0f).setPenetrationResistance(0.1f);
+	public static TGArmorMaterial T2_RIOT = new TGArmorMaterial("T2_RIOT", 96, 0, 18.5f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,1.5f).setArmorFire(18.0f).setArmorExplosion(18.0f).setArmorEnergy(18.0f).setArmorIce(17.0f).setArmorLightning(17.0f).setArmorPoison(16.0f).setArmorRadiation(16.0f);
 	
 	
-	public static TGArmorMaterial T3_COMBAT = new TGArmorMaterial("T3_COMBAT", 240, 0, 21.0f, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN,2.0f).setArmorFire(18.0f).setArmorExplosion(18.0f).setArmorEnergy(19.0f).setArmorIce(18.0f).setArmorLightning(18.0f).setArmorPoison(10.0f).setArmorRadiation(12.0f).setPenetrationResistance(0.15f);
+	public static TGArmorMaterial T3_COMBAT = new TGArmorMaterial("T3_COMBAT", 240, 0, 21.0f, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN,2.0f).setArmorFire(18.0f).setArmorExplosion(18.0f).setArmorEnergy(19.0f).setArmorIce(18.0f).setArmorLightning(18.0f).setArmorPoison(10.0f).setArmorRadiation(12.0f);
 	
-	public static TGArmorMaterial T3_POWER = new TGArmorMaterial("T3_POWER", 360, 0, 22.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,2.5f).setArmorFire(19.0f).setArmorExplosion(21.0f).setArmorEnergy(20.0f).setArmorIce(19.0f).setArmorLightning(19.0f).setArmorPoison(15.0f).setArmorRadiation(17.0f).setPenetrationResistance(0.25f);
+	public static TGArmorMaterial T3_POWER = new TGArmorMaterial("T3_POWER", 360, 0, 22.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,2.5f).setArmorFire(19.0f).setArmorExplosion(21.0f).setArmorEnergy(20.0f).setArmorIce(19.0f).setArmorLightning(19.0f).setArmorPoison(15.0f).setArmorRadiation(17.0f);
 	
-	public static TGArmorMaterial T3_MINER = new TGArmorMaterial("T3_MINER",300,0,20.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,2.0f).setArmorFire(20.0f).setArmorExplosion(20.0f).setArmorEnergy(20.0f).setArmorIce(20.0f).setArmorLightning(20.0f).setArmorPoison(20.0f).setArmorRadiation(20.0f).setPenetrationResistance(0.15f);
+	public static TGArmorMaterial T3_MINER = new TGArmorMaterial("T3_MINER",300,0,20.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,2.0f).setArmorFire(20.0f).setArmorExplosion(20.0f).setArmorEnergy(20.0f).setArmorIce(20.0f).setArmorLightning(20.0f).setArmorPoison(20.0f).setArmorRadiation(20.0f);
 	
 	//Same as T3_Combat
-	public static TGArmorMaterial T3_EXO = new TGArmorMaterial("T3_EXO", 300, 0, 21.0f, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN,2.0f).setArmorFire(18.5f).setArmorExplosion(18.5f).setArmorEnergy(19.0f).setArmorIce(18.5f).setArmorLightning(18.5f).setArmorPoison(10.0f).setArmorRadiation(12.0f).setPenetrationResistance(0.15f);
+	public static TGArmorMaterial T3_EXO = new TGArmorMaterial("T3_EXO", 300, 0, 21.0f, SoundEvents.ITEM_ARMOR_EQUIP_CHAIN,2.0f).setArmorFire(18.5f).setArmorExplosion(18.5f).setArmorEnergy(19.0f).setArmorIce(18.5f).setArmorLightning(18.5f).setArmorPoison(10.0f).setArmorRadiation(12.0f);
 	
 	public static TGArmorMaterial T2_BERET = new TGArmorMaterial("T2_BERET",60,0,8.0f, SoundEvents.ITEM_ARMOR_EQUIP_LEATHER,0);
 
 	
-	public static TGArmorMaterial T4_PRAETOR = new TGArmorMaterial("T4_PRAETOR",360,0,22.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,3.0f).setArmorFire(21.0f).setArmorExplosion(21.0f).setArmorEnergy(21.0f).setArmorIce(21.0f).setArmorLightning(21.0f).setArmorPoison(21.0f).setArmorRadiation(20.0f).setPenetrationResistance(0.25f);
+	public static TGArmorMaterial T4_PRAETOR = new TGArmorMaterial("T4_PRAETOR",360,0,22.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,3.0f).setArmorFire(21.0f).setArmorExplosion(21.0f).setArmorEnergy(21.0f).setArmorIce(21.0f).setArmorLightning(21.0f).setArmorPoison(21.0f).setArmorRadiation(20.0f);
 	
-	public static TGArmorMaterial T4_POWER = new TGArmorMaterial("T4_POWER", 460, 0, 23.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,3.5f).setArmorFire(21.0f).setArmorExplosion(22.0f).setArmorEnergy(21.0f).setArmorIce(21.0f).setArmorLightning(21.0f).setArmorPoison(19.0f).setArmorRadiation(20.0f).setPenetrationResistance(0.3f);
+	public static TGArmorMaterial T4_POWER = new TGArmorMaterial("T4_POWER", 460, 0, 23.0f, SoundEvents.ITEM_ARMOR_EQUIP_IRON,3.5f).setArmorFire(21.0f).setArmorExplosion(22.0f).setArmorEnergy(21.0f).setArmorIce(21.0f).setArmorLightning(21.0f).setArmorPoison(19.0f).setArmorRadiation(20.0f);
 	
 	/**
 	 * ARMORS
@@ -182,7 +182,7 @@ public class TGArmors implements ITGInitializer {
 		t1_miner_Boots = new GenericArmorMultiCamo("t1_miner_boots", T1_MINER, t1_miner_textures, EntityEquipmentSlot.FEET).setSpeedBoni(0.08f,0.1f).setMiningBoni(0.05f).setFallProtection(0.2f, 1.0f).setRepairMats(new ItemStack(Items.IRON_INGOT,1), TGItems.HEAVY_CLOTH, 0.5f, 2); // 3 for boots
 		
 		String[] steam_armor_textures = {"steam_armor", "steam_armor_rusty", "steam_armor_iron", "steam_armor_hazard", "steam_armor_parazite", "steam_armor_blizzard", "steam_armor_miner"};
-		ResourceLocation model3darmor = new ResourceLocation(Techguns.MODID, "dummy");
+		ResourceLocation model3darmor = new ResourceLocation(Tags.MOD_ID, "dummy");
 		steam_Helmet = new PoweredArmor("steam_helmet", T1_STEAM, steam_armor_textures, EntityEquipmentSlot.HEAD,ArmorPowerType.STEAM,10).setMiningBoni(0.05f,0.0f).setHealthBonus(1,0).setSpeedBoni(0.05f,0.03f,0.0f,0.0f).setRADResistance(0.5f).setRepairMats(TGItems.STEAMARMOR_PLATE, TGItems.STEAMARMOR_PLATE, 1.0f, 2).setArmorModel(ARMORMODEL_STEAM_ARMOR_2,false, model3darmor).setHideFaceslot(true).setKnockbackResistance(0.15f).setUseRenderHack();
 		steam_Chestplate = new PoweredArmor("steam_chestplate", T1_STEAM, steam_armor_textures, EntityEquipmentSlot.CHEST,ArmorPowerType.STEAM,1400).setSpeedBoni(-0.05f,0.03f,-0.2f,0.0f).setMiningBoni(0.05f,0.0f).setHealthBonus(2,0).setBattery(TGItems.COMPRESSED_AIR_TANK).setEmptyBattery(TGItems.COMPRESSED_AIR_TANK_EMPTY).setRADResistance(0.5f).setRepairMats(TGItems.STEAMARMOR_PLATE, TGItems.STEAMARMOR_PLATE, 1.0f, 4).setArmorModel(ARMORMODEL_STEAM_ARMOR_0,false, model3darmor).setHideBackslot(true).setHideGloveslot(true).setKnockbackResistance(0.30f).setUseRenderHack(); // 1 for chestplate
 		steam_Leggings = new PoweredArmor("steam_leggings", T1_STEAM, steam_armor_textures, EntityEquipmentSlot.LEGS,ArmorPowerType.STEAM,10).setSpeedBoni(-0.05f,0.03f,-0.1f,0f).setMiningBoni(0.05f,0f).setHealthBonus(1,0).setRADResistance(0.5f).setRepairMats(TGItems.STEAMARMOR_PLATE, TGItems.STEAMARMOR_PLATE, 1.0f, 3).setArmorModel(ARMORMODEL_STEAM_ARMOR_1,false, model3darmor).setKnockbackResistance(0.20f).setUseRenderHack(); // 2 for leggings

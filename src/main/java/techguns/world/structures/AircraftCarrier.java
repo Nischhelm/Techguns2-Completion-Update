@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.ArmySoldier;
 import techguns.entities.npcs.AttackHelicopter;
@@ -22,7 +22,7 @@ import techguns.world.dungeon.presets.specialblocks.MBlockTGSpawner;
 
 public class AircraftCarrier extends WorldgenStructure {
 
-	private final static ResourceLocation LOOT_TABLE = new ResourceLocation(Techguns.MODID, "chests/aircraftcarrier");
+	private final static ResourceLocation LOOT_TABLE = new ResourceLocation(Tags.MOD_ID, "chests/aircraftcarrier");
 	
 	static ArrayList<MBlock> blockList = new ArrayList<>();
 	static short[][] blocks;

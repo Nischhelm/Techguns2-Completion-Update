@@ -14,12 +14,12 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 
 public class CyberDemon extends GenericNPCUndead {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/cyberdemon");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/cyberdemon");
 	
 	public CyberDemon(World world) {
 		super(world);

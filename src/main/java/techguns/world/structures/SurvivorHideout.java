@@ -9,7 +9,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import techguns.TGBlocks;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.Bandit;
 import techguns.util.BlockUtils;
@@ -20,7 +20,7 @@ import techguns.world.dungeon.presets.specialblocks.MBlockTGSpawner;
 
 public class SurvivorHideout extends WorldgenStructure {
 
-private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/survivor_hideout");
+private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/survivor_hideout");
 	
 	static ArrayList<MBlock> blockList = new ArrayList<MBlock>();
 	static short[][] blocks;

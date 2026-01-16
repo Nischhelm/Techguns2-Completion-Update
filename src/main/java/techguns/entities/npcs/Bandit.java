@@ -18,12 +18,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 
 public class Bandit extends GenericNPC implements ILivingSoldier {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/Bandit");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/Bandit");
 
     private int soundAggroCooldown = 0;
 

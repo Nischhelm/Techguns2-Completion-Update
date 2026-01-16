@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGOreClusters.OreCluster;
 import techguns.util.TextUtil;
-import techguns.Techguns;
+import techguns.*;
 
 public class BlockOreCluster<T extends Enum<T> & IEnumOreClusterType> extends GenericBlockMetaEnum<T> {
 
@@ -58,30 +58,5 @@ public class BlockOreCluster<T extends Enum<T> & IEnumOreClusterType> extends Ge
 			tooltip.add(TextUtil.trans("techguns.orecluster.powermult")+": x"+String.format("%.1f",ore.getMultiplier_power()));
 			tooltip.add(TextUtil.trans("techguns.orecluster.amountmult")+": x"+String.format("%.1f",ore.getMultiplier_amount()));
 		}
-		
 	}
-
-	
-	
-	/*@Override
-	public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos) {
-		World w=null;
-		if(worldIn instanceof World) {
-			w = (World) worldIn;
-		} else if (worldIn instanceof ChunkCache) {
-			try {
-				w = (World) chunkCacheWorld.get((ChunkCache)worldIn);
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			} catch (IllegalAccessException e) {
-				e.printStackTrace();
-			}
-		}
-		if(w!=null) {
-			int id = w.provider.getDimension();
-		}
-		return super.getActualState(state, worldIn, pos);
-	}*/
-
-	
 }

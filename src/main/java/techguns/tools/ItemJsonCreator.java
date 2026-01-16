@@ -12,14 +12,14 @@ import com.google.gson.JsonObject;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.GenericItemShared;
 import techguns.items.GenericItemShared.SharedItemEntry;
 import techguns.items.guns.GenericGun;
 
 public class ItemJsonCreator {
 
-	private static final String prefix = "../src/main/resources/assets/"+Techguns.MODID+"/";
+	private static final String prefix = "../src/main/resources/assets/"+Tags.MOD_ID+"/";
 	private static final String texpath = "items/";
 	
 	public static void writeItemJsonFileForPath(String path, String name, String texname){
@@ -37,7 +37,7 @@ public class ItemJsonCreator {
 		        parent.addProperty("parent","item/generated");
 
 		        JsonObject model = new JsonObject();
-		        model.addProperty("layer0", Techguns.MODID+":"+texpath+texname);
+		        model.addProperty("layer0", Tags.MOD_ID+":"+texpath+texname);
 		        
 		        parent.add("textures", model);
 		        

@@ -11,9 +11,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
+import org.jetbrains.annotations.NotNull;
 import techguns.TGBlocks;
-import techguns.Techguns;
 import techguns.tileentities.TGSpawnerTileEnt;
 
 import java.util.ArrayList;
@@ -22,17 +21,17 @@ import java.util.List;
 public class CommandSetSpawner extends CommandBase {
 
     @Override
-    public String getName() {
+    public @NotNull String getName() {
         return "setspawner";
     }
 
     @Override
-    public String getUsage(ICommandSender sender) {
+    public @NotNull String getUsage(@NotNull ICommandSender sender) {
         return "/setspawner <mobsLeft> <maxActive> <spawnDelay> <spawnRange> <mob1>:<weight1> [<mob2>:<weight2> ...]";
     }
 
     @Override
-    public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException {
+    public void execute(@NotNull MinecraftServer server, @NotNull ICommandSender sender, String[] args) throws CommandException {
         if (args.length < 5) {
             throw new CommandException("Usage: " + getUsage(sender));
         }
@@ -78,8 +77,7 @@ public class CommandSetSpawner extends CommandBase {
         world.setBlockState(pos, spawnerState);
 
         TileEntity tile = world.getTileEntity(pos);
-        if (tile instanceof TGSpawnerTileEnt) {
-            TGSpawnerTileEnt spawner = (TGSpawnerTileEnt) tile;
+        if (tile instanceof TGSpawnerTileEnt spawner) {
 
             spawner.setParams(mobsLeft, maxActive, spawnDelay, spawnRange);
 
@@ -88,8 +86,8 @@ public class CommandSetSpawner extends CommandBase {
             }
 
             System.out.println("Set spawner at " + pos + " with " + mobClasses.size() + " mobs.");
-            for(int i = 0; i < mobClasses.size(); i++) {
-                System.out.println("Mobs: " + mobClasses.get(i));
+            for (Class mobClass : mobClasses) {
+                System.out.println("Mobs: " + mobClass);
             }
         }
     }

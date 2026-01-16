@@ -3,7 +3,7 @@ package techguns.world.structures;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.Bandit;
 import techguns.entities.npcs.Commando;
@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class FactoryBig extends WorldgenStructure {
 
-    private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/factory_building_big");
+    private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/factory_building_big");
 
     static ArrayList<MBlock> blockList = new ArrayList<>();
     static short[][] blocks;

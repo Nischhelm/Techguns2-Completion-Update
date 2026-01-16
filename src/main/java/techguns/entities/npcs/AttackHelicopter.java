@@ -22,7 +22,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 import techguns.TGPackets;
 import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 import techguns.api.npc.factions.TGNpcFaction;
 import techguns.client.audio.TGSoundCategory;
@@ -44,7 +44,7 @@ public class AttackHelicopter extends GenericFlyingMob
     
     public static final int MAX_DEATH_TIME = 100;
     
-    protected static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/attackhelicopter");
+    protected static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/attackhelicopter");
 	
     protected boolean tryLink=true;
     

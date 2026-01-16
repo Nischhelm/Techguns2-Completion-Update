@@ -19,7 +19,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import techguns.TGPackets;
-import techguns.Techguns;
+import techguns.Tags;
 import techguns.api.capabilities.ITGExtendedPlayer;
 import techguns.capabilities.TGExtendedPlayer;
 import techguns.capabilities.TGExtendedPlayerCapProvider;
@@ -30,35 +30,28 @@ import techguns.tileentities.operation.FabricatorRecipe;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 // this is made only for fabricator recipes. May generify recipes later though.
 public class ScreenRecipeSelectorGui extends GuiScreen {
 
-    protected static final ResourceLocation texture = new ResourceLocation(Techguns.MODID + ":textures/gui/recipe_selector_gui.png");
-
+    public static final String NULL_SELECTION = "null";
+    protected static final ResourceLocation texture = new ResourceLocation(Tags.MOD_ID + ":textures/gui/recipe_selector_gui.png");
     //basic GUI setup
     protected int xSize = 176;
     protected int ySize = 132;
     protected int guiLeft;
     protected int guiTop;
-
     // данные
     protected List<FabricatorRecipe> recipes = new ArrayList<>();
     protected List<FabricatorRecipe> allRecipes;
-
     protected GuiTextField search;
     protected int pageIndex;
     protected int size;
     protected String selection;
-    public static final String NULL_SELECTION = "null";
-
     // callback
     protected int index;
     protected FabricatorTileEntMaster tile;
     protected GuiScreen previousScreen;
-
-    public static void openSelector(FabricatorTileEntMaster tile, String selection, int index, GuiScreen previousScreen) {
-        FMLCommonHandler.instance().showGuiScreen(new ScreenRecipeSelectorGui(tile, selection, index, previousScreen));
-    }
 
     public ScreenRecipeSelectorGui(FabricatorTileEntMaster tile, String selection, int index, GuiScreen previousScreen) {
         this.tile = tile;
@@ -68,6 +61,10 @@ public class ScreenRecipeSelectorGui extends GuiScreen {
 
         this.allRecipes = new ArrayList<>(FabricatorRecipe.getRecipes());
         regenerateRecipes();
+    }
+
+    public static void openSelector(FabricatorTileEntMaster tile, String selection, int index, GuiScreen previousScreen) {
+        FMLCommonHandler.instance().showGuiScreen(new ScreenRecipeSelectorGui(tile, selection, index, previousScreen));
     }
 
     @Override
@@ -365,7 +362,11 @@ public class ScreenRecipeSelectorGui extends GuiScreen {
     }
 
     @Override
-    public boolean doesGuiPauseGame() { return false; }
+    public boolean doesGuiPauseGame() {
+        return false;
+    }
 
-    public void click() { mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F)); }
+    public void click() {
+        mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
+    }
 }

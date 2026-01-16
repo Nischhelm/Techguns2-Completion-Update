@@ -19,12 +19,12 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import techguns.TGArmors;
 import techguns.TGuns;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.npc.factions.ITGNpcTeam;
 
 public class ZombieSoldier extends GenericNPCUndead {
 
-	public static final ResourceLocation LOOT = new ResourceLocation(Techguns.MODID, "entities/zombiesoldier");
+	public static final ResourceLocation LOOT = new ResourceLocation(Tags.MOD_ID, "entities/zombiesoldier");
 	
 	public ZombieSoldier(World world) {
 		super(world);

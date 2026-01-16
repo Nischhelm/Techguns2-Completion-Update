@@ -20,7 +20,7 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import techguns.TGConfig;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.BlockTGDoor3x3;
 import techguns.tileentities.Door3x3TileEntity;
 

@@ -12,13 +12,13 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import techguns.TGArmors;
 import techguns.TGItems;
-import techguns.Techguns;
+import techguns.*;
 import techguns.items.GenericItemShared;
 import techguns.items.armors.GenericArmor;
 import techguns.items.guns.GenericGrenade;
 import techguns.items.guns.GenericGun;
 
-@Mod.EventBusSubscriber(modid = Techguns.MODID, value = Side.CLIENT)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID, value = Side.CLIENT)
 public class TGItemRenderEvents {
 
     @SubscribeEvent(receiveCanceled = true)
@@ -46,7 +46,7 @@ public class TGItemRenderEvents {
         if (shared != null) {
             shared.getSharedItems().stream()
                     .filter(GenericItemShared.SharedItemEntry::usesRenderHack)
-                    .forEach(entry -> registerBuiltInModel(event, new ModelResourceLocation(new ResourceLocation(Techguns.MODID, entry.getName()), "inventory")));
+                    .forEach(entry -> registerBuiltInModel(event, new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, entry.getName()), "inventory")));
         }
         TGArmors.armors.stream().filter(GenericArmor::usesRenderHack).forEach(item -> registerBuiltInModel(event, new ModelResourceLocation(item.getModelLocation(), "inventory")));
 

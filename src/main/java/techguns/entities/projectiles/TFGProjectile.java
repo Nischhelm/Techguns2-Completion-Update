@@ -12,7 +12,7 @@ import net.minecraftforge.fml.common.Optional;
 import net.minecraftforge.fml.common.registry.IEntityAdditionalSpawnData;
 import techguns.TGPackets;
 import techguns.TGSounds;
-import techguns.Techguns;
+import techguns.*;
 import techguns.api.damagesystem.DamageType;
 import techguns.client.audio.TGSoundCategory;
 import techguns.damagesystem.TGExplosion;

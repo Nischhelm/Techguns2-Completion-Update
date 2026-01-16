@@ -22,13 +22,13 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModel;
 import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.model.TRSRTransformation;
-import techguns.Techguns;
+import techguns.*;
 import techguns.entities.projectiles.Grenade40mmProjectile;
 
 public class RenderGrenade40mmProjectile extends Render<Grenade40mmProjectile>{
 
-	private static final ResourceLocation texture = new ResourceLocation(Techguns.MODID, "textures/entity/launchergrenade.png");
-	private static final ModelResourceLocation modelLoc = new ModelResourceLocation(new ResourceLocation(Techguns.MODID,"grenade40mm"), "inventory");
+	private static final ResourceLocation texture = new ResourceLocation(Tags.MOD_ID, "textures/entity/launchergrenade.png");
+	private static final ModelResourceLocation modelLoc = new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID,"grenade40mm"), "inventory");
 	private static IBakedModel bakedModel;
 
 	public static void initModel() {

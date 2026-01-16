@@ -7,18 +7,18 @@ import techguns.packets.PacketOpenPlayerGUI;
 
 public class TGPlayerTab extends AbstractTab {
 
-	public TGPlayerTab() {
-		super(0,0,0, TGItems.PISTOL_ROUNDS);
-	}
+    public TGPlayerTab() {
+        super(0, 0, 0, TGItems.PISTOL_ROUNDS);
+    }
 
-	@Override
-	public void onTabClicked() {
-		TGPackets.wrapper.sendToServer(new PacketOpenPlayerGUI());
-	}
+    @Override
+    public void onTabClicked() {
+        TGPackets.wrapper.sendToServer(new PacketOpenPlayerGUI());
+    }
 
-	@Override
-	public boolean shouldAddToList() {
-		return true;
-	}
+    @Override
+    public boolean shouldAddToList() {
+        return true;
+    }
 
 }

@@ -13,7 +13,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.ReflectionHelper;
-import techguns.Techguns;
+import techguns.*;
 import techguns.client.render.TGRenderHelper;
 import techguns.client.render.TGRenderHelper.RenderType;
 import techguns.deatheffects.EntityDeathUtils.DeathType;
@@ -26,8 +26,8 @@ import java.util.HashSet;
 import java.util.Random;
 
 public class DeathEffectEntityRenderer {
-	private static final ResourceLocation RES_BIO_EFFECT = new ResourceLocation(Techguns.MODID,"textures/fx/bio.png");
-	private static final ResourceLocation RES_LASER_EFFECT = new ResourceLocation(Techguns.MODID,"textures/fx/laserdeath.png");
+	private static final ResourceLocation RES_BIO_EFFECT = new ResourceLocation(Tags.MOD_ID,"textures/fx/bio.png");
+	private static final ResourceLocation RES_LASER_EFFECT = new ResourceLocation(Tags.MOD_ID,"textures/fx/laserdeath.png");
 	private static final int MAX_DEATH_TIME = 20;
 
 	public static Field RLB_mainModel = ReflectionHelper.findField(RenderLivingBase.class, "mainModel", "field_77045_g");

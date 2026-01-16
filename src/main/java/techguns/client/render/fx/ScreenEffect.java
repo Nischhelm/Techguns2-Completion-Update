@@ -8,7 +8,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import techguns.Techguns;
+import techguns.*;
 import techguns.client.render.TGRenderHelper;
 import techguns.client.render.TGRenderHelper.RenderType;
 
@@ -35,7 +35,7 @@ public class ScreenEffect implements IScreenEffect {
     public ScreenEffect(String fxTexture, int cols,
 			int rows, int numSprites, RenderType type) {
 		super();
-		this.fxTexture = new ResourceLocation(Techguns.MODID,fxTexture);
+		this.fxTexture = new ResourceLocation(Tags.MOD_ID,fxTexture);
 		this.cols = cols;
 		this.rows = rows;
 		this.numSprites = numSprites;

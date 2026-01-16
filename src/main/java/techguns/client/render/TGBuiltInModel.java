@@ -11,6 +11,7 @@ import net.minecraft.util.EnumFacing;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.apache.commons.lang3.tuple.Pair;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.vecmath.Matrix4f;
@@ -27,7 +28,7 @@ public class TGBuiltInModel implements IBakedModel {
     }
 
     @Override
-    public List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
+    public @NotNull List<BakedQuad> getQuads(@Nullable IBlockState state, @Nullable EnumFacing side, long rand) {
         return original != null ? original.getQuads(state, side, rand) : Collections.emptyList();
     }
 
@@ -47,17 +48,17 @@ public class TGBuiltInModel implements IBakedModel {
     }
 
     @Override
-    public TextureAtlasSprite getParticleTexture() {
+    public @NotNull TextureAtlasSprite getParticleTexture() {
         return original != null ? original.getParticleTexture() : Minecraft.getMinecraft().getTextureMapBlocks().getMissingSprite();
     }
 
     @Override
-    public ItemOverrideList getOverrides() {
+    public @NotNull ItemOverrideList getOverrides() {
         return original != null ? original.getOverrides() : ItemOverrideList.NONE;
     }
 
     @Override
-    public Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.TransformType cameraTransformType) {
+    public @NotNull Pair<? extends IBakedModel, Matrix4f> handlePerspective(ItemCameraTransforms.@NotNull TransformType cameraTransformType) {
         TGItemRendererContext.setTransform(cameraTransformType);
         Matrix4f identity = new Matrix4f();
         identity.setIdentity();

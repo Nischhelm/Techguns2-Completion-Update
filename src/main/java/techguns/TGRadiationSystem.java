@@ -1,7 +1,5 @@
 package techguns;
 
-import com.google.common.base.Predicate;
-
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.RangedAttribute;
@@ -24,6 +22,8 @@ import techguns.radiation.ItemRadiationRegistry;
 import techguns.radiation.RadRegenerationPotion;
 import techguns.radiation.RadResistancePotion;
 import techguns.radiation.RadiationPotion;
+
+import java.util.function.Predicate;
 
 public class TGRadiationSystem implements ITGInitializer {
 
@@ -48,16 +48,16 @@ public class TGRadiationSystem implements ITGInitializer {
 	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		TGRadiation.RADIATION_RESISTANCE = (new RangedAttribute(null, Techguns.MODID+".radiationResistance", 0.0D, 0.0D, Float.MAX_VALUE)).setShouldWatch(true);
+		TGRadiation.RADIATION_RESISTANCE = (new RangedAttribute(null, Tags.MOD_ID+".radiationResistance", 0.0D, 0.0D, Float.MAX_VALUE)).setShouldWatch(true);
 
 		radiation_effect= new RadiationPotion();
-		radiation_effect.setPotionName(Techguns.MODID+".radiation").setRegistryName(new ResourceLocation(Techguns.MODID,"radiation"));
+		radiation_effect.setPotionName(Tags.MOD_ID+".radiation").setRegistryName(new ResourceLocation(Tags.MOD_ID,"radiation"));
 		
 		radregen_effect= new RadRegenerationPotion();
-		radregen_effect.setPotionName(Techguns.MODID+".radregeneration").setRegistryName(new ResourceLocation(Techguns.MODID,"radregeneration"));
+		radregen_effect.setPotionName(Tags.MOD_ID+".radregeneration").setRegistryName(new ResourceLocation(Tags.MOD_ID,"radregeneration"));
 		
 		radresistance_effect= new RadResistancePotion();
-		radresistance_effect.setPotionName(Techguns.MODID+".radresistance").setRegistryName(new ResourceLocation(Techguns.MODID,"radresistance")).setBeneficial()
+		radresistance_effect.setPotionName(Tags.MOD_ID+".radresistance").setRegistryName(new ResourceLocation(Tags.MOD_ID,"radresistance")).setBeneficial()
 			.registerPotionAttributeModifier(TGRadiation.RADIATION_RESISTANCE, "515AD21C-3FB2-4E36-BBCE-88C2ED738DE2", 1D, 0);
 
 	}
@@ -108,7 +108,7 @@ public class TGRadiationSystem implements ITGInitializer {
 		AxisAlignedBB bb = new AxisAlignedBB(radius, posY+radius, posZ+radius, posX-radius, posY-radius, posZ-radius);
 		
 		Vec3d pos = new Vec3d(posX, posY, posZ);
-		world.getEntitiesWithinAABB(EntityLivingBase.class ,bb, RADIATION_TARGETS).forEach(e -> {
+		world.getEntitiesWithinAABB(EntityLivingBase.class ,bb, RADIATION_TARGETS::test).forEach(e -> {
 			
 			double distance = pos.distanceTo(new Vec3d(e.posX, e.posY, e.posZ));
 			if (distance < radius) {

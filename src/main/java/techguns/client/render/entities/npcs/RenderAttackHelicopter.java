@@ -21,17 +21,17 @@ import net.minecraftforge.client.model.ModelLoaderRegistry;
 import net.minecraftforge.common.model.TRSRTransformation;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.opengl.GL11;
-import techguns.Techguns;
+import techguns.*;
 import techguns.entities.npcs.AttackHelicopter;
 
 import java.io.IOException;
 
 public class RenderAttackHelicopter extends RenderLiving<AttackHelicopter> {
 
-    public static ResourceLocation texture = new ResourceLocation(Techguns.MODID,"textures/entity/apache.png");
-	private static final ModelResourceLocation MODEL_LOC0 = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "helicopter0"), "inventory");
-	private static final ModelResourceLocation MODEL_LOC1 = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "helicopter1"), "inventory");
-	private static final ModelResourceLocation MODEL_LOC2 = new ModelResourceLocation(new ResourceLocation(Techguns.MODID, "helicopter2"), "inventory");
+    public static ResourceLocation texture = new ResourceLocation(Tags.MOD_ID,"textures/entity/apache.png");
+	private static final ModelResourceLocation MODEL_LOC0 = new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, "helicopter0"), "inventory");
+	private static final ModelResourceLocation MODEL_LOC1 = new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, "helicopter1"), "inventory");
+	private static final ModelResourceLocation MODEL_LOC2 = new ModelResourceLocation(new ResourceLocation(Tags.MOD_ID, "helicopter2"), "inventory");
 
 	private static IBakedModel HELICOPTER_MAIN;
 	private static IBakedModel HELICOPTER_ROTOR;
@@ -64,7 +64,7 @@ public class RenderAttackHelicopter extends RenderLiving<AttackHelicopter> {
 
 	@Override
 	protected ResourceLocation getEntityTexture(@NotNull AttackHelicopter entity) {
-		return new ResourceLocation(Techguns.MODID,"textures/entity/apache.png");
+		return new ResourceLocation(Tags.MOD_ID,"textures/entity/apache.png");
 	}
 
 	@Override

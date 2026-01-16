@@ -7,7 +7,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import techguns.TGBlocks;
-import techguns.Techguns;
+import techguns.*;
 
 /**
  * May only be implemented by Blocks
@@ -15,8 +15,8 @@ import techguns.Techguns;
 public interface IGenericBlock {
 
 	default void init(Block b, String name, boolean addToList) {
-		b.setRegistryName(new ResourceLocation(Techguns.MODID,name));
-		b.setTranslationKey(Techguns.MODID+"."+name);
+		b.setRegistryName(new ResourceLocation(Tags.MOD_ID,name));
+		b.setTranslationKey(Tags.MOD_ID+"."+name);
 		b.setCreativeTab(Techguns.tabTechgun);
 		
 		if(addToList) {

@@ -7,7 +7,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
-import techguns.Techguns;
+import techguns.*;
 import techguns.blocks.EnumMonsterSpawnerType;
 import techguns.entities.npcs.ZombieMiner;
 import techguns.util.BlockUtils;
@@ -18,7 +18,7 @@ import techguns.world.dungeon.presets.specialblocks.MBlockTGSpawner;
 
 public class SmallTrainstation extends WorldgenStructure {
 	
-	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Techguns.MODID,"chests/small_trainstation");
+	private static final ResourceLocation CHEST_LOOT = new ResourceLocation(Tags.MOD_ID,"chests/small_trainstation");
 	
 	static ArrayList<MBlock> blockList = new ArrayList<MBlock>();
 	static short[][] blocks;

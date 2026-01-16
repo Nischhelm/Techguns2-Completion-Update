@@ -12,14 +12,14 @@ import net.minecraft.util.EnumHand;
  */
 public interface ITGExtendedPlayer extends ITGShooterValues {
 
-	public EntityPlayer getEntity();
+	EntityPlayer getEntity();
 	
-	public int getFireDelay(EnumHand hand);
-	public void setFireDelay(EnumHand hand, int delay);
-	public IInventory getTGInventory();
+	int getFireDelay(EnumHand hand);
+	void setFireDelay(EnumHand hand, int delay);
+	IInventory getTGInventory();
 	
-	public void saveToNBT(final NBTTagCompound tags);
-	public void loadFromNBT(final NBTTagCompound tags);
-    public boolean hasFabricatorRecipeUnlocked(ItemStack output);
-    public boolean unlockFabricatorRecipe(ItemStack output);
+	void saveToNBT(final NBTTagCompound tags);
+	void loadFromNBT(final NBTTagCompound tags);
+    boolean hasFabricatorRecipeUnlocked(ItemStack output);
+    boolean unlockFabricatorRecipe(ItemStack output);
 }

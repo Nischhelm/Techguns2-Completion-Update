@@ -6,7 +6,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
-@Mod.EventBusSubscriber(modid = Techguns.MODID)
+@Mod.EventBusSubscriber(modid = Tags.MOD_ID)
 public class TGConfig {
 	public static Configuration config;
 	
@@ -114,6 +114,8 @@ public class TGConfig {
 	public static float oreDrillFuelValueFuel;
 
 	/** ore cluster values **/
+	public static boolean addDefaultClusterOres;
+	public static String[] additionalClusterOres;
 	public static int mininglevel_coal;
 	public static int mininglevel_common_metal;
 	public static int mininglevel_rare_metal;
@@ -147,7 +149,11 @@ public class TGConfig {
 	public static int upgrade_xp_cost;
 	
 	public static String[] biomeBlacklist;
-	
+	public static boolean dimensionAutoadd;
+	public static String[] dimensionWhitelistOverworld;
+	public static String[] dimensionWhitelistNether;
+	public static String[] dimensionWhitelistEnd;
+
 	public static boolean spawnOreClusterStructures;
 	
 	/**
@@ -232,22 +238,17 @@ public class TGConfig {
 		spawnWeightPsychoSteve = config.getInt("SpawnWeightPsychoSteve", "NPC Spawn", 3, 0, 10000, "Spawn weight for spawning Psycho Steve, early game boss, don't set to high value, at 0 spawn will not be registered");
 	
 		biomeBlacklist = config.getStringList("BiomeBlacklist", "NPC Spawn", new String[]{""}, "Biome Registry names (e.g: minecraft:mushroom_island) that are excluded from Techguns monster spawning");
-		
-		
+		dimensionAutoadd = config.getBoolean("DimensionsAutoAdd", "NPC Spawn", false, "Enables auto-adding dimensions for Techguns spawn lists (e.g. if the dimension has any of vanilla types, it will have corresponding spawnlist automatically)");
+		dimensionWhitelistOverworld = config.getStringList("DimensionsWhitelistOverworld", "NPC Spawn", new String[]{""}, "Dimensions (e.g: 12, 13, 14 etc.) that are included in Techguns monster spawning to use Overworld spawnlist. NOTE: ONLY WORKS IF DimensionsAutoAdd TURNED OFF!");
+		dimensionWhitelistNether = config.getStringList("DimensionsWhitelistNether", "NPC Spawn", new String[]{""}, "Dimensions (e.g: 12, 13, 14 etc.) that are included in Techguns monster spawning in the Nether spawnlist. NOTE: ONLY WORKS IF DimensionsAutoAdd TURNED OFF!");
+		dimensionWhitelistEnd = config.getStringList("DimensionsWhitelistEnd", "NPC Spawn", new String[]{""}, "Dimensions (e.g: 12, 13, 14 etc.) that are included in Techguns monster spawning in the End spawnlist. NOTE: ONLY WORKS IF DimensionsAutoAdd TURNED OFF!");
+
 		damagePvP = config.getFloat("DamagePvP", DAMAGE_FACTORS, 0.5f, 0.0f, 100.0f, "Damage factor Techguns weapons deal when fired from players against other players, is zero when PvP is disabled");
 		
 		damageTurretToPlayer = config.getFloat("DamageTurretToPlayer", DAMAGE_FACTORS, 0.5f, 0.0f, 100.0f, "Damage factor Techguns Turrets deal when hitting players");
 		
 		damageFactorNPC = config.getFloat("DamageFactorNPC", DAMAGE_FACTORS, 1.0f, 0.0f, 100.0f, "Damage factor for all NPCs other than turrets, they already have a difficulty dependent damage penalty, this can be used to further reduce their damage, or increase it");
-	
-		
-		//dataWatcherID_FaceSlot = config.getInt("DataWatcherID_FaceSlot", ID_CONFLICTS, 23, 2,31, "The ID used for DataWatcher synchronization of the face slot for Players, the ID must not conflict with vanilla or other mods slots, see http://www.minecraftforge.net/wiki/Datawatcher for details. Never useable for EntityPlayer (used by vanilla minecraft): 0,1, 6,7,8,9, 16,17,18");
-		
-		//dataWatcherID_BackSlot = config.getInt("DataWatcherID_BackSlot", ID_CONFLICTS, 24, 2,31, "The ID used for DataWatcher synchronization of the back slot for Players, the ID must not conflict with vanilla or other mods slots, see http://www.minecraftforge.net/wiki/Datawatcher for details. Never useable for EntityPlayer (used by vanilla minecraft): 0,1, 6,7,8,9, 16,17,18");
-		
-	//	GUI_ID_tgplayerInventory = config.getInt("TechgunsGUI_TabID", ID_CONFLICTS, 17, 0, 1000, "ID for the button used by the Techguns inventory tab.");
-		
-	
+
 		doOreGenCopper = config.getBoolean("doOreGenCopper", WORLDGEN, true, "Generate Copper Ore, disable if other mod does");
 		
 		doOreGenTin = config.getBoolean("doOreGenTin", WORLDGEN, true, "Generate Tin Ore, disable if other mod does");
@@ -306,6 +307,9 @@ public class TGConfig {
 		
 		oreDrillFuelValueFuel = config.getFloat("oreDrillFuelValueFuel", ORE_DRILLS, 100, 1, 100000, "Fuel value for Liquid Fuel for use in ore Drills, this is per Millibucket, not Bucket, so 1/1000 of bucket value");
 		
+		addDefaultClusterOres = config.getBoolean("addDefaultClusterOres", ORE_DRILLS, 				      true, "Enables original Techguns' list of ores to ore clusters");
+		additionalClusterOres = config.getStringList("additionalClusterOres", ORE_DRILLS, 				      new String[]{""}, "A list where you can add your own oredicts to ore clusters. Scheme is: 'oredictName;enumOreClusterType;weight;amount'. Example is: 'oreIron;URANIUM;30;2'. " +
+				"Available enumOreClusterTypes: COAL, COMMON_METAL, RARE_METAL, SHINY_METAL, URANIUM, COMMON_GEM, SHINY_GEM, NETHER_CRYSTAL, OIL");
 		mininglevel_coal = config.getInt("cluster_mininglevel_coal", ORE_DRILLS, 				      0, 0, 10, "Mining Level for coal ore clusters");
 		mininglevel_common_metal = config.getInt("cluster_mininglevel_common_metal", ORE_DRILLS, 	  0, 0, 10, "Mining Level for common metal ore clusters");
 		mininglevel_rare_metal = config.getInt("cluster_mininglevel_rare_metal", ORE_DRILLS,          1, 0, 10, "Mining Level for rare metal ore clusters");
@@ -344,7 +348,7 @@ public class TGConfig {
 	
 	@SubscribeEvent
 	public static void onConfigChanged(ConfigChangedEvent.OnConfigChangedEvent event){
-		if(event.getModID().equalsIgnoreCase(Techguns.MODID))
+		if(event.getModID().equalsIgnoreCase(Tags.MOD_ID))
 		{
 			initValues();
 		}
