@@ -6,6 +6,7 @@
 <p align="center"><img src="https://cdn.modrinth.com/data/cached_images/706d4415e491f921e6d9c5e8628a81bde5adf93f.png" alt="Logo" width="800"></p>
 
 <h4 align="center">
+    <a href="https://www.curseforge.com/minecraft/mc-mods/techguns-ce"><img src="http://cf.way2muchnoise.eu/1417575.svg" alt="CF"></a>
     <a href="https://modrinth.com/mod/techguns"><img src="https://img.shields.io/modrinth/dt/techguns?logo=modrinth&label=&suffix=%20&style=flat&color=242629&labelColor=5ca424&logoColor=1c1c1c" alt="Modrinth"></a>
 	<a href="https://discord.gg/TAqk3wJEyp"><img src="https://img.shields.io/discord/332546158108868620?color=5865f2&label=Discord&style=flat" alt="Discord"></a>
 </h4>
